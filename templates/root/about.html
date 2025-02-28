@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'title' %}about{% endblock 'title' %}
+{% block 'content' %}
+
+<br><br><br><br><br><br>
+<!-- ======= About Section ======= -->
+<section id="about" class="about">
+    <div class="container" data-aos="fade-up">
+      <div class="row gy-4">
+        <div class="col-lg-6 order-1 order-lg-2">
+          <img src="{% static 'assets/img/logo.jpg' %}" class="img-fluid about-img" alt="">
+        </div>
+        <div class="col-lg-6 order-2 order-lg-1 content">
+          <h3>Django Queen – Experts in E-Commerce Development</h3>
+          <p class="fst-italic">
+              We are Django Queen, a professional team specializing in developing high-performance e-commerce platforms using Django. Our expertise covers both backend and frontend development, ensuring a seamless user experience.
+          </p>
+          <ul>
+              <li><i class="bi bi-check2-all"></i> <span>Custom-built online stores with Django – secure, scalable, and feature-rich.</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Fully integrated frontend, designed and developed in-house for a flawless user experience.</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Advanced features like user dashboards, product reviews, and seamless customer interaction.</span></li>
+          </ul>
+          <p>
+              Whether you need a brand-new e-commerce platform or want to enhance your existing store, Django Queen delivers cutting-edge solutions tailored to your business needs. Let’s build something amazing together!
+          </p>
+      </div>
+      
+      </div>
+
+    </div>
+  </section><!-- End About Section -->
+
+{% endblock 'content' %}

@@ -1,0 +1,305 @@
+.search-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.search-box {
+    display: none; /* مخفی کردن فیلد سرچ در حالت عادی */
+    background-color: #dfb5b5af;
+    height: 50px;
+    padding: 10px;
+    border-radius: 25px;
+    max-width: 300px;
+    margin-top: 10px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px; /* کاهش فاصله بین محصولات */
+}
+
+.col-lg-4 {
+    width: calc(33.333% - 20px); /* سه محصول در هر سطر در دسکتاپ */
+    display: flex;
+    height: 100%;
+}
+
+/* برای تبلت دو محصول در هر سطر */
+@media (max-width: 992px) {
+    .col-lg-4 {
+        width: calc(50% - 20px);
+    }
+}
+
+/* برای موبایل یک محصول در هر سطر */
+@media (max-width: 768px) {
+    .col-lg-4 {
+        width: 100%;
+    }
+}
+
+    /* استایل عمومی */
+    .container {
+        max-width: 1200px;
+        margin: 40px 140px;
+    }
+
+    /* استایل تصویر محصولات */
+    .lip {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    /* باکس محصولات */
+    .box {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 15px 0;
+    height: 100%; /* ارتفاع متناسب */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* تنظیم فضای داخلی */
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.box img {
+    max-width: 100%;
+    height: auto;
+}
+    /* دکمه خرید */
+    .bubbly-button {
+    font-size: 0.9em;
+    padding: 8px 15px;
+    background-color: #e6a8b8; /* یه رنگ آرومتر */
+    color: #4d4d4d;
+    border-radius: 20px;
+    border: 1px solid #d98b9c;
+    cursor: pointer;
+    width: 85%;
+    margin-top: auto;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.bubbly-button:hover {
+    background-color: #d98b9c;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+    /* جستجو */
+    .search-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #dfb5b5af;
+        height: 50px;
+        padding: 10px;
+        border-radius: 25px;
+        max-width: 300px;
+        margin: 20px auto;
+    }
+
+    .search-text {
+        border: none;
+        background: none;
+        outline: none;
+        flex-grow: 1;
+        padding: 5px;
+    }
+
+    .search-btn {
+        color: white;
+        background-color: #7c7c7c;
+        padding: 8px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* استایل صفحه بندی */
+    .pagination {
+        margin-top: 20px;
+    }
+
+    .pagination ul {
+        padding: 0;
+        list-style: none;
+        display: flex;
+        justify-content: center;
+    }
+
+    .pagination a {
+        padding: 10px 15px;
+        background: #ff9fcf;
+        color: #fff;
+        margin: 5px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .pagination .is-active {
+        background: #ffb2b2;
+        font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+        .col-lg-4 {
+            width: 100%;
+        }
+    }
+
+
+
+
+/* تنظیم منو در موبایل */
+@media (max-width: 991px) {
+    .navbar {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background: rgb(235, 198, 198);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 10px 0;
+      z-index: 1000;
+    }
+  
+    .navbar.active {
+      display: block;
+    }
+  
+    .dropdown-menu {
+      display: none;
+      background: #e6a8b8;
+      padding: 0;
+    }
+  
+    .dropdown.active .dropdown-menu {
+      display: block;
+    }
+  
+    .toggle-dropdown {
+      cursor: pointer;
+      margin-left: 8px;
+      transition: transform 0.3s ease;
+    }
+  
+    .dropdown.active .toggle-dropdown {
+      transform: rotate(180deg);
+    }
+  }
+  
+
+
+  @media (max-width: 768px) {
+    #book-a-table {
+      padding: 10px !important;
+    }
+  
+    #book-a-table .container {
+      width: 90% !important;
+      max-width: 100% !important;
+      padding: 5px !important;
+    }
+  
+    #book-a-table .section-title h2 {
+      font-size: 18px !important;
+      text-align: center !important;
+    }
+  
+    #book-a-table .section-title p {
+      font-size: 14px !important;
+      text-align: center !important;
+    }
+  
+    #book-a-table form {
+      width: 100% !important;
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 8px !important;
+    }
+  
+    #book-a-table .form-group {
+      width: 100% !important;
+      margin-bottom: 5px !important;
+    }
+  
+    #book-a-table input, 
+    #book-a-table textarea {
+      width: 100% !important;
+      font-size: 14px !important;
+      padding: 8px !important;
+      border-radius: 5px !important;
+      border: 1px solid #ccc !important;
+    }
+  
+    #book-a-table textarea {
+      height: 80px !important;
+      resize: none !important;
+    }
+  
+    #book-a-table .btn-primary {
+      width: 100% !important;
+      font-size: 16px !important;
+      padding: 12px !important;
+      border-radius: 5px !important;
+    }
+  }
+  @media (max-width: 768px) {
+    #hero {
+      text-align: center;
+      padding: 50px 20px;
+    }
+    
+    #hero h1 {
+      font-size: 24px;
+      line-height: 1.4;
+    }
+  
+    #hero h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+  
+    #hero .btns {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+  
+    #hero .btns a {
+      width: 80%;
+      padding: 10px;
+      font-size: 16px;
+    }
+  
+    #hero .col-lg-4 {
+      margin-top: 20px;
+    }
+  
+    #hero .play-btn {
+      width: 60px;
+      height: 60px;
+    }
+  
+    /* استایل ویژه برای تصاویر و ویدیو */
+    .img-fluid, .play-btn {
+      max-width: 100%;
+      height: auto;
+    }
+  }

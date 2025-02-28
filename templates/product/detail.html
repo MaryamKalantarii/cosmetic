@@ -1,0 +1,358 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'content' %}
+<section id="product-detail" class="product-detail py-5">
+  <div class="container" data-aos="fade-up">
+      <div class="row">
+          <div class="col-md-6 text-center">
+              <div id="product-carousel" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                      <div class="carousel-item active">
+                          <img src="" class="img-fluid" alt="">
+                      </div>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#product-carousel" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#product-carousel" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  </button>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="product-info">
+                  <h2 class="product-title text-white">Product Name</h2>
+                  <p class="product-description text-white">This is a sample product description providing details about the product.</p>
+                  
+                  <p class="category text-white">Category: <strong>Electronics</strong></p>
+                  <p class="quantity text-white">Available Quantity: <strong>15</strong></p>
+                  
+                  <div class="price-box d-flex align-items-center gap-3">
+                      <span class="price-label fw-bold">Price:</span>
+                      <span class="original-price text-pink-light text-decoration-line-through">$100</span>
+                      <span class="discounted-price text-pink-dark fw-bold fs-4">$80</span>
+                  </div>
+                  <div class="variable-single-item">
+                    <span>colors:</span>
+                    <div class="product-variable-color">
+                       
+                        <label for="">
+                            <input
+                                name="product-color"
+                                id=""
+                                class="color-select"
+                                type="radio"
+                                value=""
+                                
+                            />
+                            <span
+                                class="product-color"
+                                style="background-color:pink"
+                            ></span>
+                            <span class="color-name">pink</span>
+                        </label>
+                        
+                    </div>
+                </div>
+  
+                  
+                  <div class="d-flex align-items-center mt-3">
+                      <div class="variable-single-item">
+                          <span class="me-2">number</span>
+                          <div class="product-variable-quantity">
+                              <input id="product-quantity" min="1" max="15" value="1" type="number" class="form-control" style="width: 70px; height: 60px; text-align: center;  background-color: #ffb6c1;" />
+                          </div>
+                      </div>
+                  </div>
+             
+                <div class="action-buttons mt-4 d-flex gap-3">
+                  <button type="button" class="btn btn-pink px-4">
+                      <i class="bi bi-heart"></i> Add to Wishlist
+                  </button>
+                  <button type="button" class="btn btn-pink px-4">
+                      <i class="fa fa-shopping-cart"></i> Add to Cart
+                  </button>
+              </div>
+              
+              <div class="reviews mt-4">
+                  <h4>Customer Reviews</h4>
+                  <div class="default-form-box">
+                      <label for="rating"> <span></span></label>
+                      <select name="rating" id="rating" class="form-select mb-2 rating-dropdown" required>
+                          <option selected class="rating-placeholder">Choose a rating</option>
+                          <option value="5">⭐⭐⭐⭐⭐</option>
+                          <option value="4">⭐⭐⭐⭐</option>
+                          <option value="3">⭐⭐⭐</option>
+                          <option value="2">⭐⭐</option>
+                          <option value="1">⭐</option>
+                      </select>
+                  </div>
+                  <div class="review-form mt-3">
+                      <textarea class="form-control mb-2" placeholder="Write your review..."></textarea>
+                      <button type="button" class="btn btn-dark">Submit Review</button>
+                  </div>
+                  <div class="review-list mt-3">
+                      <div class="review p-3 border rounded mb-2">
+                          <strong>John Doe</strong> - 
+                          <span class="text-warning">
+                              ★★★★☆
+                          </span>
+                          <p>Great product! Really loved it.</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+      let carousel = new bootstrap.Carousel(document.querySelector("#product-carousel"), {
+          interval: 3000,
+          wrap: true
+      });
+  });
+</script>
+
+<style>
+  .product-detail .row {
+    display: flex;
+    align-items: center; /* متن و عکس وسط‌چین بشن */
+    justify-content: center;
+    flex-wrap: wrap; /* برای حالت ریسپانسیو */
+}
+
+.col-md-6 {
+    flex: 1;
+    min-width: 300px; /* حداقل عرض برای جلوگیری از چپ‌چپ شدن متن */
+}
+
+.product-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-info h2,
+.product-info p,
+.product-info .price-box,
+.product-info .action-buttons {
+    text-align: left; /* متن‌ها چپ‌چین بشن */
+}
+
+.price-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.product-variable-quantity input {
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-info {
+        text-align: center;
+    }
+}
+
+  .product-detail {
+      background: transparent;
+      margin-top: 250px;
+      margin-bottom: 150px;
+  }
+  .product-image img {
+      max-width: 100%;
+      margin-top: 500px;
+      border-radius: 10px;
+  }
+  .product-info {
+      border-radius: 10px;
+  }
+  .price-box {
+      font-size: 1.2rem;
+  }
+  .original-price {
+      color: #ffb6c1; /* صورتی ملایم */
+  }
+  .discounted-price {
+      color: #d63384; /* صورتی پررنگ */
+  }
+  .btn {
+      min-width: 160px;
+      border-radius: 30px;
+  }
+  .btn-pink {
+      background-color: #ffb6c1;
+      color: white;
+      border: none;
+  }
+  .btn-pink:hover {
+      background-color: #ff1493;
+  }
+  .rating span {
+      font-size: 1.2rem;
+  }
+  .review-form textarea {
+      resize: none;
+  }
+  .rating-dropdown {
+      background-color: #ffb6c1; /* صورتی ملایم */
+
+      color: white;
+      border: none;
+      padding: 8px;
+      border-radius: 5px;
+  }
+  .rating-placeholder {
+      color: white; /* تغییر رنگ متن Choose rating */
+  }
+
+<<<<<<< HEAD
+  .variable-single-item {
+  margin-bottom: 20px;
+}
+.variable-single-item > span {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: rgb(253, 253, 253);
+}
+.product-variable-color {
+  display: flex;
+  gap: 8px;
+}
+
+.product-variable-color label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.product-variable-color label input {
+  display: none;
+}
+
+.product-variable-color label span {
+  width: 30px;
+  height: 30px;
+  display: block;
+  border: 2px solid #dee2e6;
+  border-radius: 50%;
+  transition: border 0.3s ease;
+}
+
+.product-variable-color label:hover span,
+.product-variable-color label input:checked + span {
+  border: 2px solid #000;
+}
+
+.product-variable-color label .color-name {
+  position: absolute;
+  width: 60PX;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 3px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.product-variable-color label:hover .color-name {
+  opacity: 1;
+  visibility: visible;
+}
+
+.product-variable-color label input:checked ~ span::after {
+  content: "";
+}
+
+=======
+
+
+
+  @media (max-width: 768px) {
+    .product-detail {
+        margin-top: 100px;
+        margin-bottom: 80px;
+        padding: 20px;
+    }
+
+    .product-detail .row {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .product-image img {
+        max-width: 80%;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        border-radius: 10px;
+    }
+
+    .product-info {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .product-title, .product-description, .category, .quantity {
+        text-align: center;
+    }
+
+    .price-box {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .product-variable-quantity input {
+        width: 90px;
+        height: 50px;
+        font-size: 1rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .action-buttons .btn {
+        width: 90%;
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .review-form textarea {
+        width: 100%;
+        font-size: 1rem;
+    }
+}
+>>>>>>> 94ddc7b13995ceaa94130b79ae895e448a3712fb
+
+</style>
+
+
+
+
+{% endblock 'content' %}
+

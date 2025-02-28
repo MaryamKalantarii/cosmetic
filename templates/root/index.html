@@ -1,0 +1,271 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'title' %}Home{% endblock 'title' %}
+{% block 'content' %}
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+      <div class="row">
+        <div class="col-lg-8">
+          <h1>Welcome to <span>my shop</span></h1>
+          <h2>Delivering great comestic for more than 14 years!</h2>
+
+          <div class="btns">
+            <a href="{% url 'product:product' %}" class="btn-menu animated fadeInUp scrollto">product</a>
+            <a href="{% url 'product:cart' %}" class="btn-book animated fadeInUp scrollto">cart</a>
+          </div>
+        </div>
+        <div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in" data-aos-delay="200">
+          <a href="{% static 'assets/img/kylie.mp4' %}" class="glightbox play-btn"></a>
+        </div>
+
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    
+
+
+    <!-- ======= Specials Section ======= -->
+    <section id="specials" class="specials">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Specials</h2>
+          <p>Check Our Specials</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-3">
+            <ul class="nav nav-tabs flex-column">
+              <li class="nav-item">
+                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Modi sit est</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Unde praesentium sed</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Pariatur explicabo vel</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-4">Nostrum qui quasi</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Iusto ut expedita aut</a>
+              </li>
+            </ul>
+          </div>
+          {% for prd in special_products %}
+          <div class="col-lg-9 mt-4 mt-lg-0">
+            <div class="tab-content">
+              <div class="tab-pane active show" id="tab-1">
+                <div class="row">
+                  <div class="col-lg-8 details order-2 order-lg-1">
+                    <h3>{{prd.title}}</h3>
+                    <p class="fst-italic">{{prd.content}}</p>
+                  </div>
+                  <div class="col-lg-4 text-center order-1 order-lg-2">
+                    <img src="{{prd.image.url}}" alt="" class="img-fluid2">
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End Specials Section -->
+
+    <!-- ======= Events Section ======= -->
+    <section id="events" class="events">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>best offers and fe</h2>
+          <p>pack cosmetic for you</p>
+        </div>
+      {% for pack in pack_products %}
+        <div class="events-slider swiper" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
+            
+            <div class="swiper-slide">
+              <div class="row event-item">
+                <div class="col-lg-6">
+                  <img src="{{pack.image.url}}" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0 content">
+                  <h3>{{pack.title}}</h3>
+                  <div class="price">
+                    <p><span>${{pack.price}}</span></p>
+                  </div>
+                  <p>
+                    {{pack.content}}
+                  </p>
+                </div>
+              </div>
+             
+            </div><!-- End testimonial item -->
+            
+
+
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+        {% endfor %}
+      </div>
+    </section><!-- End Events Section -->
+
+  
+ <!-- ======= Testimonials Section ======= -->
+ <section id="testimonials" class="testimonials section-bg">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Testimonials</h2>
+      <p>What they're saying about us</p>
+    </div>
+    
+    <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+      <div class="swiper-wrapper">
+      {% for comment in comment %}
+        <div class="swiper-slide">
+          <div class="testimonial-item">
+            <p>
+              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+              {{comment.message}}
+              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+            </p>
+            <img src="{{request.user.image.url}}" class="testimonial-img" alt="">
+            <h3>{{comment.name}}</h3>
+            <h4>{{comment.email}}</h4>
+          </div>
+        </div><!-- End testimonial item -->
+      {% endfor %}
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section><!-- End Testimonials Section -->
+
+
+    {% if request.user.is_authenticated %}
+      <!-- ======= Comments ======= -->
+      <section id="book-a-table" class="book-a-table">
+        <div class="container" data-aos="fade-up">
+  
+          <div class="section-title">
+            <h2>Comments</h2>
+            <p>Send a comment</p>
+          </div>
+          
+          <form  method="post"  data-aos="fade-up" data-aos-delay="100" >
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-lg-4 col-md-6 form-group">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" style="background-color:  #e7a1a1;">
+                <div class="validate"></div>
+              </div>
+              <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" style="background-color:  #e7a1a1;">
+                <div class="validate"></div>
+              </div>
+              <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="subject" data-rule="minlen:4" data-msg="Please enter at least 4 chars" style="background-color:  #e7a1a1;">
+                <div class="validate"></div>
+              </div>
+              
+            </div>
+            <div class="form-group mt-3">
+              <textarea class="form-control" name="message" rows="5" placeholder="Message" style="background-color:  #e7a1a1;"></textarea>
+              <div class="validate"></div>
+            </div>
+            <br>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary" style="background-color: #e7a1a1; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer;">
+                  Send
+              </button>
+          </div>
+          
+          </form>
+         
+  
+        </div>
+      </section><!-- End Comment -->
+      {% endif %}
+
+    <!-- ======= Gallery Section ======= -->
+    <section id="gallery" class="gallery">
+
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Gallery</h2>
+          <p>Some photos from Our Company</p>
+        </div>
+      </div>
+
+      <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row g-0">
+          {% for gallery in gallery %}
+          <div class="col-lg-3 col-md-4">
+            <div class="gallery-item">
+              <a href="{{gallery.image.url}}" class="gallery-lightbox" data-gall="gallery-item">
+                <img src="{{gallery.image.url}}" alt="" class="img-fluid">
+              </a>
+            </div>
+          </div>
+
+          {% endfor %}
+
+        </div>
+
+      </div>
+    </section><!-- End Gallery Section -->
+
+    <!-- ======= Chefs Section ======= -->
+    <section id="chefs" class="chefs">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>OWNER</h2>
+          <p>KYLIEJENNER</p>
+        </div>
+
+        <div class="row">
+          {%for social in social %}
+          <div class="col-lg-4 col-md-6">
+            <div class="member" data-aos="zoom-in" data-aos-delay="100">
+              <img src="{{social.image.url}}" class="img-fluid" alt="">
+              <div class="member-info">
+                <div class="member-info-content">
+                  <h4>Walter White</h4>
+                  <span>Master Chef</span>
+                </div>
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+
+        </div>
+
+      </div>
+    </section><!-- End Chefs Section -->
+
+    
+
+  </main><!-- End #main -->
+
+  {% endblock 'content' %}
+

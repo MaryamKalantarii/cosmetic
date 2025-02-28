@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'content' %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-7 bg-white p-4 rounded-4 shadow-lg wishlist-box">
+            <h1 class="text-center text-muted fs-3 d-none d-md-block">My Wishlist</h1>
+            <h1 class="text-center text-muted fs-6 d-md-none">Wishlist</h1>
+            
+            <table class="table text-center">
+                <thead class="bg-light">
+                    <tr class="text-danger small">
+                        <th>Product</th>
+                        <th>Unit Price</th>
+                        <th>Actions</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in wish %}
+                    <tr> 
+                        <td>
+                            <div class="product-cell">
+                                <img src="{{ product.product_object.image.url }}" 
+                                     alt="{{ product.product_object.title }}" class="img-product">
+                                <span class="product-title small">{{ product.product_object.title }}</span>
+                            </div>
+                        </td>
+                        <td class="small">${{ product.product_object.price }}</td>
+                        <td>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="pk" value="{{ product.product_object.id }}">
+                                <button class="btn btn-minimal shadow-sm btn-md d-none d-md-block">
+                                    🎀 Add to Cart
+                                </button>
+                                <button class="btn btn-minimal shadow-sm btn-sm d-md-none">
+                                    🎀 Add
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <a href="#" class="trash-icon"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* 🎀 باکس کلی Wishlist */
+    .wishlist-box {
+        max-width: 700px;
+        margin-top: 300px;
+        margin-bottom: 250px;
+    }
+
+    @media (max-width: 768px) {
+        .wishlist-box {
+            max-width: 90% !important;
+            margin-top: 250px !important;
+            margin-bottom: 250px !important;
+            padding: 15px !important;
+        }
+        .table th, .table td {
+            font-size: 12px !important;
+            padding: 5px !important;
+        }
+        .img-product {
+            width: 60px !important;
+        }
+    }
+
+    /* 🎀 دکمه‌های کیوت */
+    .btn-minimal {
+        background: #ffdee9;
+        color: #b23a48 !important;
+        border-radius: 20px;
+        padding: 8px 18px;
+        font-weight: bold;
+        font-size: 15px;
+        border: none;
+        transition: 0.2s ease-in-out;
+    }
+
+    .btn-minimal:hover {
+        background: #ffc2d1;
+        transform: translateY(-2px);
+        box-shadow: 0 3px 10px rgba(255, 98, 140, 0.3);
+    }
+
+    /* 🎀 آیکون حذف */
+    .trash-icon {
+        font-size: 20px;
+        color: #b23a48;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    .trash-icon:hover {
+        color: #ff6b81;
+    }
+</style>
+{% endblock 'content' %}
