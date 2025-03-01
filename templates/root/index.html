@@ -12,8 +12,8 @@
           <h2>Delivering great comestic for more than 14 years!</h2>
 
           <div class="btns">
-            <a href="{% url 'product:product' %}" class="btn-menu animated fadeInUp scrollto">product</a>
-            <a href="{% url 'product:cart' %}" class="btn-book animated fadeInUp scrollto">cart</a>
+            <a href="" class="btn-menu animated fadeInUp scrollto">product</a>
+            <a href="" class="btn-book animated fadeInUp scrollto">cart</a>
           </div>
         </div>
         <div class="col-lg-4 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in" data-aos-delay="200">
@@ -88,7 +88,7 @@
           <h2>best offers and fe</h2>
           <p>pack cosmetic for you</p>
         </div>
-      {% for pack in pack_products %}
+      <!-- {% for pack in pack_products %}
         <div class="events-slider swiper" data-aos="fade-up" data-aos-delay="100">
           <div class="swiper-wrapper">
             
@@ -108,7 +108,7 @@
                 </div>
               </div>
              
-            </div><!-- End testimonial item -->
+            </div>
             
 
 
@@ -117,7 +117,7 @@
           <div class="swiper-pagination"></div>
         </div>
         {% endfor %}
-      </div>
+      </div> -->
     </section><!-- End Events Section -->
 
   
@@ -130,7 +130,7 @@
       <p>What they're saying about us</p>
     </div>
     
-    <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+    <!-- <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
       <div class="swiper-wrapper">
       {% for comment in comment %}
         <div class="swiper-slide">
@@ -144,17 +144,17 @@
             <h3>{{comment.name}}</h3>
             <h4>{{comment.email}}</h4>
           </div>
-        </div><!-- End testimonial item -->
+        </div>
       {% endfor %}
       </div>
       <div class="swiper-pagination"></div>
-    </div>
+    </div> -->
   </div>
 </section><!-- End Testimonials Section -->
 
-
-    {% if request.user.is_authenticated %}
-      <!-- ======= Comments ======= -->
+ <!-- ======= Comments ======= -->
+    <!-- {% if request.user.is_authenticated %}
+     
       <section id="book-a-table" class="book-a-table">
         <div class="container" data-aos="fade-up">
   
@@ -195,8 +195,8 @@
          
   
         </div>
-      </section><!-- End Comment -->
-      {% endif %}
+      </section>
+      {% endif %} -->
 
     <!-- ======= Gallery Section ======= -->
     <section id="gallery" class="gallery">
@@ -210,7 +210,7 @@
 
       <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row g-0">
+        <!-- <div class="row g-0">
           {% for gallery in gallery %}
           <div class="col-lg-3 col-md-4">
             <div class="gallery-item">
@@ -224,11 +224,11 @@
 
         </div>
 
-      </div>
-    </section><!-- End Gallery Section -->
+      </div> -->
+    </section>
 
     <!-- ======= Chefs Section ======= -->
-    <section id="chefs" class="chefs">
+    <!-- <section id="chefs" class="chefs">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -261,7 +261,7 @@
         </div>
 
       </div>
-    </section><!-- End Chefs Section -->
+    </section> -->
 
     
 
