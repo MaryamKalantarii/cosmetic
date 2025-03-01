@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView,ListView,DetailView,View
-from product.models import ProductModel,ProductStatusType,ProductCategoryModel,StyleModel,WishlistProductModel
+from product.models import ProductModel,ProductStatusType,ProductCategoryModel,WishlistProductModel
 from django.shortcuts import render
 from django.core.exceptions import FieldError
 from review.models import ReviewModel, ReviewStatusType 
