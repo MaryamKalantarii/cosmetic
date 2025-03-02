@@ -6,11 +6,19 @@
       <div class="row">
           <div class="col-md-6 text-center">
               <div id="product-carousel" class="carousel slide" data-bs-ride="carousel">
-                  <div class="carousel-inner">
-                      <div class="carousel-item active">
-                          <img src="{{object.image1.url}}" class="img-fluid" alt="">
-                      </div>
-                  </div>
+                <div class="carousel-inner">
+         
+                    <div class="carousel-item active">
+                        <img src="{{ object.image1.url }}" class="img-fluid" alt="">
+                    </div>
+            
+                    
+                    {% if object.image2 %}
+                    <div class="carousel-item">
+                        <img src="{{ object.image2.url }}" class="img-fluid" alt="">
+                    </div>
+                    {% endif %}
+                
                   <button class="carousel-control-prev" type="button" data-bs-target="#product-carousel" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   </button>
@@ -40,10 +48,11 @@
                  
                   {% if object.is_discounted %}
                   <div class="price-box d-flex align-items-center gap-3">
-                      <span class="price-label fw-bold">{{object.get_price}} </span>
-                      <span class="original-price text-pink-light text-decoration-line-through">{{object.price}}</span>
+                      <span class="price-label fw-bold">price: </span>
+                      <span class="price-label fw-bold">{{object.get_price}}$ </span>
+                      <span class="original-price text-pink-light text-decoration-line-through">{{object.price}}$</span>
                       {% else %}
-                      <span class="discounted-price text-pink-dark fw-bold fs-4">{{object.get_price}}</span>
+                      <span class="discounted-price text-pink-dark fw-bold fs-4">{{object.get_price}}$</span>
                       {% endif %}
                   </div>
            
@@ -52,50 +61,66 @@
                       <div class="variable-single-item">
                           <span class="me-2">number</span>
                           <div class="product-variable-quantity">
-                              <input id="product-quantity" min="1" max="{{object.stock}}" value="1" type="number" class="form-control" style="width: 70px; height: 60px; text-align: center;  background-color: #ffb6c1;" />
+                              <input id="product-quantity" min="1" max="{{object.stock}}" value="1" type="number" class="form-control" style="width: 70px; height: 30px; text-align: center;  background-color: #ffb6c1;" />
                           </div>
                       </div>
                   </div>
+                  <style>
                 
-                  <div class="product-variable-color">
-                    {% for colors in object.colors.all %}
-                    <label for="product-color-{{ colors.id }}">
-                        <input
-                            name="product-color"
-                            id="product-color-{{ colors.id }}"
-                            class="color-select"
-                            type="radio"
-                            value="{{ colors.id }}"
-                            {% if forloop.first %}checked{% endif %}
-                        />
-                        <span
-                            class="product-color"
-                            style="background-color: {{ colors.hex_code }};"
-                        ></span>
-                        <span class="color-name">{{ colors.name }}</span>
-                    </label>
-                    {% endfor %}
-                </div>
-            </div>
+              
+                  </style>
+                 <!-- محصولات 2 Single Item -->
+                 <div class="variable-single-item" style="margin-right: 400px;">
+                  <span style="margin-right: 400px;">color:</span>
+                  <div class="product-variable-color" >
+                      {% for colors in object.colors.all %}
+                      <label for="product-color-{{ colors.id }}" >
+                          <input
+                              name="product-color"
+                              id="product-color-{{ colors.id }}"
+                              class="color-select"
+                              type="radio"
+                              value="{{ colors.id }}"
+                              {% if forloop.first %}checked{% endif %}
+                          />
+                          <span
+                              class="product-color"
+                              style="background-color: {{ colors.hex_code }};"
+                          ></span>
+                          <span class="color-name">{{ colors.name }}</span>
+                      </label>
+                      {% endfor %}
+                  </div>
+              </div>
+              
+  
+                
+                   
+                    </div>
+                  </div>
             
 
 
 
-            {% if request.user.is_authenticated %}
-            <div class="action-buttons mt-4 d-flex gap-3">
-              <button type="button" class="btn btn-pink px-4"{% if object.id in wishlist_items %} active {% endif %}
-              onclick="addToWishlist(this, `{{ object.id }}`)"
-              >
-                  <i class="bi bi-heart"></i> Add to Wishlist
-              </button>
-              {% endif %}
-            
-              <button type="button" class="btn btn-pink px-4" onclick="addToCart('{{ object.id }}')"
-              >
-                  <i class="fa fa-shopping-cart"></i>
-              </button>
-          </div>
-          
+
+
+                {% if request.user.is_authenticated %}
+                <div class="action-buttons mt-4 d-flex gap-3">
+                  <button type="button" class="btn btn-pink px-4"{% if object.id in wishlist_items %} active {% endif %}
+                  onclick="addToWishlist(this, `{{ object.id }}`)"
+                  >
+                      <i class="bi bi-heart"></i> 
+                  </button>
+                  {% endif %}
+                
+                  <button type="button" class="btn btn-pink px-4" onclick="addToCart('{{ object.id }}')"
+                  >
+                      <i class="fa fa-shopping-cart"></i>
+                  </button>
+              </div>
+             
+
+
               <div class="reviews mt-4">
                   <h4>Customer Reviews</h4>
                   <div class="default-form-box">
@@ -161,6 +186,43 @@ function addToCart(productId) {
 </script>
 
 <style>
+      .product-variable-color label {
+                    position: relative;
+                    width: 36px;
+                    height: 36px;
+                    cursor: pointer;
+                }
+                
+                .product-variable-color input {
+                    display: none;
+                }
+                
+                .product-variable-color .product-color {
+                    width: 36px;
+                    height: 36px;
+                    border: 2px solid #ddd;
+                    border-radius: 50%;
+                    transition: all 0.3s ease;
+                }
+                
+                .product-variable-color input:checked + .product-color {
+                    border-color: black;
+                    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+                }
+                
+                .product-variable-color input:checked + .product-color::after {
+                    content: "✓";
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: white;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    text-shadow: 0px 0px 4px black;
+                }
+                
+  
   .product-detail .row {
     display: flex;
     align-items: center; /* متن و عکس وسط‌چین بشن */
@@ -174,7 +236,7 @@ function addToCart(productId) {
 }
 
 .product-info {
-    padding: 20px;
+  
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -280,8 +342,9 @@ function addToCart(productId) {
 .product-variable-color {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 5px;
   justify-content: center;
+
 }
 
 
@@ -297,14 +360,7 @@ function addToCart(productId) {
   display: none;
 }
 
-.product-variable-color label span {
-  width: 30px;
-  height: 30px;
-  display: block;
-  border: 2px solid #dee2e6;
-  border-radius: 50%;
-  transition: border 0.3s ease;
-}
+
 
 .product-variable-color label:hover span,
 .product-variable-color label input:checked + span {
@@ -315,7 +371,7 @@ function addToCart(productId) {
   position: absolute;
   width: 60PX;
   bottom: -22px;
-  left: 50%;
+  left: %;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
