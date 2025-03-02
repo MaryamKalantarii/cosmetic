@@ -64,29 +64,34 @@
 
         <div class="col-lg-8 mt-5 mt-lg-0">
 
-          {% if messages %}
-          {% for message in messages %}
-            <p style='color:palevioletred'>{{ message}}</p>
-          {% endfor %}
-        {% endif %}
-          <form  method="post" >
+          <form  method="post" action="{% url 'root:submit-ticket' %}" data-aos="fade-up" data-aos-delay="100" >
             {% csrf_token %}
             <div class="row">
-              <div class="col-md-6 form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+              <div class="col-lg-4 col-md-6 form-group">
+                <input type="text" name="full_name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" style="background-color:  #e7a1a1;">
+                <div class="validate"></div>
               </div>
-              <div class="col-md-6 form-group mt-3 mt-md-0">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+              <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" style="background-color:  #e7a1a1;">
+                <div class="validate"></div>
               </div>
+              <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="subject" data-rule="minlen:4" data-msg="Please enter at least 4 chars" style="background-color:  #e7a1a1;">
+                <div class="validate"></div>
+              </div>
+              
             </div>
             <div class="form-group mt-3">
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              <textarea class="form-control"  name="content" rows="5" placeholder="Message" style="background-color:  #e7a1a1;"></textarea>
+              <div class="validate"></div>
             </div>
-            <div class="form-group mt-3">
-              <textarea class="form-control" name="message" rows="8" placeholder="Message" required></textarea>
-            </div>
-            
-            <div class="text-center"><button type="submit">Send Message</button></div>
+            <br>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary" style="background-color: #e7a1a1; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer;">
+                  Send
+              </button>
+          </div>
+          
           </form>
 
         </div>
