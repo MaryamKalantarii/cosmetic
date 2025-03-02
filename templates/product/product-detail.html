@@ -25,28 +25,7 @@
                   <p class="product-description text-white">{{object.brief_description}}</p>
                   <div class="variable-single-item">
                     <span></span>
-                    <div class="product-variable-color">
-                        {% for colors in object.colors.all %}
-                        <label for="product-color-{{ colors.id }}">
-                            <input
-                                name="product-color"
-                                id="product-color-{{ colors.id }}"
-                                class="color-select"
-                                type="radio"
-                                value="{{ colors.id }}"
-                                {% if forloop.first %}checked{% endif %}
-                            />
-                            <span
-                                class="product-color"
-                                style="background-color: {{ colors.hex_code }};"
-                            ></span>
-                            <span class="color-name">{{ colors.name }}</span>
-                        </label>
-                        {% endfor %}
-                    </div>
-                </div>
                 
-    
                   
                      
                       </div>
@@ -77,21 +56,46 @@
                           </div>
                       </div>
                   </div>
-                  {% if request.user.is_authenticated %}
-                <div class="action-buttons mt-4 d-flex gap-3">
-                  <button type="button" class="btn btn-pink px-4"{% if object.id in wishlist_items %} active {% endif %}
-                  onclick="addToWishlist(this, `{{ object.id }}`)"
-                  >
-                      <i class="bi bi-heart"></i> Add to Wishlist
-                  </button>
-                  {% endif %}
                 
-                  <button type="button" class="btn btn-pink px-4" onclick="addToCart('{{ object.id }}')"
-                  >
-                      <i class="fa fa-shopping-cart"></i>
-                  </button>
-              </div>
-              
+                  <div class="product-variable-color">
+                    {% for colors in object.colors.all %}
+                    <label for="product-color-{{ colors.id }}">
+                        <input
+                            name="product-color"
+                            id="product-color-{{ colors.id }}"
+                            class="color-select"
+                            type="radio"
+                            value="{{ colors.id }}"
+                            {% if forloop.first %}checked{% endif %}
+                        />
+                        <span
+                            class="product-color"
+                            style="background-color: {{ colors.hex_code }};"
+                        ></span>
+                        <span class="color-name">{{ colors.name }}</span>
+                    </label>
+                    {% endfor %}
+                </div>
+            </div>
+            
+
+
+
+            {% if request.user.is_authenticated %}
+            <div class="action-buttons mt-4 d-flex gap-3">
+              <button type="button" class="btn btn-pink px-4"{% if object.id in wishlist_items %} active {% endif %}
+              onclick="addToWishlist(this, `{{ object.id }}`)"
+              >
+                  <i class="bi bi-heart"></i> Add to Wishlist
+              </button>
+              {% endif %}
+            
+              <button type="button" class="btn btn-pink px-4" onclick="addToCart('{{ object.id }}')"
+              >
+                  <i class="fa fa-shopping-cart"></i>
+              </button>
+          </div>
+          
               <div class="reviews mt-4">
                   <h4>Customer Reviews</h4>
                   <div class="default-form-box">
