@@ -19,6 +19,7 @@
 
   <!-- Vendor CSS Files -->
   <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/toastify/toastify.css' %}" rel="stylesheet">
   <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
   <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
   <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
@@ -55,7 +56,7 @@
           {% if request.user.is_authenticated %}
           <li class="bi d-flex align-items-center ms-4"><a href="">{{request.user.email}}</a></li>
           {% else %}
-          <li class="bi bi-box-arrow-in-right d-flex align-items-center ms-4"><a href="">Login / Register</a></li>
+          <li class="bi bi-box-arrow-in-right d-flex align-items-center ms-4"><a href="{% url 'accounts:login' %}">Login / Register</a></li>
           {% endif %}
         </ul>
       </div>
@@ -211,10 +212,10 @@
   <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
   <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
   <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
-
+  <script src="{% static 'assets/vendor/toastify/toastify.js' %}"></script>
   <!-- Template Main JS File -->
   <script src="{% static 'assets/js/main.js' %}"></script>
-   
+  {% include 'messages.html' %}
 
 </body>
 

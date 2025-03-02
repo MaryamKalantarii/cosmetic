@@ -127,11 +127,11 @@
   </head>
   <body>
     <div class="container">
-      <form action="#" method="post">
+      <form action="{% url 'accounts:login' %}" method="POST">
         {% csrf_token %}
         <div class="title">Login</div>
         <div class="input-box underline">
-          <input type="email" name="email" placeholder="Enter Your Email" required>
+          <input type="text" name="email" placeholder="Enter Your Email" required>
           <div class="underline"></div>
         </div>
         <div class="input-box">
@@ -143,12 +143,7 @@
         </div>
       </form>
     <div>
-        <a href="{% url 'password_reset' %}">forgot your password?</a>
-        
-    </div>
-    <div>
-     
-      <a href="{% url 'accounts:signup' %}">If you have not registered, click here.</a>
+      <a href="{% url 'accounts:register' %}">If you have not registered, click here.</a>
   </div>
   </body>
 </html>
