@@ -93,21 +93,21 @@
         <ul>
           <li><a class="nav-link scrollto active" href="{% url 'root:home' %}">Home</a></li>
           
-          <li><a class="nav-link scrollto" href="">Product</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'product:product-grid' %}">Product</a></li>
           <li class="dropdown"><a href="#"><span>cosmetics</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-             
-              <li><a href=""></a></li>
-              
               <li class="dropdown"><a href="#"><span>COSMETIC</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">lips</a></li>
-                  <li><a href="#">face</a></li>
-                  <li><a href="#">eyes</a></li>
-                  <li><a href="#">eyebrows</a></li>
-                  <li><a href="#">spray</a></li>
+                  {% for category in categories %}
+              <li><a href="/product/product/grid/?category={{category.slug}}">{{category.title}}</a></li>
+                  {% endfor %}
                 </ul>
               </li>
+              {% for category in categories %}
+              <li><a href="/product/product/grid/?category={{category.slug}}">{{category.title}}</a></li>
+              {% endfor %}
+              
+              
             </ul>
           </li>
           <li><a class="nav-link scrollto" href="{% url 'root:about' %}">About Us</a></li>
@@ -117,7 +117,7 @@
           </svg></a></li>
           <!-- {% if request.user.is_authenticated %}          
           <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-          <li><a href="{% url 'password_change' %}">change password</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <li><a href="">change password</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <li style="color: #e7a1a1;">loged as {{request.user.username}}<img src={{request.user.image.url}} style="border-radius: 50%; width:20%; height: 20%;"></li>
           {% else %}
           <li><a href="">Login</a></li>
