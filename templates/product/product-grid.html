@@ -129,7 +129,8 @@
                           {% endfor %}
                           <span class="ms-1">{{object.avg_rate}}/5</span>
                       </ul></p>
-                      <a href="" class="btn btn-pink w-100">Add to Cart</a>
+                      <a href="{% url 'product:product-detail' object.slug %}" class="btn btn-pink w-100">product details </a>
+
                   </div>
               </div>
               {% endfor %}
