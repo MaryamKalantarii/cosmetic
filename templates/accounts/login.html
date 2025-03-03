@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <!-- Created By CodingLab - www.codinglabweb.com -->
 <html lang="en" dir="ltr">
@@ -123,6 +123,7 @@
     <title> login </title>
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <link href="{% static 'assets/vendor/toastify/toastify.css' %}" rel="stylesheet">
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
@@ -145,5 +146,8 @@
     <div>
       <a href="{% url 'accounts:register' %}">If you have not registered, click here.</a>
   </div>
+  <script src="{% static 'assets/vendor/toastify/toastify.js' %}"></script>
+  <!-- Template Main JS File -->
+  {% include 'messages.html' %}
   </body>
 </html>

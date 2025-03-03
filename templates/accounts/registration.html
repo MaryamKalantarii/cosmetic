@@ -1,4 +1,4 @@
-  
+{% load static %}
     <!DOCTYPE html>
     <!-- Created By CodingLab - www.codinglabweb.com -->
     <html lang="en" dir="ltr">
@@ -124,28 +124,49 @@
         <title> signup </title>
         <!-- <link rel="stylesheet" href="style.css"> -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
-         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="{% static 'assets/vendor/toastify/toastify.css' %}" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
       </head>
       <body>
         <div class="container">
-        <form action="#" method="post">
+        <form action="{% url 'accounts:register' %}" method="post">
           {% csrf_token %}
              <div class="title">create new account</div>
              <div class="input-box underline">
               <input type="email" name="email" placeholder="Enter Your Email" required>
-              <div class="underline"></div>
-            </div>
-            <div class="input-box underline">
-                <input type="text" name="username" placeholder="Enter Your Username" required>
-                <div class="underline"></div>
+              <div class="underline">
+                 {% if user_form.email.errors %}
+                <ul>
+                  {% for error in user_form.email.errors %}
+                    <li class="text-danger">{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
             </div>
             <div class="input-box">
               <input type="password" name="password1" placeholder="Enter Your Password" required>
-              <div class="underline"></div>
+              <div class="underline">
+                {% if user_form.password1.errors %}
+                <ul>
+                  {% for error in user_form.password1.errors %}
+                    <li class="text-danger">{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
             </div>
             <div class="input-box">
                 <input type="password" name="password2" placeholder="again to confrim Password" required>
-                <div class="underline"></div>
+                <div class="underline">
+                  {% if user_form.password2.errors %}
+                    <ul>
+                      {% for error in user_form.password2.errors %}
+                        <li class="text-danger">{{ error }}</li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </div>
             </div>  
             <div class="input-box button">
               <input type="submit" name="" value="Continue">
@@ -154,6 +175,9 @@
         <div>
             <a href="{% url 'accounts:login' %}">do you have an account?</a>
         </div>
+        <script src="{% static 'assets/vendor/toastify/toastify.js' %}"></script>
+        <!-- Template Main JS File -->
+        {% include 'messages.html' %}
       </body>
     </html>
 
