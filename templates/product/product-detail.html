@@ -80,15 +80,15 @@
                               <i class="bi bi-heart"></i> Wishlist
                           </button>
                       {% endif %}
-                      <button type="button" style="    background-color: #ffb6c1 !important;
-    border-radius: 30px !important;
-                      color: white !important;
-                      border: none !important;" class="btn btn-outline-primary px-4" onclick="addToCart('{{ object.id }}')">
-                          <i class="fa fa-shopping-cart"></i> Add to Cart
-                      </button>
-                  </div>
-          
-
+                   
+                      <div class="product-add-to-cart-btn">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart"
+                           onclick="addToCart('{{ object.id }}', event)">
+                            + اضافه به سبد خرید
+                        </a>
+                    </div>
+                    
+                </div>
                   <!-- بخش نظرات -->
                   <div class="reviews mt-4">
                       <h4>Customer Reviews</h4>
@@ -121,23 +121,7 @@
   </div>
 </section>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    new bootstrap.Carousel(document.querySelector("#product-carousel"), { interval: 3000, wrap: true });
-});
 
-function addToCart(productId) {
-    fetch('/cart/add/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
-        body: JSON.stringify({ 'product_id': productId })
-    }).then(response => response.json())
-      .then(data => {
-          if (data.success) alert("محصول به سبد خرید اضافه شد!");
-      });
-}
-
-</script>
 <style>
     /* استایل اصلی رنگ‌ها */
     .product-variable-color {
@@ -191,4 +175,55 @@ function addToCart(productId) {
     margin-bottom: 100px;
 }
     </style>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+    new bootstrap.Carousel(document.querySelector("#product-carousel"), { interval: 3000, wrap: true });
+});
+
+// تابع گرفتن CSRF Token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// تابع افزودن محصول به سبد خرید
+function addToCart(productId, event) {
+    event.preventDefault();  // جلوگیری از رفتار پیش‌فرض لینک
+    fetch('/cart/add/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({ 'product_id': productId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("✅ محصول با موفقیت به سبد خرید اضافه شد!");
+        } else {
+            alert("❌ مشکلی پیش آمده است، لطفاً دوباره امتحان کنید!");
+        }
+    })
+    .catch(error => {
+        console.error("خطا در افزودن به سبد خرید:", error);
+        alert("⚠️ مشکلی در ارتباط با سرور پیش آمد!");
+    });
+}
+</script>
+
+
+      
 {% endblock 'content' %}
