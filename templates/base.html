@@ -125,7 +125,7 @@
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-      <a href="{% url 'cart:cart-summary' %}" class="book-a-table-btn scrollto d-none d-lg-flex">shoping\cart<i class="bi bi-bag"></i><div style="font-size: 17px;"></div></a>
+      <a href="{% url 'cart:cart-summary' %}" class="book-a-table-btn scrollto d-none d-lg-flex">shoping\cart<i class="bi bi-bag"></i>{{cart.get_total_quantity}}<div style="font-size: 17px;"></div></a>
     </div>
   </header><!-- End Header -->
   
@@ -240,4 +240,73 @@
     });
   });
 });
+
+
+function addToCart(product_id) {
+    // گرفتن رنگ و سایز انتخابی
+    var colorId = $("input[name='product-color']:checked").val(); // گرفتن ID رنگ انتخاب شده
+    var quantity = $(".product-variable-quantity input").val(); // گرفتن مقدار تعداد
+
+    // ارسال درخواست AJAX به سرور
+    $.ajax({
+        url: "{% url 'cart:session-add-product' %}",
+        method: 'POST',
+        data: {
+            product_id: product_id,
+            color_id: colorId,       // ارسال ID رنگ انتخابی
+            quantity: quantity,    
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success: function (response) {
+            // به‌روزرسانی تعداد کل محصولات در سبد خرید
+            $("#total-cart-item-count").html(response.total_quantity);
+            console.log(response);  // نمایش داده‌ها در کنسول
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);  // نمایش خطا در کنسول
+        }
+    });
+}
+
+function addToWishlist(element,product_id) {
+     
+     //console.log(product_id)
+     $.ajax({
+         url: "{%  url 'product:add-or-remove-wishlist' %}",
+         method: 'POST',
+         data: {
+             product_id: product_id,
+             csrfmiddlewaretoken: '{{ csrf_token }}'
+ 
+         },
+         success: function (response) {
+            Toastify({
+                text: response.message,
+                className: `info`,
+                style: {
+                    background: response.message.includes("اضافه") ? "pink" : "red",
+                }
+            }).showToast();
+
+            // تغییر وضعیت آیکون
+            if ($(element).hasClass('active')) {
+                $(element).removeClass('active');
+            } else {
+                $(element).addClass('active');
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error(errorThrown);
+            Toastify({
+                text: "خطا در انجام عملیات.",
+                className: `error`,
+                style: {
+                    background: "red",
+                }
+            }).showToast();
+        }
+    });
+}
+ 
+
 </script>
