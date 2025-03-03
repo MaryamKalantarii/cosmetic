@@ -25,44 +25,33 @@
               </div>
           </div>
           
-          <div class="col-md-6">
-              <div class="product-info text-white">
-                  <h2 class="product-title">{{ object.title }}</h2>
-                  <p class="product-description">{{ object.brief_description }}</p>
-
-                  <p class="category">
-                    {% for category in object.category.all %}
-                        <strong>{{ category.title }}</strong>{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                  </p>
-
+           <div class="col-md-6">
               <div class="product-info">
                   <h2 class="product-title text-white">"{{object.title}}"</h2>
-                  <p class="product-description text-white" style="margin-right: 400px;">{{object.brief_description}}</p>
+                  <p class="product-description text-white">{{ object.brief_description }}</p>
+
                   <div class="variable-single-item">
-                    <span>{{object.description}}</span>
+                    <span></span>
+                
+                  
+                     
                       </div>
-                      <p  class="category text-white">
-                        <strong> category:</strong>
-                        {% for category in object.category.all %}
-                            <strong>{{ category.title }}</strong>
-                            {% if not forloop.last %}, {% endif %}
-                        {% endfor %}
-                    </p>
                     </div>
-                 
+                  <p  class="category text-white">
+                    {% for category in object.category.all %}
+                        <strong>{{ category.title }}</strong>
+                        {% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
                   
                  
-                 
                   {% if object.is_discounted %}
-=
                   <div class="price-box d-flex align-items-center gap-3">
-                      <span class="fw-bold">Price:</span>
-                      {% if object.is_discounted %}
-                          <span class="fw-bold text-success">{{ object.get_price }}$</span>
-                          <span class="original-price text-danger text-decoration-line-through">{{ object.price }}$</span>
+                      <span class="price-label fw-bold">price: </span>
+                      <span class="price-label fw-bold">{{object.get_price}}$ </span>
+                      <span class="original-price text-pink-light text-decoration-line-through">{{object.price}}$</span>
                       {% else %}
-                          <span class="fw-bold text-success fs-4">{{ object.get_price }}$</span>
+                      <span class="discounted-price text-pink-dark fw-bold fs-4">{{object.get_price}}$</span>
                       {% endif %}
                   </div>
                   <div class="d-flex align-items-center mt-3">
@@ -84,7 +73,7 @@
                   <!-- دکمه‌های Wishlist و Add to Cart -->
                   <div class="action-buttons mt-4 d-flex gap-3">
                       {% if request.user.is_authenticated %}
-                          <button type="button" style="    background-color: #ffb6c1 !important;
+                          <button id="nom" type="button" style="    background-color: #ffb6c1 !important;
     border-radius: 30px !important;
                           color: white !important;
                           border: none !important;" class="btn btn-outline-danger px-4" onclick="addToWishlist(this, `{{ object.id }}`)">
@@ -147,6 +136,7 @@ function addToCart(productId) {
           if (data.success) alert("محصول به سبد خرید اضافه شد!");
       });
 }
+
 </script>
 <style>
     /* استایل اصلی رنگ‌ها */
@@ -191,10 +181,11 @@ function addToCart(productId) {
         transform: translate(-50%, -50%);
     }
 
-
-.btn-pink:hover {
-    background-color: #ff1493 !important;
+    #nom:hover {
+    background-color: #ff1493;
+    color: white;
 }
+
 .product-detail {
     margin-top: 100px;
     margin-bottom: 100px;
