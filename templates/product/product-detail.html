@@ -32,19 +32,19 @@
                   <h2 class="product-title text-white">"{{object.title}}"</h2>
                   <p class="product-description text-white" style="margin-right: 400px;">{{object.brief_description}}</p>
                   <div class="variable-single-item">
-                    <span></span>
-                
-                  
-                     
+                    <span>{{object.description}}</span>
                       </div>
+                      <p  class="category text-white">
+                        <strong> category:</strong>
+                        {% for category in object.category.all %}
+                            <strong>{{ category.title }}</strong>
+                            {% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    </p>
                     </div>
-                  <p  class="category text-white">
-                    {% for category in object.category.all %}
-                        <strong>{{ category.title }}</strong>
-                        {% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                </p>
+                 
                   
+                 
                  
                   {% if object.is_discounted %}
                   <div class="price-box d-flex align-items-center gap-3">
@@ -55,7 +55,7 @@
                       <span class="discounted-price text-pink-dark fw-bold fs-4">{{object.get_price}}$</span>
                       {% endif %}
                   </div>
-           
+            
                   
                   <div class="d-flex align-items-center mt-3">
                       <div class="variable-single-item">
