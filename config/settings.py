@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'product',
     'accounts',
     'review',
+    'cart',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +69,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                  #اضافه شده
                 'product.context_processors.categories_processor',
-                # 'cart.context_processors.cart_processor',
+                'cart.context_processors.cart_processor',
             ],
         },
     },
