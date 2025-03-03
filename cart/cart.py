@@ -33,7 +33,6 @@ class CartSession:
             # اگر محصول جدید است، آن را اضافه می‌کنیم
             new_item = {
                 "product_id": product_id,
-                "quantity": 1,  # مقدار quantity به درستی ارسال می‌شود
                 "color_id": color_id,
                 "quantity": int(quantity),
             }

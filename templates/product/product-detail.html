@@ -70,25 +70,16 @@
                         {% endfor %}
                     </div>
                 </div>     
-                  <!-- دکمه‌های Wishlist و Add to Cart -->
-                  <div class="action-buttons mt-4 d-flex gap-3">
-                      {% if request.user.is_authenticated %}
-                          <button id="nom" type="button" style="    background-color: #ffb6c1 !important;
-    border-radius: 30px !important;
-                          color: white !important;
-                          border: none !important;" class="btn btn-outline-danger px-4" onclick="addToWishlist(this, `{{ object.id }}`)">
-                              <i class="bi bi-heart"></i> Wishlist
-                          </button>
-                      {% endif %}
-                   
-                      <div class="product-add-to-cart-btn">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart"
-                           onclick="addToCart('{{ object.id }}', event)">
-                            + اضافه به سبد خرید
-                        </a>
-                    </div>
-                    
-                </div>
+       <!-- دکمه Wishlist -->
+<button id="wishlist-btn" type="button" class="btn btn-wishlist" onclick="addToWishlist(this, `{{ object.id }}`)">
+    <i class="bi bi-heart"></i> Wishlist
+</button>
+
+<!-- دکمه افزودن به سبد خرید -->
+<button class="btn btn-add-to-cart" onclick="addToCart('{{ object.id }}', event)">
+add to cart
+</button>
+
                   <!-- بخش نظرات -->
                   <div class="reviews mt-4">
                       <h4>Customer Reviews</h4>
@@ -164,66 +155,125 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-
-    #nom:hover {
-    background-color: #ff1493;
-    color: white;
-}
-
 .product-detail {
     margin-top: 100px;
     margin-bottom: 100px;
 }
+/* دکمه Wishlist */
+.btn-wishlist {
+    margin-top: 20px;
+    background-color: transparent;
+    border: 2px solid #ff1493;
+    color: #ff1493;
+    border-radius: 30px;
+    padding: 8px 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-wishlist i {
+    color: #ff1493;
+    transition: color 0.3s ease-in-out;
+}
+
+.btn-wishlist:hover, .btn-wishlist.active {
+    background-color: #ff1493;
+    color: white;
+}
+
+.btn-wishlist:hover i, .btn-wishlist.active i {
+    color: white;
+}
+
+/* دکمه سبد خرید */
+.btn-add-to-cart { margin-top: 20px;
+
+    background-color: #ffb6c1;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 25px;
+    color: white;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-add-to-cart:hover {
+    background-color: #ff1493;
+}
+
+
+
     </style>
 
 <script>
+ 
+function addToCart(product_id) {
+    // گرفتن رنگ و سایز انتخابی
+    var colorId = $("input[name='product-color']:checked").val(); // گرفتن ID رنگ انتخاب شده
+    var quantity = $(".product-variable-quantity input").val(); // گرفتن مقدار تعداد
 
-document.addEventListener("DOMContentLoaded", function () {
-    new bootstrap.Carousel(document.querySelector("#product-carousel"), { interval: 3000, wrap: true });
-});
-
-// تابع گرفتن CSRF Token
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.startsWith(name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-// تابع افزودن محصول به سبد خرید
-function addToCart(productId, event) {
-    event.preventDefault();  // جلوگیری از رفتار پیش‌فرض لینک
-    fetch('/cart/add/', {
+    // ارسال درخواست AJAX به سرور
+    $.ajax({
+        url: "{% url 'cart:session-add-product' %}",
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
+        data: {
+            product_id: product_id,
+            color_id: colorId,       // ارسال ID رنگ انتخابی
+            quantity: quantity,    
+            csrfmiddlewaretoken: '{{ csrf_token }}'
         },
-        body: JSON.stringify({ 'product_id': productId })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert("✅ محصول با موفقیت به سبد خرید اضافه شد!");
-        } else {
-            alert("❌ مشکلی پیش آمده است، لطفاً دوباره امتحان کنید!");
+        success: function (response) {
+            // به‌روزرسانی تعداد کل محصولات در سبد خرید
+            $("#total-cart-item-count").html(response.total_quantity);
+            console.log(response);  // نمایش داده‌ها در کنسول
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(errorThrown);  // نمایش خطا در کنسول
         }
-    })
-    .catch(error => {
-        console.error("خطا در افزودن به سبد خرید:", error);
-        alert("⚠️ مشکلی در ارتباط با سرور پیش آمد!");
     });
 }
-</script>
 
+function addToWishlist(element,product_id) {
+     
+     //console.log(product_id)
+     $.ajax({
+         url: "{%  url 'product:add-or-remove-wishlist' %}",
+         method: 'POST',
+         data: {
+             product_id: product_id,
+             csrfmiddlewaretoken: '{{ csrf_token }}'
+ 
+         },
+         success: function (response) {
+            Toastify({
+                text: response.message,
+                className: `info`,
+                style: {
+                    background: response.message.includes("اضافه") ? "pink" : "red",
+                }
+            }).showToast();
+
+            // تغییر وضعیت آیکون
+            if ($(element).hasClass('active')) {
+                $(element).removeClass('active');
+            } else {
+                $(element).addClass('active');
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error(errorThrown);
+            Toastify({
+                text: "خطا در انجام عملیات.",
+                className: `error`,
+                style: {
+                    background: "red",
+                }
+            }).showToast();
+        }
+    });
+}
+ 
+
+    </script>
 
       
 {% endblock 'content' %}
