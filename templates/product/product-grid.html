@@ -115,9 +115,44 @@
               {% for object in object_list %}
               <div class="col-lg-4 col-md-6 col-sm-12">
                   <div class="card h-100 shadow-sm text-center p-3">
-                      <span>{{ object.id }}</span>
+          
+                    <a href="{% url 'product:add-or-remove-wishlist' %}" class="wishlist-icon">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                    
+                    <style>
+                        .wishlist-icon {
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            text-decoration: none;
+                            font-size: 22px; /* اندازه آیکون */
+                            color: #bbb; /* رنگ اولیه */
+                            transition: color 0.3s ease, transform 0.2s ease;
+                        }
+                    
+                        .wishlist-icon:hover {
+                            color: #ff6b81; /* تغییر رنگ هنگام هاور */
+                            transform: scale(1.1); /* کمی بزرگ شدن */
+                        }
+                    
+                        .wishlist-icon.active {
+                            color: #ff4757; /* رنگ قرمز پررنگ برای حالت فعال */
+                        }
+                    </style>
+                    
+                    
+                    
                       <img src="{{object.image1.url }}" alt="{{object.title }}" class="img-fluid rounded">
                       <h4 class="mt-3">{{ object.title }}</h4>
+                      {% if object.is_discounted %}
+                      <div class="price-box d-flex align-items-center gap-3">
+                          <span class="price-label fw-bold" style="margin-left: 130px;">{{object.get_price}}$ </span>
+                          <span class="original-price text-pink-light text-decoration-line-through" style="color: #d6bbcac2;">{{object.price}}$</span>
+                          {% else %}
+                          <span class="discounted-price text-pink-dark fw-bold fs-4">{{object.get_price}}$</span>
+                          {% endif %}
+                      </div>
                       <p><ul class="review-star">
                         {% for i in "12345" %}
                       {% if i|add:0 <= object.avg_rate %} <span><i
@@ -127,7 +162,7 @@
                           {% endif %}
 
                           {% endfor %}
-                          <span class="ms-1">{{object.avg_rate}}/5</span>
+                        
                       </ul></p>
                       <a href="{% url 'product:product-detail' object.slug %}" class="btn btn-pink w-100">product details </a>
 
