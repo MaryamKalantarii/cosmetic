@@ -3,22 +3,19 @@
 {% block 'content' %}
 <section id="product-detail" class="product-detail py-5">
   <div class="container" data-aos="fade-up">
-      <div class="row">
+      <div class="row g-4">
           <div class="col-md-6 text-center">
               <div id="product-carousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-         
-                    <div class="carousel-item active">
-                        <img src="{{ object.image1.url }}" class="img-fluid" alt="">
-                    </div>
-            
-                    
-                    {% if object.image2 %}
-                    <div class="carousel-item">
-                        <img src="{{ object.image2.url }}" class="img-fluid" alt="">
-                    </div>
-                    {% endif %}
-                
+                  <div class="carousel-inner">
+                      <div class="carousel-item active">
+                          <img src="{{ object.image1.url }}" class="img-fluid rounded" alt="">
+                      </div>
+                      {% if object.image2 %}
+                      <div class="carousel-item">
+                          <img src="{{ object.image2.url }}" class="img-fluid rounded" alt="">
+                      </div>
+                      {% endif %}
+                  </div>
                   <button class="carousel-control-prev" type="button" data-bs-target="#product-carousel" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   </button>
@@ -27,128 +24,88 @@
                   </button>
               </div>
           </div>
+          
           <div class="col-md-6">
-              <div class="product-info">
-                  <h2 class="product-title text-white">"{{object.title}}"</h2>
-                  <p class="product-description text-white" style="margin-right: 400px;">{{object.brief_description}}</p>
-                  <div class="variable-single-item">
-                    <span></span>
-                
-                  
-                     
-                      </div>
-                    </div>
-                  <p  class="category text-white">
+              <div class="product-info text-white">
+                  <h2 class="product-title">{{ object.title }}</h2>
+                  <p class="product-description">{{ object.brief_description }}</p>
+
+                  <p class="category">
                     {% for category in object.category.all %}
-                        <strong>{{ category.title }}</strong>
-                        {% if not forloop.last %}, {% endif %}
+                        <strong>{{ category.title }}</strong>{% if not forloop.last %}, {% endif %}
                     {% endfor %}
-                </p>
-                  
-                 
-                  {% if object.is_discounted %}
+                  </p>
+
                   <div class="price-box d-flex align-items-center gap-3">
-                      <span class="price-label fw-bold">price: </span>
-                      <span class="price-label fw-bold">{{object.get_price}}$ </span>
-                      <span class="original-price text-pink-light text-decoration-line-through">{{object.price}}$</span>
+                      <span class="fw-bold">Price:</span>
+                      {% if object.is_discounted %}
+                          <span class="fw-bold text-success">{{ object.get_price }}$</span>
+                          <span class="original-price text-danger text-decoration-line-through">{{ object.price }}$</span>
                       {% else %}
-                      <span class="discounted-price text-pink-dark fw-bold fs-4">{{object.get_price}}$</span>
+                          <span class="fw-bold text-success fs-4">{{ object.get_price }}$</span>
                       {% endif %}
                   </div>
-           
-                  
+
                   <div class="d-flex align-items-center mt-3">
-                      <div class="variable-single-item">
-                          <span class="me-2">number</span>
-                          <div class="product-variable-quantity">
-                              <input id="product-quantity" min="1" max="{{object.stock}}" value="1" type="number" class="form-control" style="width: 70px; height: 30px; text-align: center;  background-color: #ffb6c1;" />
-                          </div>
-                      </div>
+                      <span class="me-2">Number:</span>
+                      <input id="product-quantity" min="1" max="{{ object.stock }}" value="1" type="number" class="form-control" style="width: 70px; height: 30px; text-align: center; background-color: #ffb6c1;">
                   </div>
-                  <style>
-                
-              
-                  </style>
-                 <!-- محصولات 2 Single Item -->
-                 <div class="variable-single-item" style="margin-right: 400px;">
-                  <span style="margin-right: 400px;">color:</span>
-                  <div class="product-variable-color" >
-                      {% for colors in object.colors.all %}
-                      <label for="product-color-{{ colors.id }}" >
-                          <input
-                              name="product-color"
-                              id="product-color-{{ colors.id }}"
-                              class="color-select"
-                              type="radio"
-                              value="{{ colors.id }}"
-                              {% if forloop.first %}checked{% endif %}
-                          />
-                          <span
-                              class="product-color"
-                              style="background-color: {{ colors.hex_code }};"
-                          ></span>
-                          <span class="color-name">{{ colors.name }}</span>
-                      </label>
-                      {% endfor %}
-                  </div>
-              </div>
-              
-  
-                
-                   
+
+                  <div class="variable-single-item mt-3">
+                    <span class="fw-bold">Color:</span>
+                    <div class="product-variable-color d-flex flex-wrap gap-2 mt-2">
+                        {% for color in object.colors.all %}
+                        <label for="product-color-{{ color.id }}" class="color-label">
+                            <input type="radio" name="product-color" id="product-color-{{ color.id }}" value="{{ color.id }}" class="d-none" {% if forloop.first %}checked{% endif %}>
+                            <span class="product-color" style="background-color: {{ color.hex_code }};"></span>
+                        </label>
+                        {% endfor %}
                     </div>
+                </div>     
+                  <!-- دکمه‌های Wishlist و Add to Cart -->
+                  <div class="action-buttons mt-4 d-flex gap-3">
+                      {% if request.user.is_authenticated %}
+                          <button type="button" style="    background-color: #ffb6c1 !important;
+    border-radius: 30px !important;
+                          color: white !important;
+                          border: none !important;" class="btn btn-outline-danger px-4" onclick="addToWishlist(this, `{{ object.id }}`)">
+                              <i class="bi bi-heart"></i> Wishlist
+                          </button>
+                      {% endif %}
+                      <button type="button" style="    background-color: #ffb6c1 !important;
+    border-radius: 30px !important;
+                      color: white !important;
+                      border: none !important;" class="btn btn-outline-primary px-4" onclick="addToCart('{{ object.id }}')">
+                          <i class="fa fa-shopping-cart"></i> Add to Cart
+                      </button>
                   </div>
-            
+          
 
-
-
-
-
-                {% if request.user.is_authenticated %}
-                <div class="action-buttons mt-4 d-flex gap-3">
-                  <button type="button" class="btn btn-pink px-4"{% if object.id in wishlist_items %} active {% endif %}
-                  onclick="addToWishlist(this, `{{ object.id }}`)"
-                  >
-                      <i class="bi bi-heart"></i> 
-                  </button>
-                  {% endif %}
-                
-                  <button type="button" class="btn btn-pink px-4" onclick="addToCart('{{ object.id }}')"
-                  >
-                      <i class="fa fa-shopping-cart"></i>
-                  </button>
-              </div>
-             
-
-
-              <div class="reviews mt-4">
-                  <h4>Customer Reviews</h4>
-                  <div class="default-form-box">
-                      <label for="rating"> <span></span></label>
-                      <select name="rating" id="rating" class="form-select mb-2 rating-dropdown" required>
-                          <option selected class="rating-placeholder">Choose a rating</option>
-                          <option value="5">⭐⭐⭐⭐⭐</option>
-                          <option value="4">⭐⭐⭐⭐</option>
-                          <option value="3">⭐⭐⭐</option>
-                          <option value="2">⭐⭐</option>
-                          <option value="1">⭐</option>
-                      </select>
-                  </div>
-                  <div class="review-form mt-3">
-                      <textarea class="form-control mb-2" placeholder="Write your review..."></textarea>
-                      <button type="button" class="btn btn-dark">Submit Review</button>
-                  </div>
-                  <div class="review-list mt-3">
-                      <div class="review p-3 border rounded mb-2">
-                          <strong>John Doe</strong> - 
-                          <span class="text-warning">
-                              ★★★★☆
-                          </span>
-                          <p>Great product! Really loved it.</p>
+                  <!-- بخش نظرات -->
+                  <div class="reviews mt-4">
+                      <h4>Customer Reviews</h4>
+                      <div class="default-form-box" >
+                          <label for="rating">Rating:</label>
+                          <select name="rating" id="rating" class="form-select mb-2 rating-dropdown" required style=" background-color: #ffb6c1; border-radius: 5px;">
+                              <option selected class="rating-placeholder">Choose a rating</option>
+                              <option value="5">⭐⭐⭐⭐⭐</option>
+                              <option value="4">⭐⭐⭐⭐</option>
+                              <option value="3">⭐⭐⭐</option>
+                              <option value="2">⭐⭐</option>
+                              <option value="1">⭐</option>
+                          </select>
+                      </div>
+                      <div class="review-form mt-3">
+                          <textarea class="form-control mb-2" placeholder="Write your review..."></textarea>
+                          <button type="button" class="btn btn-dark">Submit Review</button>
+                      </div>
+                      <div class="review-list mt-3">
+                          <div class="review p-3 border rounded mb-2">
+                              <strong>John Doe</strong> - 
+                              <span class="text-warning">★★★★☆</span>
+                              <p>Great product! Really loved it.</p>
                           </div>
                       </div>
-                
-      
                   </div>
               </div>
           </div>
@@ -157,308 +114,71 @@
 </section>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-      let carousel = new bootstrap.Carousel(document.querySelector("#product-carousel"), {
-          interval: 3000,
-          wrap: true
-      });
-  });
+document.addEventListener("DOMContentLoaded", function () {
+    new bootstrap.Carousel(document.querySelector("#product-carousel"), { interval: 3000, wrap: true });
+});
 
-  
 function addToCart(productId) {
-    console.log("Adding to cart:", productId);  // تست مقدار
     fetch('/cart/add/', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
-        },
+        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCookie('csrftoken') },
         body: JSON.stringify({ 'product_id': productId })
     }).then(response => response.json())
       .then(data => {
-          if (data.success) {
-              alert("محصول به سبد خرید اضافه شد!");
-          }
+          if (data.success) alert("محصول به سبد خرید اضافه شد!");
       });
 }
-
-
 </script>
-
 <style>
-      .product-variable-color label {
-                    position: relative;
-                    width: 36px;
-                    height: 36px;
-                    cursor: pointer;
-                }
-                
-                .product-variable-color input {
-                    display: none;
-                }
-                
-                .product-variable-color .product-color {
-                    width: 36px;
-                    height: 36px;
-                    border: 2px solid #ddd;
-                    border-radius: 50%;
-                    transition: all 0.3s ease;
-                }
-                
-                .product-variable-color input:checked + .product-color {
-                    border-color: black;
-                    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-                }
-                
-                .product-variable-color input:checked + .product-color::after {
-                    content: "✓";
-                    font-size: 18px;
-                    font-weight: bold;
-                    color: white;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    text-shadow: 0px 0px 4px black;
-                }
-                
-  
-  .product-detail .row {
-    display: flex;
-    align-items: center; /* متن و عکس وسط‌چین بشن */
-    justify-content: center;
-    flex-wrap: wrap; /* برای حالت ریسپانسیو */
-}
-
-.col-md-6 {
-    flex: 1;
-    min-width: 300px; /* حداقل عرض برای جلوگیری از چپ‌چپ شدن متن */
-}
-
-.product-info {
-  
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.product-info h2,
-.product-info p,
-.product-info .price-box,
-.product-info .action-buttons {
-    text-align: left; /* متن‌ها چپ‌چین بشن */
-}
-
-.price-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.product-variable-quantity input {
-    text-align: center;
-    font-size: 1.2rem;
-}
-
-@media (max-width: 768px) {
-    .row {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .product-info {
-        text-align: center;
-    }
-}
-
-.product-detail {
-  margin-top: 100px; /* اگر مقدار بالا باشد، آن را کاهش بده */
-
-}
-
-  .product-image img {
-      max-width: 100%;
-      margin-top: 500px;
-      border-radius: 10px;
-  }
-  .product-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-}
-
-  .price-box {
-      font-size: 1.2rem;
-  }
-  .original-price {
-      color: #ffb6c1; /* صورتی ملایم */
-  }
-  .discounted-price {
-      color: #d63384; /* صورتی پررنگ */
-  }
-  .btn {
-      min-width: 160px;
-      border-radius: 30px;
-  }
-  .btn-pink {
-      background-color: #ffb6c1;
-      color: white;
-      border: none;
-      width: 60px;
-      
-  }
-  .btn-pink:hover {
-      background-color: #ff1493;
-  }
-  .rating span {
-      font-size: 1.2rem;
-  }
-  .review-form textarea {
-      resize: none;
-  }
-  .rating-dropdown {
-      background-color: #ffb6c1; /* صورتی ملایم */
-
-      color: white;
-      border: none;
-      padding: 8px;
-      border-radius: 5px;
-  }
-  .rating-placeholder {
-      color: white; /* تغییر رنگ متن Choose rating */
-  }
-
-  .variable-single-item {
-  margin-bottom: 20px;
-}
-.variable-single-item > span {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 600;
-  text-transform: capitalize;
-  color: rgb(253, 253, 253);
-}
-.product-variable-color {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  justify-content: center;
-
-}
-
-
-.product-variable-color label {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-}
-
-.product-variable-color label input {
-  display: none;
-}
-
-
-
-.product-variable-color label:hover span,
-.product-variable-color label input:checked + span {
-  border: 2px solid #000;
-}
-
-.product-variable-color label .color-name {
-  position: absolute;
-  width: 60PX;
-  bottom: -22px;
-  left: %;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-  padding: 3px 8px;
-  font-size: 12px;
-  border-radius: 4px;
-  white-space: nowrap;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.product-variable-color label:hover .color-name {
-  opacity: 1;
-  visibility: visible;
-}
-
-.product-variable-color label input:checked ~ span::after {
-  content: "";
-}
-
-
-
-
-  @media (max-width: 768px) {
-    .product-detail {
-        margin-top: 100px;
-        margin-bottom: 80px;
-        padding: 20px;
-    }
-
-    .product-detail .row {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .product-image img {
-        max-width: 80%;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-        border-radius: 10px;
-    }
-
-    .product-info {
-        padding: 20px;
+    /* استایل اصلی رنگ‌ها */
+    .product-variable-color {
         display: flex;
-        flex-direction: column;
         align-items: center;
+        flex-wrap: wrap;
     }
-
-    .product-title, .product-description, .category, .quantity {
-        text-align: center;
+    .product-variable-color label {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
     }
-
-    .price-box {
-        flex-direction: column;
-        gap: 5px;
+    .product-variable-color input {
+        display: none;
     }
-
-    .product-variable-quantity input {
-        width: 90px;
-        height: 50px;
-        font-size: 1rem;
-    }
-
-    .action-buttons {
-        flex-direction: column;
+    .product-variable-color .product-color {
         width: 100%;
+        height: 100%;
+        border: 2px solid transparent;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* استایل رنگ انتخاب‌شده */
+    .product-variable-color input:checked + .product-color {
+        border: 3px solid black !important;
+        position: relative;
+    }
+    .product-variable-color input:checked + .product-color::after {
+        content: "✓";
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
-    .action-buttons .btn {
-        width: 90%;
-        font-size: 1rem;
-        padding: 10px;
-    }
 
-    .review-form textarea {
-        width: 100%;
-        font-size: 1rem;
-    }
+.btn-pink:hover {
+    background-color: #ff1493 !important;
 }
-
-</style>
-
-
-
-
+.product-detail {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+    </style>
 {% endblock 'content' %}
-
