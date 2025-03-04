@@ -28,57 +28,118 @@
 
     
 
+<!-- ======= Specials Section ======= -->
+<section id="specials" class="specials">
+  <div class="container" data-aos="fade-up">
 
-    <!-- ======= Specials Section ======= -->
-    <section id="specials" class="specials">
-      <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Specials</h2>
+      <p>Check Our Specials</p>
+    </div>
 
-        <div class="section-title">
-          <h2>Specials</h2>
-          <p>Check Our Specials</p>
-        </div>
+    <div class="row" data-aos="fade-up" data-aos-delay="100">
+      <div class="col-lg-3">
+        <ul class="nav nav-tabs flex-column">
+          <li class="nav-item">
+            <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Modi sit est</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Unde praesentium sed</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Pariatur explicabo vel</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-4">Nostrum qui quasi</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Iusto ut expedita aut</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-9 mt-4 mt-lg-0">
+        <div class="tab-content">
+          <div class="tab-pane active show" id="tab-1">
+            <div class="row">
+              <div class="col-lg-8 details order-2 order-lg-1">
+                <h3>Kylie Lipsticks: The Perfect Blend of Elegance and Long-Lasting Beauty</h3>
+                <p class="fst-italic">Kylie Cosmetics has revolutionized the beauty industry with its iconic lipsticks, offering a perfect balance of style, quality, and long-lasting wear. Known for their rich pigmentation and smooth application, Kylie lipsticks provide a flawless matte or glossy finish that enhances any look.
 
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-3">
-            <ul class="nav nav-tabs flex-column">
-              <li class="nav-item">
-                <a class="nav-link active show" data-bs-toggle="tab" href="#tab-1">Modi sit est</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-2">Unde praesentium sed</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-3">Pariatur explicabo vel</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-4">Nostrum qui quasi</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" data-bs-toggle="tab" href="#tab-5">Iusto ut expedita aut</a>
-              </li>
-            </ul>
-          </div>
-          {% for prd in special_products %}
-          <div class="col-lg-9 mt-4 mt-lg-0">
-            <div class="tab-content">
-              <div class="tab-pane active show" id="tab-1">
-                <div class="row">
-                  <div class="col-lg-8 details order-2 order-lg-1">
-                    <h3>{{prd.title}}</h3>
-                    <p class="fst-italic">{{prd.content}}</p>
-                  </div>
-                  <div class="col-lg-4 text-center order-1 order-lg-2">
-                    <img src="{{prd.image.url}}" alt="" class="img-fluid2">
-                  </div>
-                </div>
+                  Infused with hydrating ingredients, these lipsticks ensure comfort throughout the day without drying out the lips. From bold reds to soft nudes, the diverse shade range suits every skin tone and occasion. Whether you’re aiming for a casual daytime look or a glamorous evening style, Kylie lipsticks are the go-to choice for beauty lovers worldwide.</p>
+                <p>With their sleek packaging and celebrity-approved formula, Kylie lipsticks continue to be a must-have in every makeup collection. Elevate your beauty game with the luxurious touch of Kylie Cosmetics! 💄✨</p>
               </div>
-              {% endfor %}
+              <div class="col-lg-4 text-center order-1 order-lg-2">
+                <img src="{% static 'assets/img/pic4.png' %}" alt="" class="img-fluid shadow-lg rounded" style="border-radius: 15px; width: 100%; max-width: 350px; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.15)';" onmouseout="this.style.transform='scale(1)';">
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="tab-2">
+            <div class="row">
+              <div class="col-lg-8 details order-2 order-lg-1">
+                <h3>Kylie Lip Gloss: Shine, Hydration, and Perfection</h3>
+                <p class="fst-italic">Kylie Cosmetics' lip glosses are the ultimate game-changer for achieving a luscious, glossy pout. Designed to deliver a radiant shine without feeling sticky, these lip glosses provide a smooth and lightweight finish that enhances the natural beauty of your lips.
+
+                  Enriched with nourishing ingredients, Kylie lip glosses keep your lips hydrated and soft throughout the day. Whether you prefer a sheer shimmer or a bold, pigmented gloss, the collection offers a variety of shades to complement any skin tone and style.</p>
+                <p>Perfect for wearing alone or layering over your favorite lipstick, Kylie lip glosses add dimension and volume to your lips, making them look fuller and more glamorous. With their sleek packaging and luxurious formula, they are a must-have in every beauty lover’s collection.
+
+                  Get that perfect glossy finish with Kylie Lip Gloss—because your lips deserve to shine! 💖✨</p>
+              </div>
+              <div class="col-lg-4 text-center order-1 order-lg-2">
+                <img src="{% static 'assets/img/pic1.png' %}" alt="" class="img-fluid shadow-lg rounded" style="border-radius: 15px; width: 100%; max-width: 350px; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.15)';" onmouseout="this.style.transform='scale(1)';">
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="tab-3">
+            <div class="row">
+              <div class="col-lg-8 details order-2 order-lg-1">
+                <h3>Kylie Lip Blush: The Perfect Soft Matte Finish</h3>
+                <p class="fst-italic">Kylie Cosmetics’ Lip Blush is the ultimate go-to for a natural, soft-focus lip look. Designed to deliver a weightless, blurred matte finish, this innovative formula gives your lips a beautiful wash of color without feeling heavy or drying.
+
+                  Perfect for everyday wear, Lip Blush provides a sheer to buildable coverage, making it easy to create a subtle, effortless look or layer up for more intensity. Its lightweight texture ensures comfortable wear throughout the day, keeping your lips looking smooth and hydrated.</p>
+                <p>With a range of flattering shades, from delicate pinks to warm nudes, Kylie’s Lip Blush enhances your natural beauty while maintaining a fresh and youthful vibe. Whether you want a soft tint or a more defined look, this product is a must-have in any makeup collection.
+
+                  Achieve the perfect blurred lip effect with Kylie Lip Blush—because beauty should feel as good as it looks! 💕✨</p>
+              </div>
+              <div class="col-lg-4 text-center order-1 order-lg-2">
+                <img src="{% static 'assets/img/p2.png' %}" alt="" class="img-fluid shadow-lg rounded" style="border-radius: 15px; width: 100%; max-width: 350px; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.15)';" onmouseout="this.style.transform='scale(1)';">
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="tab-4">
+            <div class="row">
+              <div class="col-lg-8 details order-2 order-lg-1">
+                <h3>Kylie Skin Face Mist: Instant Hydration & Glow</h3>
+                <p class="fst-italic">The Kylie Skin Face Mist is your secret to an instant boost of hydration and radiance. Infused with skin-loving ingredients, this ultra-fine mist refreshes, soothes, and revitalizes your skin, leaving it feeling soft and dewy throughout the day.
+
+                  Formulated with antioxidants and nourishing extracts, this mist helps to lock in moisture while protecting your skin from environmental stressors. Whether you use it as a prep step before makeup, a mid-day refresher, or a setting spray, its lightweight formula delivers a natural, healthy glow without feeling sticky or heavy.
+                 </p>
+                <p>Perfect for all skin types, the Kylie Skin Face Mist keeps your complexion looking fresh and luminous anytime, anywhere. Just a spritz, and your skin is instantly hydrated, smooth, and radiant! ✨💖</p>
+              </div>
+              <div class="col-lg-4 text-center order-1 order-lg-2">
+                <img src="{% static 'assets/img/pic3.png' %}" alt="" class="img-fluid shadow-lg rounded" style="border-radius: 15px; width: 100%; max-width: 350px; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.15)';" onmouseout="this.style.transform='scale(1)';">
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane" id="tab-5">
+            <div class="row">
+              <div class="col-lg-8 details order-2 order-lg-1">
+                <h3>Kylie Jenner Fragrance: A Scent of Confidence & Glamour</h3>
+                <p class="fst-italic">The Kylie Jenner Fragrance is a captivating blend of elegance, confidence, and sensuality, perfectly embodying Kylie's signature style. Designed for the modern, bold, and sophisticated woman, this perfume delivers an unforgettable scent that lingers beautifully throughout the day.
+
+                  With top notes of fresh citrus and juicy berries, the fragrance opens with a refreshing and vibrant feel. As it settles, the heart notes of delicate florals, vanilla, and warm amber create a sweet yet luxurious balance. Finally, the base notes of musk, sandalwood, and soft caramel leave a rich, seductive trail that enhances your natural allure.</p>
+                <p>Perfect for day or night, this fragrance is the ultimate finishing touch to any look, adding a touch of glamour and confidence with every spritz. Whether you’re stepping out for a casual day or a special occasion, the Kylie Jenner Fragrance ensures you leave a lasting impression. ✨💖</p>
+              </div>
+              <div class="col-lg-4 text-center order-1 order-lg-2">
+                <img src="{% static 'assets/img/pic5.png' %}" alt="" class="img-fluid shadow-lg rounded" style="border-radius: 15px; width: 100%; max-width: 350px; box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3); transition: transform 0.3s ease-in-out;" onmouseover="this.style.transform='scale(1.15)';" onmouseout="this.style.transform='scale(1)';">
+              </div>
             </div>
           </div>
         </div>
-
       </div>
-    </section><!-- End Specials Section -->
+    </div>
+  </div>
+</section><!-- /Specials Section -->
+
 
     <!-- ======= Events Section ======= -->
     <section id="events" class="events">

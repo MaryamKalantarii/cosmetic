@@ -2,14 +2,15 @@
 <!-- محصولات مرتبط -->
 <section class="related-products py-5">
     <div class="container">
-        <h3 class="text-center mb-4">Related products</h3>
+        <h3 class="text-center mb-4" style="color: darkgray;">Related products____</h3>
         <div class="position-relative">
             <button class="carousel-control-prev custom-prev" type="button">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             </button>
             <div class="row related-products-slider">
                 {% for similar_prodcut in similar_prodcuts %}
-                <div class="col-md-3 col-sm-6 mb-4">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 product-item">
+                    
                     <div class="card border-0 shadow-sm product-card">
                         <div class="wishlist-icon">&#9825;</div>
                         <img src="{{similar_prodcut.image1.url}}" class="card-img-top" alt="{{ product.title }}">
@@ -215,5 +216,63 @@
           height: 20px;
   
       }
-  
+      .related-products-slider {
+    display: flex;
+    flex-wrap: nowrap; /* جلوگیری از رفتن محصولات به خط بعدی */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* مخفی کردن اسکرول‌بار در فایرفاکس */
+}
+
+.related-products-slider::-webkit-scrollbar {
+    display: none; /* مخفی کردن اسکرول‌بار در کروم و سافاری */
+}
+
+.related-products-slider .col-md-3 {
+    flex: 0 0 auto; /* جلوگیری از کشیده شدن کارت‌ها */
+    width: 25%; /* ۴ کارت در هر ردیف */
+}
+@media (max-width: 768px) {
+    .related-products-slider {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none; /* مخفی کردن اسکرول‌بار در فایرفاکس */
+    }
+
+    .related-products-slider::-webkit-scrollbar {
+        display: none; /* مخفی کردن اسکرول‌بار در کروم و سافاری */
+    }
+
+    .related-products-slider .product-item {
+        flex: 0 0 auto;
+        width: 80%; /* نمایش دو محصول نسبی */
+        margin-right: 10px;
+    }
+
+    .custom-prev, .custom-next {
+        display: none; /* مخفی کردن دکمه‌های قبل و بعد در موبایل */
+    }
+}
+
   </style>
+
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const slider = document.querySelector(".related-products-slider");
+    const prevButton = document.querySelector(".custom-prev");
+    const nextButton = document.querySelector(".custom-next");
+
+    const scrollStep = slider.clientWidth / 2; // مقدار اسکرول به اندازه نصف عرض نمایشگر
+
+    nextButton.addEventListener("click", function () {
+        slider.scrollBy({ left: scrollStep, behavior: "smooth" });
+    });
+
+    prevButton.addEventListener("click", function () {
+        slider.scrollBy({ left: -scrollStep, behavior: "smooth" });
+    });
+});
+
+</script>
