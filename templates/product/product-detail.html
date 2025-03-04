@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load product_tags %}
 {% block 'content' %}
 <section id="product-detail" class="product-detail py-5">
   <div class="container" data-aos="fade-up">
@@ -203,12 +204,12 @@ add to cart
       </div>
     </div>
   </div>
+  {% show_similar_products object %}
   
-  
-                  </div>
-              </div>
-          </div>
       </div>
+    </div>
+    </div>
+    </div>
   </div>
 </section>
 

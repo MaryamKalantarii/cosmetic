@@ -1,0 +1,219 @@
+{% load static %}
+<!-- محصولات مرتبط -->
+<section class="related-products py-5">
+    <div class="container">
+        <h3 class="text-center mb-4">Related products</h3>
+        <div class="position-relative">
+            <button class="carousel-control-prev custom-prev" type="button">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+            <div class="row related-products-slider">
+                {% for similar_prodcut in similar_prodcuts %}
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card border-0 shadow-sm product-card">
+                        <div class="wishlist-icon">&#9825;</div>
+                        <img src="{{similar_prodcut.image1.url}}" class="card-img-top" alt="{{ product.title }}">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{similar_prodcut.title}}</h5>
+                            {% if similar_prodcut.is_discounted %}
+                            <p class="card-text price"> <span class="discounted-price">{{similar_prodcut.get_price}}$</span> <span class="original-price">{{similar_prodcut.price}}$</span></p>
+                            {% else %}
+                            <p class="card-text price"> <span class="discounted-price">{{similar_prodcut.price}}$</span></p>
+                            {% endif %}
+                            <ul class="review-star">
+                                {% for i in "12345" %}
+                                {% if i|add:0 <= similar_prodcut.avg_rate %} <span><i
+                                        class="bi bi-star-fill star-rate"></i></span>
+                                    {% else %}
+                                    <span><i class="bi bi-star star-rate"></i></span>
+                                    {% endif %}
+                                    {% endfor %}
+                                    
+                               </ul>
+  
+                            <a href="{% url 'product:product-detail' slug=similar_prodcut.slug %}" class="btn product-btn">product details</a>
+  
+                        </div>
+  
+                    </div>
+  
+                </div>
+  
+                {% endfor %}
+  
+            </div>
+  
+            <button class="carousel-control-next custom-next" type="button">
+  
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  
+            </button>
+  
+        </div>
+  
+    </div>
+  
+  </section>
+  
+  
+  <style>
+  
+      .product-card {
+  
+          background: rgba(255, 182, 193, 0.2);
+  
+          border-radius: 15px;
+  
+          padding: 15px;
+  
+          backdrop-filter: blur(10px);
+  
+          position: relative;
+  
+          overflow: hidden;
+  
+          text-align: center;
+  
+          transition: all 0.3s ease;
+  
+      }
+  
+      .product-card:hover {
+  
+          transform: scale(1.05);
+  
+      }
+  
+      .wishlist-icon {
+  
+          position: absolute;
+  
+          top: 10px;
+  
+          left: 10px;
+  
+          font-size: 20px;
+  
+          color: #ff1493;
+  
+          cursor: pointer;
+  
+      }
+  
+      .price {
+  
+          font-weight: bold;
+  
+          color: #333;
+  
+      }
+  
+      .original-price {
+  
+          text-decoration: line-through;
+  
+          color: gray;
+  
+          margin-left: 5px;
+  
+      }
+  
+      .discounted-price {
+  
+          color: #ff1493;
+  
+      }
+  
+      .rating .star {
+  
+          color: gold;
+  
+      }
+  
+      .rating .star-empty {
+  
+          color: lightgray;
+  
+      }
+  
+      .product-btn {
+  
+          background: #ffb6c1;
+  
+          border: none;
+  
+          border-radius: 20px;
+  
+          padding: 8px 15px;
+  
+          color: white;
+  
+          transition: 0.3s;
+  
+      }
+  
+      .product-btn:hover {
+  
+          background: #ff1493;
+  
+      }
+  
+      .custom-prev, .custom-next {
+  
+          position: absolute;
+  
+          top: 50%;
+  
+          transform: translateY(-50%);
+  
+          background: rgba(255, 182, 193, 0.4);
+  
+          border: none;
+  
+          padding: 10px;
+  
+          border-radius: 50%;
+  
+          width: 40px;
+  
+          height: 40px;
+  
+          display: flex;
+  
+          align-items: center;
+  
+          justify-content: center;
+  
+          transition: background 0.3s ease;
+  
+      }
+  
+      .custom-prev:hover, .custom-next:hover {
+  
+          background: rgba(255, 182, 193, 0.8);
+  
+      }
+  
+      .custom-prev {
+  
+          left: 10px;
+  
+      }
+  
+      .custom-next {
+  
+          right: 10px;
+  
+      }
+  
+      .carousel-control-prev-icon, .carousel-control-next-icon {
+  
+          filter: invert(1);
+  
+          width: 20px;
+  
+          height: 20px;
+  
+      }
+  
+  </style>

@@ -19,21 +19,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for item in cart_items %}
                         <tr>
                             <td>
-                                <img src="{% static 'assets/img/sample-product.jpg' %}" alt="Sample" 
+                                <img src="{{item.product_obj.image1.url}}" alt="Sample" 
                                      class="rounded d-none d-md-inline" width="80">
                                 <img src="{% static 'assets/img/sample-product.jpg' %}" alt="Sample" 
                                      class="rounded d-md-none" width="40">
                             </td>
-                            <td class="small">Sample</td>
-                            <td class="small">$10.00</td>
+                            <td class="small">{{item.product_obj.title}}</td>
+                            <td class="small">${{item.product_obj.get_price}}</td>
                             <td>
-                                <input type="number" value="1" class="form-control w-50 mx-auto text-center">
-                                <a href="#" class="text-danger d-block mt-1 small">Remove</a>
+                                <input type="number" type="number" min="1" max="{{ item.product_obj.stock }}" value="{{ item.quantity }}" class="form-control w-50 mx-auto text-center"
+                                onchange="changeProductQuantity('{{ item.product_id }}', '{{ item.color_id }}',this.value)" >
+                                <a href="#" class="text-danger d-block mt-1 small" onclick="removeProduct('{{ item.product_id }}', '{{ item.color_id }}')">Remove</a>
                             </td>
-                            <td class="small">$10.00</td>
+                            <td class="small">${{item.total_price}}</td>
                         </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -42,8 +45,8 @@
                 <h2 class="text-danger fw-bold fs-5 d-none d-md-block">Order Summary</h2>
                 <h2 class="text-danger fw-bold fs-6 d-md-none">Summary</h2>
                 <p class="text-muted text-decoration-line-through small">Original: $15.00</p>
-                <p class="text-danger fw-bold fs-6">Discount: $10.00</p>
-                <p class="text-danger fs-6">Total: $10.00</p>
+                <p class="text-danger fw-bold fs-6">Discount: ${{total_payment_price}}</p>
+                <p class="text-danger fs-6">Total: ${{total_payment_price}}</p>
                 <div class="d-flex flex-column flex-md-row justify-content-center gap-2 mt-2">
                     <a href="#" class="btn btn-minimal shadow-sm btn-md d-none d-md-block">
                         🎀 Checkout
@@ -121,4 +124,44 @@
         box-shadow: 0 3px 10px rgba(255, 98, 140, 0.3);
     }
 </style>
+<script>
+    function changeProductQuantity(product_id, color_id,quantity) {
+   $.ajax({
+       url: "{% url 'cart:session-update-product-quantity' %}",
+       method: 'POST',
+       data: {
+           product_id: product_id,
+           color_id: color_id,
+           quantity: quantity,
+           csrfmiddlewaretoken: '{{ csrf_token }}'
+       },
+       success: function (response) {
+           console.log(response);
+           window.location.reload();
+       },
+       error: function (jqXHR, textStatus, errorThrown) {
+           console.log(errorThrown);
+       }
+   });
+}
+     function removeProduct(product_id, color_id, style_id) {
+   $.ajax({
+       url: "{% url 'cart:session-remove-product' %}",
+       method: 'POST',
+       data: {
+           product_id: product_id,
+           color_id: color_id || null,    
+           style_id: style_id || null,
+           csrfmiddlewaretoken: '{{ csrf_token }}'
+       },
+       success: function (response) {
+           console.log("محصول حذف شد:", response);
+           window.location.reload();
+       },
+       error: function (jqXHR, textStatus, errorThrown) {
+           console.log("خطا در حذف محصول:", errorThrown);
+       }
+   });
+}
+ </script> 
 {% endblock 'content' %}
