@@ -72,6 +72,8 @@ class ProductDetailView(DetailView):
             "product__id", flat=True) if self.request.user.is_authenticated else []
         return context
 
+     
+
 
 class AddOrRemoveWishlistView(LoginRequiredMixin, View):
 
