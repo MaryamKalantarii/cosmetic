@@ -41,6 +41,7 @@ class CartSummaryView(TemplateView):
         context["cart_items"] = cart_items
         context["total_quantity"] = cart.get_total_quantity()
         context["total_payment_price"] = cart.get_total_payment_amount()
+        context["total_original_price"] = cart.get_total_original_amount()  # قیمت کل قبل از تخفیف
         return context
     
 class SessionRemoveProductView(View):

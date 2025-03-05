@@ -44,7 +44,7 @@
             <div class="bg-light p-3 rounded-3 text-center mt-3">
                 <h2 class="text-danger fw-bold fs-5 d-none d-md-block">Order Summary</h2>
                 <h2 class="text-danger fw-bold fs-6 d-md-none">Summary</h2>
-                <p class="text-muted text-decoration-line-through small">Original: $15.00</p>
+                <p class="text-muted text-decoration-line-through small">Original: ${{ total_original_price }}</p>
                 <p class="text-danger fw-bold fs-6">Discount: ${{total_payment_price}}</p>
                 <p class="text-danger fs-6">Total: ${{total_payment_price}}</p>
                 <div class="d-flex flex-column flex-md-row justify-content-center gap-2 mt-2">
@@ -54,11 +54,11 @@
                     <a href="#" class="btn btn-minimal shadow-sm btn-sm d-md-none">
                         🎀 Checkout
                     </a>
-                    <button class="btn btn-outline-minimal shadow-sm btn-md d-none d-md-block">
-                        🎀 Clear Cart
-                    </button>
+                    <a href="/product/grid/"><button class="btn btn-outline-minimal shadow-sm btn-md d-none d-md-block">
+                        🎀 shopping
+                    </button></a>
                     <button class="btn btn-outline-minimal shadow-sm btn-sm d-md-none">
-                        🎀 Clear
+                        🎀 shopping
                     </button>
                 </div>
             </div>

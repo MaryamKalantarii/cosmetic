@@ -1,6 +1,6 @@
 from product.models import ProductModel,ProductStatusType,ColorModel
 from cart.models import CartModel,CartItemModel
-
+from decimal import Decimal
 class CartSession:
     def __init__(self, session):
         self.session = session
@@ -69,6 +69,14 @@ class CartSession:
 
     def get_total_payment_amount(self):
         return sum(item["total_price"] for item in self._cart["items"])
+
+    def get_total_original_amount(self):
+        """محاسبه مجموع قیمت قبل از اعمال تخفیف"""
+        total_original_price = Decimal(0)
+        for item in self._cart["items"]:
+            product_obj = ProductModel.objects.get(id=item["product_id"], status=ProductStatusType.publish.value)
+            total_original_price += product_obj.price * item["quantity"]  # قیمت اصلی * تعداد محصول
+        return total_original_price
 
     def get_total_quantity(self):
         return sum(item["quantity"] for item in self._cart["items"])
