@@ -99,10 +99,12 @@
   <section id="hero" class="d-flex align-items-center text-center py-5 bg-light">
       <div class="container">
           <h1>Welcome to Our Store</h1>
+          <form action="{% url 'product:product-grid' %}">
           <div class="input-group search-group mt-3">
-              <input type="text" class="form-control search-input" placeholder="Search...">
-              <button class="btn search-btn"><i class="fas fa-search"></i></button>
+              <input type="text" name="q" class="form-control search-input" placeholder="Search...">
+              <button type="submit" class="btn search-btn"><i class="fas fa-search"></i></button>
           </div>
+        </form>
       </div>
   </section>
   <section id="why-us" class="py-5">
@@ -115,11 +117,11 @@
               {% for object in object_list %}
               <div class="col-lg-4 col-md-6 col-sm-12">
                   <div class="card h-100 shadow-sm text-center p-3">
-          
-                    <a href="{% url 'product:add-or-remove-wishlist' %}" class="wishlist-icon">
+                    {% if request.user.is_authenticated %}
+                    <a class="wishlist-icon {% if object.id in wishlist_items %} active {% endif %}" onclick="addToWishlist(this,`{{object.id}}`)">
                         <i class="fas fa-heart"></i>
                     </a>
-                    
+                    {% endif %}
                     <style>
                         .wishlist-icon {
                             display: inline-flex;
@@ -198,5 +200,46 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<script>
+    function addToWishlist(element,product_id) {
+     
+     //console.log(product_id)
+     $.ajax({
+         url: "{%  url 'product:add-or-remove-wishlist' %}",
+         method: 'POST',
+         data: {
+             product_id: product_id,
+             csrfmiddlewaretoken: '{{ csrf_token }}'
+ 
+         },
+         success: function (response) {
+            Toastify({
+                text: response.message,
+                className: `info`,
+                style: {
+                    background: response.message.includes("اضافه") ? "pink" : "red",
+                }
+            }).showToast();
 
+            // تغییر وضعیت آیکون
+            if ($(element).hasClass('active')) {
+                $(element).removeClass('active');
+            } else {
+                $(element).addClass('active');
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error(errorThrown);
+            Toastify({
+                text: "خطا در انجام عملیات.",
+                className: `error`,
+                style: {
+                    background: "red",
+                }
+            }).showToast();
+        }
+    });
+}
+ 
+</script>
 {% endblock 'content' %}

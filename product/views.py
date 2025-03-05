@@ -22,7 +22,7 @@ class ProductGridView(ListView):
         #search
         if search_q := self.request.GET.get("q"):
             queryset = queryset.filter(
-                Q(title__icontains=search_q) | Q(brief_description__icontains=search_q) | Q(description__icontains=search_q))
+                Q(title__icontains=search_q) | Q(description__icontains=search_q))
     
          # فیلتر بر اساس کتگوری
         category_slug = self.request.GET.get("category")

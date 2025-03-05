@@ -71,10 +71,12 @@
                         {% endfor %}
                     </div>
                 </div>     
-       <!-- دکمه Wishlist -->
-<button id="wishlist-btn" type="button" class="btn btn-wishlist" onclick="addToWishlist(this, `{{ object.id }}`)">
+<!-- دکمه Wishlist -->
+{% if request.user.is_authenticated %}
+<button id="wishlist-btn" type="button" class="btn btn-wishlist {% if object.id in wishlist_items %} active {% endif %}" onclick="addToWishlist(this,`{{object.id}}`)">
     <i class="bi bi-heart"></i> Wishlist
 </button>
+{% endif %}
 
 <!-- دکمه افزودن به سبد خرید -->
 <button class="btn btn-add-to-cart" onclick="addToCart('{{ object.id }}', event)">

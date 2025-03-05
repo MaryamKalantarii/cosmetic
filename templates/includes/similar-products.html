@@ -12,7 +12,11 @@
                 <div class="col-lg-3 col-md-4 col-sm-6 col-12 product-item">
                     
                     <div class="card border-0 shadow-sm product-card">
-                        <div class="wishlist-icon">&#9825;</div>
+                        {% if request.user.is_authenticated %}
+                    <a class="wishlist-icon {% if similar_prodcut.id in wishlist_items %} active {% endif %}" onclick="addToWishlist(this,`{{similar_prodcut.id}}`)">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                    {% endif %}
                         <img src="{{similar_prodcut.image1.url}}" class="card-img-top" alt="{{ product.title }}">
                         <div class="card-body text-center">
                             <h5 class="card-title">{{similar_prodcut.title}}</h5>
@@ -58,7 +62,26 @@
   
   
   <style>
-  
+        
+                        .wishlist-icon {
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            text-decoration: none;
+                            font-size: 22px; /* اندازه آیکون */
+                            color: #bbb; /* رنگ اولیه */
+                            transition: color 0.3s ease, transform 0.2s ease;
+                        }
+                    
+                        .wishlist-icon:hover {
+                            color: #ff6b81; /* تغییر رنگ هنگام هاور */
+                            transform: scale(1.1); /* کمی بزرگ شدن */
+                        }
+                    
+                        .wishlist-icon.active {
+                            color: #ff4757; /* رنگ قرمز پررنگ برای حالت فعال */
+                        }
+                    
       .product-card {
   
           background: rgba(255, 182, 193, 0.2);
@@ -85,21 +108,7 @@
   
       }
   
-      .wishlist-icon {
-  
-          position: absolute;
-  
-          top: 10px;
-  
-          left: 10px;
-  
-          font-size: 20px;
-  
-          color: #ff1493;
-  
-          cursor: pointer;
-  
-      }
+
   
       .price {
   
@@ -274,5 +283,6 @@ document.addEventListener("DOMContentLoaded", function () {
         slider.scrollBy({ left: -scrollStep, behavior: "smooth" });
     });
 });
+
 
 </script>
