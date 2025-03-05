@@ -283,6 +283,31 @@ document.addEventListener("DOMContentLoaded", function () {
         slider.scrollBy({ left: -scrollStep, behavior: "smooth" });
     });
 });
+// دریافت دکمه‌های فلش
+const prevButton = document.querySelector('.custom-prev');
+const nextButton = document.querySelector('.custom-next');
+
+// دریافت اسلایدر محصولات
+const productSlider = document.querySelector('.related-products-slider');
+
+// تعریف سرعت اسکرول
+const scrollAmount = 300; // مقدار اسکرول به پیکسل
+
+// حرکت به سمت چپ
+prevButton.addEventListener('click', () => {
+    productSlider.scrollBy({
+        left: -scrollAmount,  // اسکرول به سمت چپ
+        behavior: 'smooth'    // اسکرول نرم
+    });
+});
+
+// حرکت به سمت راست
+nextButton.addEventListener('click', () => {
+    productSlider.scrollBy({
+        left: scrollAmount,   // اسکرول به سمت راست
+        behavior: 'smooth'    // اسکرول نرم
+    });
+});
 
 
 </script>
