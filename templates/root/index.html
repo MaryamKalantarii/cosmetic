@@ -139,6 +139,107 @@
     </div>
   </div>
 </section><!-- /Specials Section -->
+<!-- ======= Categories Section ======= -->
+<section id="categories" class="categories">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Categories</h2>
+      <p>Explore Our Categories</p>
+    </div>
+
+    <div class="categories-wrapper">
+    
+      <div class="category">
+        <img src="{% static 'assets/img/c6.png' %}" alt="Skin">
+        <div class="overlay">Eyes</div>
+        <a href="/category/skin" class="btn">View ←</a>
+      </div>
+      <div class="category">
+        <img src="{% static 'assets/img/c2.jpg' %}" alt="Hair">
+        <div class="overlay">Lip</div>
+        <a href="/category/hair" class="btn">View ←</a>
+      </div>
+      <div class="category">
+        <img src="{% static 'assets/img/c1.jpg' %}" alt="Hair">
+        <div class="overlay">Skin</div>
+        <a href="/category/hair" class="btn">View ←</a>
+      </div>
+      <div class="category">
+        <img src="{% static 'assets/img/h3.jpg' %}"alt="Perfume">
+        <div class="overlay">Serums</div>
+        <a href="/category/perfume" class="btn">View ←</a>
+      </div>
+      <div class="category">
+        <img src="{% static 'assets/img/c4.png' %}" alt="Hygiene">
+        <div class="overlay">Perfume</div>
+        <a href="/category/hygiene" class="btn">View ←</a>
+      </div>
+      <div class="category">
+        <img src="{% static 'assets/img/c5.png' %}" alt="Makeup">
+        <div class="overlay">Mask</div>
+        <a href="/category/makeup" class="btn">View ←</a>
+      </div>
+      
+    </div>
+
+  </div>
+</section><!-- /Categories Section -->
+
+<style>
+    .categories {
+        padding: 50px 0;
+        text-align: center;
+    }
+    .categories-wrapper {
+        display: flex;
+        flex-wrap: nowrap; /* Prevents items from wrapping to the next line */
+        justify-content: space-between; /* Distribute items evenly */
+    }
+    .category {
+        position: relative;
+        width: 200px;
+        height: 250px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+    }
+    .category img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 0.3s;
+    }
+    .category:hover img {
+        filter: blur(3px);
+    }
+    .category .overlay {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        text-align: right;
+    }
+    .category .btn {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: #e4aeb6;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+    .category .btn:hover {
+        background: #cc0055;
+    }
+</style>
+
 
 
     <!-- ======= Events Section ======= -->
