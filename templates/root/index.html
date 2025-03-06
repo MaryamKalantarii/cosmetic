@@ -224,10 +224,12 @@
     justify-content: space-between;
     gap: 30px;
     flex-wrap: wrap;
+    flex-wrap: nowrap; /* جلوگیری از افتادن آیتم‌ها به خط بعد */
   }
   /* استایل بنر */
   .bestsellers-banner {
-    flex: 1 1 40%;
+    flex: 1 1 30%; /* تنظیم عرض بنر روی ۳۰٪ */
+    max-width: 350px; /* حداکثر عرض بنر */
     position: relative;
     overflow: hidden;
     border-radius: 12px;
@@ -266,32 +268,46 @@
   }
   /* استایل اسلایدر محصولات */
   .fave-slider {
-    flex: 1 1 55%;
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
+    justify-content: space-between; /* باکس‌ها را به طور مساوی کنار هم می‌چیند */
+    flex-wrap: wrap;
     gap: 20px;
-    padding-bottom: 10px;
-  }
-  .fave-slider::-webkit-scrollbar {
-    display: none;
-  }
-  .fave-item {
-    flex: 0 0 auto;
-    width: 45%;
+    flex: 1 1 70%; /* محصولات ۷۰٪ عرض رو بگیرن */
 }
-  .fave-box {
+
+.fave-box {
+  flex: 1; /* تمام باکس‌ها اندازه یکسان داشته باشن */
+  max-width: 250px; /* جلوگیری از بزرگ شدن بیش از حد */
+    max-width: 300px; /* حداکثر عرض برای هماهنگی */
     background: rgba(255, 182, 193, 0.2);
     border-radius: 15px;
     padding: 15px;
     backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
     text-align: center;
     transition: all 0.3s ease;
-  }
+}
+.fave-item {
+    flex: 0 0 calc(33.33% - 20px); /* هر باکس 33.33% از عرض بگیره */
+    max-width: 300px; /* افزایش حداکثر عرض */
+}
+
+.fave-box img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* تنظیمات واکنش‌گرا */
+@media (max-width: 992px) {
+    .fave-box {
+        flex: 1 1 calc(50% - 20px); /* دو ستونه در تبلت */
+    }
+}
+
+@media (max-width: 600px) {
+    .fave-box {
+        flex: 1 1 100%; /* تک ستونه در موبایل */
+    }
+}
   .fave-box:hover {
     transform: scale(1.05);
   }
@@ -351,7 +367,7 @@
       flex: 1 1 100%;
     }
     .fave-item  {
-      width: 80%;
+      width: 90%;
     }
   }
 
