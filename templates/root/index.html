@@ -139,6 +139,228 @@
     </div>
   </div>
 </section><!-- /Specials Section -->
+
+<!-- ======= Worth the Hype Section ======= -->
+<section id="worth-the-hype" class="bestsellers-section section-bg">
+  <div class="container" data-aos="fade-up">
+    <div class="bestsellers-header">
+      <h2>Worth the Hype</h2>
+      <p>Fave customers cosmetic</p>
+    </div>
+    <div class="bestsellers-content">
+      <!-- بنر سمت چپ -->
+      <div class="bestsellers-banner">
+        <img src="{% static 'assets/img/p2.png' %}" alt="Best Sellers">
+        <div class="banner-text">
+          <h3>Best Sellers</h3>
+          <a href="#" class="btn-shop">Shop Now</a>
+        </div>
+      </div>
+      <!-- اسلایدر محصولات سمت راست -->
+      <div class="fave-slider">
+        <div class="fave-box">
+          <div class="product-textbox">
+            <img src="{% static 'assets/img/p2.png' %}" alt="Color Bloom Liquid" class="product-img">
+            <h3>Color Bloom Liquid</h3>
+            <p class="price-2">$5.99</p>
+            <div class="color-options">
+              <span class="color-option" style="background: #f8a5c2;"></span>
+              <span class="color-option" style="background: #d1a3a4;"></span>
+              <span class="color-option" style="background: #f9d6a5;"></span>
+            </div>
+            <button class="btn-add">Add to Cart</button>
+          </div>
+        </div>
+        <div class="product-item-2">
+          <div class="fave-box ">
+            <img src="{% static 'assets/img/p2.png' %}" alt="Product 2" class="product-img">
+            <h3>Product Name 2</h3>
+            <p class="price-2">$12.99</p>
+            <div class="color-options">
+              <span class="color-option" style="background: #d1a3a4;"></span>
+              <span class="color-option" style="background: #f8a5c2;"></span>
+              <span class="color-option" style="background: #f9d6a5;"></span>
+            </div>
+            <button class="btn-add">Add to Cart</button>
+          </div>
+        </div>
+        <div class="fave-item">
+          <div class="fave-box ">
+            <img src="{% static 'assets/img/p2.png' %}" alt="Product 2" class="product-img">
+            <h3>Product Name 2</h3>
+            <p class="price-2">$12.99</p>
+            <div class="color-options">
+              <span class="color-option" style="background: #d1a3a4;"></span>
+              <span class="color-option" style="background: #f8a5c2;"></span>
+              <span class="color-option" style="background: #f9d6a5;"></span>
+            </div>
+            <button class="btn-add">Add to Cart</button>
+          </div>
+        </div>
+        <!-- می‌توانید محصولات بیشتری به همین صورت اضافه کنید -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Worth the Hype Section -->
+
+
+<style>
+
+.bestsellers-header h2 {
+    color: #ff69b4;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .bestsellers-header p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+  }
+  .bestsellers-content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  /* استایل بنر */
+  .bestsellers-banner {
+    flex: 1 1 40%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  .bestsellers-banner img {
+    width: 100%;
+    transition: transform 0.4s ease;
+  }
+  .bestsellers-banner:hover img {
+    transform: scale(1.05);
+  }
+  .banner-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: #fff;
+  }
+  .banner-text h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.4);
+  }
+  .btn-shop {
+    background: #ff69b4;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background 0.3s ease;
+  }
+  .btn-shop:hover {
+    background: #e0558c;
+  }
+  /* استایل اسلایدر محصولات */
+  .fave-slider {
+    flex: 1 1 55%;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    gap: 20px;
+    padding-bottom: 10px;
+  }
+  .fave-slider::-webkit-scrollbar {
+    display: none;
+  }
+  .fave-item {
+    flex: 0 0 auto;
+    width: 45%;
+}
+  .fave-box {
+    background: rgba(255, 182, 193, 0.2);
+    border-radius: 15px;
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .fave-box:hover {
+    transform: scale(1.05);
+  }
+  .product-img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease;
+  }
+  .product-img:hover {
+    transform: scale(1.03);
+  }
+  .price-2 {
+    font-size: 18px;
+    color: #ff69b4;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+  .color-options {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  .color-option {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    transition: transform 0.3s ease;
+  }
+  .color-option:hover {
+    transform: scale(1.2);
+  }
+  .btn-add {
+    background: #ff69b4;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  .btn-add:hover {
+    background: #d1478b;
+    transform: translateY(-2px);
+  }
+  /* تنظیمات واکنش‌گرا */
+  @media (max-width: 768px) {
+    .bestsellers-content {
+      flex-direction: column;
+      align-items: center;
+    }
+    .bestsellers-banner,
+    .related-products-slider {
+      flex: 1 1 100%;
+    }
+    .fave-item  {
+      width: 80%;
+    }
+  }
+
+
+
+</style>
+
+
+
 <!-- ======= Categories Section ======= -->
 <section id="categories" class="categories">
   <div class="container" data-aos="fade-up">
@@ -381,35 +603,9 @@
 
   
  <!-- ======= Testimonials Section ======= -->
- <section id="testimonials" class="testimonials section-bg">
-  <div class="container" data-aos="fade-up">
 
-    <div class="section-title">
-      <h2>Testimonials</h2>
-      <p>What they're saying about us</p>
-    </div>
-    
-    <!-- <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-      <div class="swiper-wrapper">
-      {% for comment in comment %}
-        <div class="swiper-slide">
-          <div class="testimonial-item">
-            <p>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              {{comment.message}}
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-            <img src="{{request.user.image.url}}" class="testimonial-img" alt="">
-            <h3>{{comment.name}}</h3>
-            <h4>{{comment.email}}</h4>
-          </div>
-        </div>
-      {% endfor %}
-      </div>
-      <div class="swiper-pagination"></div>
-    </div> -->
-  </div>
-</section><!-- End Testimonials Section -->
+<!-- ======= Worth the Hype Section ======= -->
+
 
  <!-- ======= Comments ======= -->
     <!-- {% if request.user.is_authenticated %}
@@ -470,9 +666,10 @@
     display: none;
 }
 
-.product-item {
+/* برای نیو پروداکت */
+.new-product-item {
     flex: 0 0 auto;
-    width: 20%; /* نمایش 5 محصول */
+    width: 20%;
 }
 
 .product-card {
@@ -553,7 +750,7 @@
 }
 
 @media (max-width: 768px) {
-    .product-item {
+  .new-product-item{
         width: 80%; /* نمایش دو محصول نسبی */
     }
 
@@ -651,6 +848,24 @@
       slider.scrollBy({ left: -scrollStep, behavior: "smooth" });
   });
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    new Swiper(".bestsellers-slider", {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
+  });
+
+
+
 </script>
   {% endblock 'content' %}
 
