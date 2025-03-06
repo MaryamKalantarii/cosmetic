@@ -681,6 +681,18 @@
     overflow: hidden;
     text-align: center;
     transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 400px; /* ارتفاع ثابت برای جلوگیری از بهم ریختن باکس */
+}
+
+.product-title {
+    white-space: nowrap; /* جلوگیری از شکست متن */
+    overflow: hidden; /* مخفی کردن متن اضافی */
+    text-overflow: ellipsis; /* اضافه کردن سه نقطه در صورت طولانی بودن متن */
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .product-card:hover {
@@ -750,7 +762,7 @@
 }
 
 @media (max-width: 768px) {
-  .new-product-item{
+  .new-product-item {
         width: 80%; /* نمایش دو محصول نسبی */
     }
 
@@ -758,6 +770,7 @@
         display: none;
     }
 }
+
 
 
 </style>
