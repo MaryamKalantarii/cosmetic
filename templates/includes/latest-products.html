@@ -1,0 +1,77 @@
+{% load static %}
+
+<!-- محصولات مرتبط -->
+<section class="related-products py-5">
+    <div class="container">
+        <h3 class="text-center mb-4" style="color: darkgray;">New products____</h3>
+        <div class="position-relative">
+            <!-- دکمه فلش قبلی -->
+            <button class="carousel-control-prev custom-prev" type="button">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            </button>
+  
+            <div class="row related-products-slider">
+                <!-- تغییرات برای 5 محصول -->
+                {% for latest_product in latest_products %}
+                <div class="col-lg-2 col-md-4 col-sm-6 col-12 product-item">
+                    <div class="card border-0 shadow-sm product-card">
+                        {% if request.user.is_authenticated %}
+                    <a class="wishlist-icon {% if latest_product.id in wishlist_items %} active {% endif %}" onclick="addToWishlist(this,`{{latest_product.id}}`)">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                    {% endif %}
+                        <img src="{{latest_product.image1.url}}" class="card-img-top" alt="Product Title 1">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{latest_product.title}}</h5>
+                            {% if latest_product.is_discounted %}
+                            <p class="card-text price"> <span class="discounted-price">{{latest_product.get_price}}$</span> <span class="original-price">{{latest_product.price}}$</span></p>
+                            {% else %}
+                            <p class="card-text price"> <span class="discounted-price">{{latest_product.price}}$</span></p>
+                            {% endif %}
+                            <ul class="review-star">
+                                {% for i in "12345" %}
+                                {% if i|add:0 <= latest_product.avg_rate %} <span><i
+                                        class="bi bi-star-fill star-rate"></i></span>
+                                    {% else %}
+                                    <span><i class="bi bi-star star-rate"></i></span>
+                                    {% endif %}
+                                    {% endfor %}
+                                    
+                               </ul>
+                            <a href="{% url 'product:product-detail' slug=latest_product.slug %}" class="btn product-btn">Product Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+  
+            </div>
+  
+            <!-- دکمه فلش بعدی -->
+            <button class="carousel-control-next custom-next" type="button">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+  </section>
+  <style>
+    
+    .wishlist-icon {
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            text-decoration: none;
+                            font-size: 22px; /* اندازه آیکون */
+                            color: #bbb; /* رنگ اولیه */
+                            transition: color 0.3s ease, transform 0.2s ease;
+                        }
+                    
+                        .wishlist-icon:hover {
+                            color: #ff6b81; /* تغییر رنگ هنگام هاور */
+                            transform: scale(1.1); /* کمی بزرگ شدن */
+                        }
+                    
+                        .wishlist-icon.active {
+                            color: #ff4757; /* رنگ قرمز پررنگ برای حالت فعال */
+                        }
+  </style>
