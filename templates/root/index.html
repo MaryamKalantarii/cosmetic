@@ -194,50 +194,49 @@
 
 <style>
 .content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    max-width: 1200px;
-    margin: auto;
-  }
+  display: flex;
+  align-items: flex-start; /* محصولات و بنر در یک سطح قرار بگیرند */
+  justify-content: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+  flex-wrap: nowrap; /* جلوگیری از افتادن محصولات زیر بنر */
+}
+
+.banner {
+  flex: 0 0 600px; /* ثابت نگه داشتن عرض بنر */
+  text-align: center;
+}
+
 .banner img {
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
   border-radius: 20px;
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
   transition: all 0.4s ease-in-out;
 }
 
-.banner img:hover {
-  transform: scale(1.03);
-  filter: brightness(1.1);
+.products-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-
 
 .products {
   text-align: left;
   max-width: 600px;
 }
 
-.products h2 {
-  font-size: 24px;
-  color: #d6336c;
-}
-
-.products p {
-  color: #555;
-  max-width: 500px;
-  margin: 10px 0;
-}
-
 /* استایل برای اسکرول محصولات */
 .scroll-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    max-width: 100%;
-  }
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+  overflow: hidden; /* جلوگیری از اسکرول صفحه */
+}
+
 .product-list {
   display: flex;
   gap: 20px;
@@ -282,7 +281,6 @@
 .scroll-btn {
   position: absolute;
   top: 50%;
-
   background: #d6336c;
   color: white;
   border: none;
@@ -298,15 +296,30 @@
   opacity: 0.8;
 }
 
-
-
-
 .scroll-btn.left {
   left: -10px;
 }
 
 .scroll-btn.right {
   right: -10px;
+}
+/* دکمه‌های "Shop Now" */
+.product button {
+  background: linear-gradient(45deg, #d6336c, #a65d49); /* صورتی به قهوه‌ای */
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.product button:hover {
+  background: linear-gradient(45deg, #b82b5a, #8b4b3a); /* تیره‌تر شدن رنگ */
+  transform: scale(1.05);
 }
 
 /* دکمه نمایش بیشتر */
@@ -323,97 +336,80 @@
   background: #d6336c;
   color: white;
 }
-/* دکمه‌های "Shop Now" */
-.product button {
-  background: linear-gradient(45deg, #a65d49, #d9a07a);
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 10px;
-  width: 100%;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
 
-.product button:hover {
-  background: linear-gradient(45deg, #8b4b3a, #c98c6d);
-  transform: scale(1.05);
-}
+/* جلوگیری از تغییر اندازه بنر هنگام اسکرول محصولات */
 .custom-banner {
-    position: relative;
-    width: 600px;
-    border-radius: 20px;
-    overflow: hidden;
+  position: relative;
+  width: 600px;
+  min-height: 300px;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .custom-banner img {
-    width: 100%;
-    border-radius: 20px;
-    display: block;
-    transition: all 0.4s ease-in-out;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  display: block;
+  transition: all 0.4s ease-in-out;
 }
 
 .custom-banner .overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 192, 203, 0.8); /* پس‌زمینه صورتی کم‌رنگ */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 192, 203, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
 }
 
 .custom-banner h2 {
-    font-size: 22px;
-    color: white;
-    margin-bottom: 10px;
+  font-size: 22px;
+  color: white;
+  margin-bottom: 10px;
 }
 
 .custom-banner button {
-    background: white;
-    color: #d6336c;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  background: white;
+  color: #d6336c;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .custom-banner button:hover {
-    background: #d6336c;
-    color: white;
+  background: #d6336c;
+  color: white;
 }
 
 .custom-banner:hover .overlay {
-    opacity: 1;
+  opacity: 1;
 }
 
-
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .content {
     flex-direction: column;
-    gap: 20px;
     align-items: center;
+    gap: 20px;
   }
 
-  .banner img {
-    width: 95%;
-    border-radius: 25px;
-  }
-}
-
-
-  .products {
-    text-align: center;
+  .banner {
     max-width: 90%;
+  }
+
+  .products-container {
+    max-width: 90%;
+    text-align: center;
   }
 
   .scroll-container {
@@ -443,6 +439,7 @@
   .view-more {
     width: 80%;
   }
+}
 
 
 </style>
