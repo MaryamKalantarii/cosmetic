@@ -140,241 +140,324 @@
   </div>
 </section><!-- /Specials Section -->
 
-<!-- ======= Worth the Hype Section ======= -->
-<section id="worth-the-hype" class="bestsellers-section section-bg">
-  <div class="container" data-aos="fade-up">
-    <div class="bestsellers-header">
-      <h2>Worth the Hype</h2>
-      <p>Fave customers cosmetic</p>
-    </div>
-    <div class="bestsellers-content">
-      <!-- بنر سمت چپ -->
-      <div class="bestsellers-banner">
-        <img src="{% static 'assets/img/p2.png' %}" alt="Best Sellers">
-        <div class="banner-text">
-          <h3>Best Sellers</h3>
-          <a href="#" class="btn-shop">Shop Now</a>
-        </div>
-      </div>
-      <!-- اسلایدر محصولات سمت راست -->
-      <div class="fave-slider">
-        <div class="fave-box">
-          <div class="product-textbox">
-            <img src="{% static 'assets/img/p2.png' %}" alt="Color Bloom Liquid" class="product-img">
-            <h3>Color Bloom Liquid</h3>
-            <p class="price-2">$5.99</p>
-            <div class="color-options">
-              <span class="color-option" style="background: #f8a5c2;"></span>
-              <span class="color-option" style="background: #d1a3a4;"></span>
-              <span class="color-option" style="background: #f9d6a5;"></span>
-            </div>
-            <button class="btn-add">Add to Cart</button>
-          </div>
-        </div>
-        <div class="product-item-2">
-          <div class="fave-box ">
-            <img src="{% static 'assets/img/p2.png' %}" alt="Product 2" class="product-img">
-            <h3>Product Name 2</h3>
-            <p class="price-2">$12.99</p>
-            <div class="color-options">
-              <span class="color-option" style="background: #d1a3a4;"></span>
-              <span class="color-option" style="background: #f8a5c2;"></span>
-              <span class="color-option" style="background: #f9d6a5;"></span>
-            </div>
-            <button class="btn-add">Add to Cart</button>
-          </div>
-        </div>
-        <div class="fave-item">
-          <div class="fave-box ">
-            <img src="{% static 'assets/img/p2.png' %}" alt="Product 2" class="product-img">
-            <h3>Product Name 2</h3>
-            <p class="price-2">$12.99</p>
-            <div class="color-options">
-              <span class="color-option" style="background: #d1a3a4;"></span>
-              <span class="color-option" style="background: #f8a5c2;"></span>
-              <span class="color-option" style="background: #f9d6a5;"></span>
-            </div>
-            <button class="btn-add">Add to Cart</button>
-          </div>
-        </div>
-        <!-- می‌توانید محصولات بیشتری به همین صورت اضافه کنید -->
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End Worth the Hype Section -->
 
+<section class="worth-the-hype">
+  <div class="content">
+    <div class="custom-banner">
+      <img src="{% static 'assets/img/pic3.png' %}" alt="Worth the Hype">
+      <div class="overlay">
+          <h2>Worth the Hype</h2>
+          <button>Shop Now</button>
+      </div>
+  </div>
+  
+    <div class="products">
+      <h2>Worth the Hype</h2>
+      <p>Discover the hottest beauty trends that everyone is raving about!</p>
+      
+      <div class="scroll-container">
+        <button class="scroll-btn left" onclick="scrollProducts(-1)">&#10094;</button>
+        <div class="product-list">
+          <div class="product">
+            <img src="{% static 'assets/img/pic4.png' %}"  alt="Glam Lipstick">
+            <h3>Glam Lipstick</h3>
+            <p class="price">$12.99</p>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="{% static 'assets/img/pic4.png' %}"  alt="Shiny Highlighter">
+            <h3>Shiny Highlighter</h3>
+            <p class="price">$14.99</p>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="{% static 'assets/img/pic4.png' %}"  alt="Blush Powder">
+            <h3>Blush Powder</h3>
+            <p class="price">$9.99</p>
+            <button>Shop Now</button>
+          </div>
+          <div class="product">
+            <img src="{% static 'assets/img/pic4.png' %}"  alt="Foundation">
+            <h3>Foundation</h3>
+            <p class="price">$19.99</p>
+            <button>Shop Now</button>
+          </div>
+        
+        </div>
+        <button class="scroll-btn right" onclick="scrollProducts(1)">&#10095;</button>
+      </div>
+      <div class="custom-banner">
+
+    </div>
+    
+</section>
 
 <style>
-
-.bestsellers-header h2 {
-    color: #ff69b4;
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  .bestsellers-header p {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 30px;
-  }
-  .bestsellers-content {
+.content {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 30px;
-    flex-wrap: wrap;
-    flex-wrap: nowrap; /* جلوگیری از افتادن آیتم‌ها به خط بعد */
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1200px;
+    margin: auto;
   }
-  /* استایل بنر */
-  .bestsellers-banner {
-    flex: 1 1 30%; /* تنظیم عرض بنر روی ۳۰٪ */
-    max-width: 350px; /* حداکثر عرض بنر */
-    position: relative;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  .bestsellers-banner img {
-    width: 100%;
-    transition: transform 0.4s ease;
-  }
-  .bestsellers-banner:hover img {
-    transform: scale(1.05);
-  }
-  .banner-text {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    color: #fff;
-  }
-  .banner-text h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.4);
-  }
-  .btn-shop {
-    background: #ff69b4;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: background 0.3s ease;
-  }
-  .btn-shop:hover {
-    background: #e0558c;
-  }
-  /* استایل اسلایدر محصولات */
-  .fave-slider {
-    display: flex;
-    justify-content: space-between; /* باکس‌ها را به طور مساوی کنار هم می‌چیند */
-    flex-wrap: wrap;
-    gap: 20px;
-    flex: 1 1 70%; /* محصولات ۷۰٪ عرض رو بگیرن */
+.banner img {
+  width: 600px;
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease-in-out;
 }
 
-.fave-box {
-  flex: 1; /* تمام باکس‌ها اندازه یکسان داشته باشن */
-  max-width: 250px; /* جلوگیری از بزرگ شدن بیش از حد */
-    max-width: 300px; /* حداکثر عرض برای هماهنگی */
-    background: rgba(255, 182, 193, 0.2);
-    border-radius: 15px;
-    padding: 15px;
-    backdrop-filter: blur(10px);
-    text-align: center;
+.banner img:hover {
+  transform: scale(1.03);
+  filter: brightness(1.1);
+}
+
+
+.products {
+  text-align: left;
+  max-width: 600px;
+}
+
+.products h2 {
+  font-size: 24px;
+  color: #d6336c;
+}
+
+.products p {
+  color: #555;
+  max-width: 500px;
+  margin: 10px 0;
+}
+
+/* استایل برای اسکرول محصولات */
+.scroll-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    max-width: 100%;
+  }
+.product-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  padding: 10px 0;
+  scrollbar-width: none;
+}
+
+.product-list::-webkit-scrollbar {
+  display: none;
+}
+
+.product {
+  background: #f8f4f1;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center;
+  width: 180px;
+  flex: 0 0 auto;
+}
+
+.product img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.product h3 {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #5c4033;
+}
+
+.price {
+  color: #a65d49;
+  font-weight: bold;
+}
+
+/* دکمه‌های اسکرول */
+.scroll-btn {
+  position: absolute;
+  top: 50%;
+
+  background: #d6336c;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+}
+
+
+
+
+.scroll-btn.left {
+  left: -10px;
+}
+
+.scroll-btn.right {
+  right: -10px;
+}
+
+/* دکمه نمایش بیشتر */
+.view-more {
+  background: transparent;
+  border: 2px solid #d6336c;
+  color: #d6336c;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 6px;
+}
+
+.view-more:hover {
+  background: #d6336c;
+  color: white;
+}
+/* دکمه‌های "Shop Now" */
+.product button {
+  background: linear-gradient(45deg, #a65d49, #d9a07a);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.product button:hover {
+  background: linear-gradient(45deg, #8b4b3a, #c98c6d);
+  transform: scale(1.05);
+}
+.custom-banner {
+    position: relative;
+    width: 600px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.custom-banner img {
+    width: 100%;
+    border-radius: 20px;
+    display: block;
+    transition: all 0.4s ease-in-out;
+}
+
+.custom-banner .overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 192, 203, 0.8); /* پس‌زمینه صورتی کم‌رنگ */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.custom-banner h2 {
+    font-size: 22px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.custom-banner button {
+    background: white;
+    color: #d6336c;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
-.fave-item {
-    flex: 0 0 calc(33.33% - 20px); /* هر باکس 33.33% از عرض بگیره */
-    max-width: 300px; /* افزایش حداکثر عرض */
+
+.custom-banner button:hover {
+    background: #d6336c;
+    color: white;
 }
 
-.fave-box img {
+.custom-banner:hover .overlay {
+    opacity: 1;
+}
+
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .banner img {
+    width: 95%;
+    border-radius: 25px;
+  }
+}
+
+
+  .products {
+    text-align: center;
+    max-width: 90%;
+  }
+
+  .scroll-container {
     width: 100%;
-    border-radius: 10px;
-}
-
-/* تنظیمات واکنش‌گرا */
-@media (max-width: 992px) {
-    .fave-box {
-        flex: 1 1 calc(50% - 20px); /* دو ستونه در تبلت */
-    }
-}
-
-@media (max-width: 600px) {
-    .fave-box {
-        flex: 1 1 100%; /* تک ستونه در موبایل */
-    }
-}
-  .fave-box:hover {
-    transform: scale(1.05);
-  }
-  .product-img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    transition: transform 0.3s ease;
-  }
-  .product-img:hover {
-    transform: scale(1.03);
-  }
-  .price-2 {
-    font-size: 18px;
-    color: #ff69b4;
-    margin-bottom: 15px;
-    font-weight: bold;
-  }
-  .color-options {
-    display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 15px;
-  }
-  .color-option {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    transition: transform 0.3s ease;
-  }
-  .color-option:hover {
-    transform: scale(1.2);
-  }
-  .btn-add {
-    background: #ff69b4;
-    color: #fff;
-    padding: 10px 25px;
-    border-radius: 8px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
-  }
-  .btn-add:hover {
-    background: #d1478b;
-    transform: translateY(-2px);
-  }
-  /* تنظیمات واکنش‌گرا */
-  @media (max-width: 768px) {
-    .bestsellers-content {
-      flex-direction: column;
-      align-items: center;
-    }
-    .bestsellers-banner,
-    .related-products-slider {
-      flex: 1 1 100%;
-    }
-    .fave-item  {
-      width: 90%;
-    }
   }
 
+  .scroll-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    opacity: 1;
+  }
+
+  .scroll-btn.left {
+    left: 5px;
+  }
+
+  .scroll-btn.right {
+    right: 5px;
+  }
+
+  .product {
+    width: 160px;
+  }
+
+  .view-more {
+    width: 80%;
+  }
 
 
 </style>
 
+
+<script defer>
+  function scrollProducts(direction) {
+    const productList = document.querySelector('.product-list');
+    const scrollAmount = 200; // مقدار اسکرول
+
+    // اسکرول لیست محصولات با توجه به جهت
+    productList.scrollLeft += direction * scrollAmount;
+  }
+
+</script>
 
 
 <!-- ======= Categories Section ======= -->
