@@ -10,7 +10,15 @@ from django.views.generic import TemplateView
 
 class IndexView(TemplateView):
     template_name = "root/index.html" 
-
+    def get_context_data(self, **kwargs):
+        # دریافت context پیش‌فرض
+        context = super().get_context_data(**kwargs)
+        
+        # اضافه کردن داده‌های مدل‌ها به context
+        context['gallery'] = Gallery.objects.filter(status=True)[:8]  # دریافت 10 محصول اول
+        
+        
+        return context
 class AboutView(TemplateView):
     template_name = "root/about.html"
 

@@ -30,3 +30,10 @@ class NewsLetter(models.Model):
 
     def __str__(self):
         return self.email
+
+class Gallery(models.Model):
+    image = models.ImageField(upload_to='Gallery')
+    status = models.BooleanField(default=False)
+    created_date = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        ordering = ['-created_date']

@@ -9,3 +9,7 @@ class ContactModelAdmin(admin.ModelAdmin):
 @admin.register(NewsLetter)
 class NewsLetterAdmin(admin.ModelAdmin):
     list_display = ("id", "email", "created_date")
+
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+    list_display = ("id", "created_date")
