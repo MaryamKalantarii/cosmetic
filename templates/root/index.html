@@ -411,26 +411,41 @@
     max-width: 90%;
     text-align: center;
   }
-
+  @media (max-width: 768px) {
   .scroll-container {
+    position: relative;
     width: 100%;
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
 
   .scroll-btn {
-    width: 50px;
-    height: 50px;
-    font-size: 20px;
-    opacity: 1;
+    display: flex !important; /* مطمئن بشه دکمه‌ها نمایش داده میشن */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    background: #d6336c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
   }
 
   .scroll-btn.left {
-    left: 5px;
+    left: 10px;
   }
 
   .scroll-btn.right {
-    right: 5px;
+    right: 10px;
   }
+}
 
   .product {
     width: 160px;
