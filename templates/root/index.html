@@ -141,6 +141,343 @@
 </section><!-- /Specials Section -->
 
 
+
+
+<!-- ======= Events Section ======= -->
+<section class="brands-section">
+  <div class="brand-item">
+    <i class="fa fa-leaf"></i>
+    <p class="brand-name">Vegan</p>
+    <p class="brand-description">100% Organic and Plant-Based</p>
+  </div>
+  <div class="brand-item">
+    <i class="fa fa-gem"></i>
+    <p class="brand-name">PureGlam</p>
+    <p class="brand-description">Glamour without compromise</p>
+  </div>
+  <div class="brand-item">
+    <i class="fa fa-paw"></i> <!-- آیکون paw برای Cruelty-Free -->
+    <p class="brand-name">Cruelty-Free</p>
+    <p class="brand-description">No animal testing involved</p>
+  </div>
+  <div class="brand-item">
+    <i class="fa fa-lemon"></i>
+    <p class="brand-name">Organic</p>
+    <p class="brand-description">Made with natural ingredients</p>
+  </div>
+  <div class="brand-item">
+    <i class="fa fa-recycle"></i> <!-- آیکون بازیافت برای Sustainable -->
+    <p class="brand-name">Sustainable</p>
+    <p class="brand-description">Committed to a better future</p>
+  </div>
+  <div class="brand-item">
+    <i class="fa fa-heart"></i>
+    <p class="brand-name">Eco-Friendly</p>
+    <p class="brand-description">Environmentally conscious choices</p>
+  </div>
+</section>
+
+
+  
+  <style>/* تنظیمات برای بخش برندها */
+/* تنظیمات برای بخش برندها */
+/* تنظیمات برای بخش برندها */
+.worth-the-hype {
+  margin-bottom: 2px; /* کاهش فاصله پایین بخش worth-the-hype */
+}
+
+.brands-section {
+  margin-top: 0; /* حذف فاصله بالای بخش brands-section */
+}
+
+.brands-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start; /* تراز عمودی با بالا */
+  padding: 40px;
+  background-color: #574e4e;
+  flex-wrap: wrap; /* برای این که در صورت لزوم، باکس‌ها به خط بعد بروند */
+}
+
+/* تنظیمات برای هر برند */
+.brand-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #c0abab;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  width: 180px; /* عرض ثابت */
+  min-height: 220px; /* ارتفاع ثابت برای هم‌اندازه کردن باکس‌ها */
+  text-align: center;
+  margin: 10px;
+}
+
+/* تنظیمات آیکون‌ها */
+.brand-item i {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: #cc4e82; /* رنگ آیکون‌ها */
+  transition: color 0.3s ease;
+  flex-grow: 1; /* اجازه می‌دهد که آیکون به صورت عمودی فضای بیشتری بگیرد */
+}
+
+/* تغییر رنگ آیکون‌ها هنگام هاور */
+.brand-item:hover i {
+  color: #e4aeb6; /* تغییر رنگ آیکون‌ها به سبز هنگام هاور */
+}
+
+/* تنظیمات متن برندها */
+.brand-name {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 5px 0;
+  transition: color 0.3s ease;
+}
+
+/* تغییر رنگ متن برندها هنگام هاور */
+.brand-item:hover .brand-name {
+  color: #fab8f4; /* تغییر رنگ متن به قرمز هنگام هاور */
+}
+
+/* تنظیمات متن توضیحات برند */
+.brand-description {
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+  color: #777;
+  margin-top: 5px;
+  transition: color 0.3s ease;
+  flex-grow: 1; /* اجازه می‌دهد که توضیحات در صورت لزوم فضای بیشتری بگیرند */
+}
+
+/* تغییر رنگ متن توضیحات هنگام هاور */
+.brand-item:hover .brand-description {
+  color: #ff0281; /* تغییر رنگ متن توضیحات به سبز هنگام هاور */
+}
+
+/* افکت هاور */
+.brand-item:hover {
+  transform: translateY(-10px); /* جابجایی جزئی هنگام هاور */
+}
+
+  </style>
+
+
+<!-- ======= Categories Section ======= -->
+<section id="categories" class="categories">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-title">
+      <h2>Categories</h2>
+      <p>Explore Our Categories</p>
+    </div>
+
+    <div class="categories-wrapper">
+    
+      <div class="category">
+        <img src="{% static 'assets/img/c6.png' %}" alt="Skin">
+        <div class="overlay">Eyes</div>
+        <a href="/category/skin" class="btn">View ←</a>
+      </div>
+      <div class="category">
+        <img src="{% static 'assets/img/c2.jpg' %}" alt="Hair">
+        <div class="overlay">Lip</div>
+        <a href="/category/hair" class="btn">View ←</a>
+      </div>
+      <div class="category">
+        <img src="{% static 'assets/img/c1.jpg' %}" alt="Hair">
+        <div class="overlay">Skin</div>
+        <a href="/category/hair" class="btn">View ←</a>
+      </div>
+      <div class="category">
+        <img src="{% static 'assets/img/h3.jpg' %}"alt="Perfume">
+        <div class="overlay">Serums</div>
+        <a href="/category/perfume" class="btn">View ←</a>
+      </div>
+      <div class="category">
+        <img src="{% static 'assets/img/c4.png' %}" alt="Hygiene">
+        <div class="overlay">Perfume</div>
+        <a href="/category/hygiene" class="btn">View ←</a>
+      </div>
+      <div class="category">
+        <img src="{% static 'assets/img/c5.png' %}" alt="Makeup">
+        <div class="overlay">Mask</div>
+        <a href="/category/makeup" class="btn">View ←</a>
+      </div>
+      
+    </div>
+
+  </div>
+</section><!-- /Categories Section -->
+
+<style>
+    .categories {
+        padding: 50px 0;
+        text-align: center;
+    }
+    .categories-wrapper {
+        display: flex;
+        flex-wrap: nowrap; /* Prevents items from wrapping to the next line */
+        justify-content: space-between; /* Distribute items evenly */
+    }
+    .category {
+        position: relative;
+        width: 200px;
+        height: 250px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+    }
+    .category img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 0.3s;
+    }
+    .category:hover img {
+        filter: blur(3px);
+    }
+    .category .overlay {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        text-align: right;
+    }
+    .category .btn {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: #e4aeb6;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+    .category .btn:hover {
+        background: #cc0055;
+    }
+    /* استایل‌های عمومی برای دسته‌بندی‌ها */
+.categories {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.categories-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* به آیتم‌ها اجازه می‌دهیم تا در چند ردیف نمایش داده شوند */
+    justify-content: space-between;
+}
+
+.category {
+    position: relative;
+    width: 200px;
+    height: 250px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    margin-bottom: 20px; /* فاصله بین دسته‌بندی‌ها */
+}
+
+.category img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.3s;
+}
+
+.category:hover img {
+    filter: blur(3px);
+}
+
+.category .overlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-align: right;
+}
+
+.category .btn {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: #e4aeb6;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.category .btn:hover {
+    background: #cc0055;
+}
+
+/* ریسپانسیو برای موبایل‌ها */
+@media (max-width: 767px) {
+    .categories-wrapper {
+        justify-content: center; /* وسط‌چین کردن آیتم‌ها */
+    }
+
+    .category {
+        width: 48%; /* هر دسته‌بندی 48% عرض می‌گیرد (در هر ردیف دو تا) */
+        height: 220px; /* ارتفاع مناسب برای موبایل */
+        margin-bottom: 20px; /* فاصله بین دسته‌بندی‌ها */
+    }
+
+    .category .btn {
+        font-size: 12px; /* کاهش اندازه دکمه در موبایل */
+        padding: 6px 10px; /* کاهش اندازه دکمه در موبایل */
+    }
+}
+
+/* ریسپانسیو برای تبلت‌ها */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .categories-wrapper {
+        justify-content: center; /* وسط‌چین کردن آیتم‌ها */
+    }
+
+    .category {
+        width: 45%; /* هر دسته‌بندی 45% عرض در تبلت */
+        height: 220px; /* ارتفاع مناسب برای تبلت‌ها */
+        margin-bottom: 20px; /* فاصله بین دسته‌بندی‌ها */
+    }
+
+    .category .btn {
+        font-size: 13px; /* تغییر اندازه دکمه */
+        padding: 7px 12px; /* تغییر اندازه دکمه */
+    }
+}
+
+</style>
+
+
+
+<!-- End Events Section -->
+
+
+  
+ <!-- ======= Testimonials Section ======= -->
+
+<!-- ======= Worth the Hype Section ======= -->
+
+
 <section class="worth-the-hype">
   <div class="content">
     <div class="custom-banner">
@@ -192,21 +529,33 @@
     
 </section>
 
+
 <style>
+.next-section {
+  padding-top: 20px; /* فاصله از بالای این سکشن */
+}
 .content {
   display: flex;
-  align-items: flex-start; /* محصولات و بنر در یک سطح قرار بگیرند */
+  align-items: flex-start; /* اجزا به بالا می‌روند */
+
   justify-content: center;
-  gap: 40px;
+  gap: 20px; /* کاهش فاصله */
   max-width: 1200px;
-  margin: auto;
-  flex-wrap: nowrap; /* جلوگیری از افتادن محصولات زیر بنر */
+  margin-left: 180px;
+  margin-bottom: 0px;
 }
 
 .banner {
-  flex: 0 0 600px; /* ثابت نگه داشتن عرض بنر */
+  flex: 0 0 600px;
+  max-width: 600px; /* محدود کردن عرض بنر */
   text-align: center;
+  margin-bottom: 20px;
+  flex-shrink: 0; /* جلوگیری از تغییر اندازه بنر */
+
 }
+
+}
+
 
 .banner img {
   width: 100%;
@@ -221,8 +570,8 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-bottom: 0px; /* فاصله پایین محصولات */
 }
-
 .products {
   text-align: left;
   max-width: 600px;
@@ -470,253 +819,6 @@
   }
 
 </script>
-
-
-<!-- ======= Categories Section ======= -->
-<section id="categories" class="categories">
-  <div class="container" data-aos="fade-up">
-
-    <div class="section-title">
-      <h2>Categories</h2>
-      <p>Explore Our Categories</p>
-    </div>
-
-    <div class="categories-wrapper">
-    
-      <div class="category">
-        <img src="{% static 'assets/img/c6.png' %}" alt="Skin">
-        <div class="overlay">Eyes</div>
-        <a href="/category/skin" class="btn">View ←</a>
-      </div>
-      <div class="category">
-        <img src="{% static 'assets/img/c2.jpg' %}" alt="Hair">
-        <div class="overlay">Lip</div>
-        <a href="/category/hair" class="btn">View ←</a>
-      </div>
-      <div class="category">
-        <img src="{% static 'assets/img/c1.jpg' %}" alt="Hair">
-        <div class="overlay">Skin</div>
-        <a href="/category/hair" class="btn">View ←</a>
-      </div>
-      <div class="category">
-        <img src="{% static 'assets/img/h3.jpg' %}"alt="Perfume">
-        <div class="overlay">Serums</div>
-        <a href="/category/perfume" class="btn">View ←</a>
-      </div>
-      <div class="category">
-        <img src="{% static 'assets/img/c4.png' %}" alt="Hygiene">
-        <div class="overlay">Perfume</div>
-        <a href="/category/hygiene" class="btn">View ←</a>
-      </div>
-      <div class="category">
-        <img src="{% static 'assets/img/c5.png' %}" alt="Makeup">
-        <div class="overlay">Mask</div>
-        <a href="/category/makeup" class="btn">View ←</a>
-      </div>
-      
-    </div>
-
-  </div>
-</section><!-- /Categories Section -->
-
-<style>
-    .categories {
-        padding: 50px 0;
-        text-align: center;
-    }
-    .categories-wrapper {
-        display: flex;
-        flex-wrap: nowrap; /* Prevents items from wrapping to the next line */
-        justify-content: space-between; /* Distribute items evenly */
-    }
-    .category {
-        position: relative;
-        width: 200px;
-        height: 250px;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-    }
-    .category img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: 0.3s;
-    }
-    .category:hover img {
-        filter: blur(3px);
-    }
-    .category .overlay {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        padding: 10px;
-        background: rgba(0, 0, 0, 0.5);
-        color: #fff;
-        text-align: right;
-    }
-    .category .btn {
-        position: absolute;
-        bottom: 10px;
-        left: 10px;
-        background: #e4aeb6;
-        color: white;
-        padding: 8px 12px;
-        border-radius: 5px;
-        text-decoration: none;
-        font-size: 14px;
-        transition: 0.3s;
-    }
-    .category .btn:hover {
-        background: #cc0055;
-    }
-    /* استایل‌های عمومی برای دسته‌بندی‌ها */
-.categories {
-    padding: 50px 0;
-    text-align: center;
-}
-
-.categories-wrapper {
-    display: flex;
-    flex-wrap: wrap; /* به آیتم‌ها اجازه می‌دهیم تا در چند ردیف نمایش داده شوند */
-    justify-content: space-between;
-}
-
-.category {
-    position: relative;
-    width: 200px;
-    height: 250px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    margin-bottom: 20px; /* فاصله بین دسته‌بندی‌ها */
-}
-
-.category img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: 0.3s;
-}
-
-.category:hover img {
-    filter: blur(3px);
-}
-
-.category .overlay {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    text-align: right;
-}
-
-.category .btn {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    background: #e4aeb6;
-    color: white;
-    padding: 8px 12px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 14px;
-    transition: 0.3s;
-}
-
-.category .btn:hover {
-    background: #cc0055;
-}
-
-/* ریسپانسیو برای موبایل‌ها */
-@media (max-width: 767px) {
-    .categories-wrapper {
-        justify-content: center; /* وسط‌چین کردن آیتم‌ها */
-    }
-
-    .category {
-        width: 48%; /* هر دسته‌بندی 48% عرض می‌گیرد (در هر ردیف دو تا) */
-        height: 220px; /* ارتفاع مناسب برای موبایل */
-        margin-bottom: 20px; /* فاصله بین دسته‌بندی‌ها */
-    }
-
-    .category .btn {
-        font-size: 12px; /* کاهش اندازه دکمه در موبایل */
-        padding: 6px 10px; /* کاهش اندازه دکمه در موبایل */
-    }
-}
-
-/* ریسپانسیو برای تبلت‌ها */
-@media (min-width: 768px) and (max-width: 1024px) {
-    .categories-wrapper {
-        justify-content: center; /* وسط‌چین کردن آیتم‌ها */
-    }
-
-    .category {
-        width: 45%; /* هر دسته‌بندی 45% عرض در تبلت */
-        height: 220px; /* ارتفاع مناسب برای تبلت‌ها */
-        margin-bottom: 20px; /* فاصله بین دسته‌بندی‌ها */
-    }
-
-    .category .btn {
-        font-size: 13px; /* تغییر اندازه دکمه */
-        padding: 7px 12px; /* تغییر اندازه دکمه */
-    }
-}
-
-</style>
-
-
-
-    <!-- ======= Events Section ======= -->
-    <section id="events" class="events">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>best offers and fe</h2>
-          <p>pack cosmetic for you</p>
-        </div>
-      <!-- {% for pack in pack_products %}
-        <div class="events-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-            
-            <div class="swiper-slide">
-              <div class="row event-item">
-                <div class="col-lg-6">
-                  <img src="{{pack.image.url}}" class="img-fluid" alt="">
-                </div>
-                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                  <h3>{{pack.title}}</h3>
-                  <div class="price">
-                    <p><span>${{pack.price}}</span></p>
-                  </div>
-                  <p>
-                    {{pack.content}}
-                  </p>
-                </div>
-              </div>
-             
-            </div>
-            
-
-
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        {% endfor %}
-      </div> -->
-    </section><!-- End Events Section -->
-
-  
- <!-- ======= Testimonials Section ======= -->
-
-<!-- ======= Worth the Hype Section ======= -->
-
 
  <!-- ======= Comments ======= -->
     <!-- {% if request.user.is_authenticated %}
