@@ -1,26 +1,23 @@
 {% load static %}
-
 <!-- محصولات مرتبط -->
 <section class="related-products py-5">
     <div class="container">
-        <h3 class="text-center mb-4" style="color: darkgray;">New products____</h3>
+        <h3 class="text-center mb-4" style="color: darkgray;">Related products____</h3>
         <div class="position-relative">
-            <!-- دکمه فلش قبلی -->
             <button class="carousel-control-prev custom-prev" type="button">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             </button>
-  
             <div class="row related-products-slider">
-                <!-- تغییرات برای 5 محصول -->
                 {% for latest_product in latest_products %}
-                <div class="col-lg-2 col-md-4 col-sm-6 col-12 product-item">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 product-item">
+                    
                     <div class="card border-0 shadow-sm product-card">
                         {% if request.user.is_authenticated %}
                     <a class="wishlist-icon {% if latest_product.id in wishlist_items %} active {% endif %}" onclick="addToWishlist(this,`{{latest_product.id}}`)">
                         <i class="fas fa-heart"></i>
                     </a>
                     {% endif %}
-                        <img src="{{latest_product.image1.url}}" class="card-img-top" alt="Product Title 1">
+                        <img src="{{latest_product.image1.url}}" class="card-img-top" alt="{{ product.title }}">
                         <div class="card-body text-center">
                             <h5 class="card-title">{{latest_product.title}}</h5>
                             {% if latest_product.is_discounted %}
@@ -38,25 +35,35 @@
                                     {% endfor %}
                                     
                                </ul>
-                            <a href="{% url 'product:product-detail' slug=latest_product.slug %}" class="btn product-btn">Product Details</a>
+  
+                            <a href="{% url 'product:product-detail' slug=latest_product.slug %}" class="btn product-btn">product details</a>
+  
                         </div>
+  
                     </div>
+  
                 </div>
+  
                 {% endfor %}
-                
   
             </div>
   
-            <!-- دکمه فلش بعدی -->
             <button class="carousel-control-next custom-next" type="button">
+  
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  
             </button>
+  
         </div>
+  
     </div>
+  
   </section>
+  
+  
   <style>
-    
-    .wishlist-icon {
+        
+                        .wishlist-icon {
                             display: inline-flex;
                             align-items: center;
                             justify-content: center;
@@ -74,4 +81,233 @@
                         .wishlist-icon.active {
                             color: #ff4757; /* رنگ قرمز پررنگ برای حالت فعال */
                         }
+                    
+      .product-card {
+  
+          background: rgba(255, 182, 193, 0.2);
+  
+          border-radius: 15px;
+  
+          padding: 15px;
+  
+          backdrop-filter: blur(10px);
+  
+          position: relative;
+  
+          overflow: hidden;
+  
+          text-align: center;
+  
+          transition: all 0.3s ease;
+  
+      }
+  
+      .product-card:hover {
+  
+          transform: scale(1.05);
+  
+      }
+  
+
+  
+      .price {
+  
+          font-weight: bold;
+  
+          color: #333;
+  
+      }
+  
+      .original-price {
+  
+          text-decoration: line-through;
+  
+          color: gray;
+  
+          margin-left: 5px;
+  
+      }
+  
+      .discounted-price {
+  
+          color: #ff1493;
+  
+      }
+  
+      .rating .star {
+  
+          color: gold;
+  
+      }
+  
+      .rating .star-empty {
+  
+          color: lightgray;
+  
+      }
+  
+      .product-btn {
+  
+          background: #ffb6c1;
+  
+          border: none;
+  
+          border-radius: 20px;
+  
+          padding: 8px 15px;
+  
+          color: white;
+  
+          transition: 0.3s;
+  
+      }
+  
+      .product-btn:hover {
+  
+          background: #ff1493;
+  
+      }
+  
+      .custom-prev, .custom-next {
+  
+          position: absolute;
+  
+          top: 50%;
+  
+          transform: translateY(-50%);
+  
+          background: rgba(255, 182, 193, 0.4);
+  
+          border: none;
+  
+          padding: 10px;
+  
+          border-radius: 50%;
+  
+          width: 40px;
+  
+          height: 40px;
+  
+          display: flex;
+  
+          align-items: center;
+  
+          justify-content: center;
+  
+          transition: background 0.3s ease;
+  
+      }
+  
+      .custom-prev:hover, .custom-next:hover {
+  
+          background: rgba(255, 182, 193, 0.8);
+  
+      }
+  
+      .custom-prev {
+  
+          left: 10px;
+  
+      }
+  
+      .custom-next {
+  
+          right: 10px;
+  
+      }
+  
+      .carousel-control-prev-icon, .carousel-control-next-icon {
+  
+          filter: invert(1);
+  
+          width: 20px;
+  
+          height: 20px;
+  
+      }
+      .related-products-slider {
+    display: flex;
+    flex-wrap: nowrap; /* جلوگیری از رفتن محصولات به خط بعدی */
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* مخفی کردن اسکرول‌بار در فایرفاکس */
+}
+
+.related-products-slider::-webkit-scrollbar {
+    display: none; /* مخفی کردن اسکرول‌بار در کروم و سافاری */
+}
+
+.related-products-slider .col-md-3 {
+    flex: 0 0 auto; /* جلوگیری از کشیده شدن کارت‌ها */
+    width: 25%; /* ۴ کارت در هر ردیف */
+}
+@media (max-width: 768px) {
+    .related-products-slider {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none; /* مخفی کردن اسکرول‌بار در فایرفاکس */
+    }
+
+    .related-products-slider::-webkit-scrollbar {
+        display: none; /* مخفی کردن اسکرول‌بار در کروم و سافاری */
+    }
+
+    .related-products-slider .product-item {
+        flex: 0 0 auto;
+        width: 80%; /* نمایش دو محصول نسبی */
+        margin-right: 10px;
+    }
+
+    .custom-prev, .custom-next {
+        display: none; /* مخفی کردن دکمه‌های قبل و بعد در موبایل */
+    }
+}
+
   </style>
+
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const slider = document.querySelector(".related-products-slider");
+    const prevButton = document.querySelector(".custom-prev");
+    const nextButton = document.querySelector(".custom-next");
+
+    const scrollStep = slider.clientWidth / 2; // مقدار اسکرول به اندازه نصف عرض نمایشگر
+
+    nextButton.addEventListener("click", function () {
+        slider.scrollBy({ left: scrollStep, behavior: "smooth" });
+    });
+
+    prevButton.addEventListener("click", function () {
+        slider.scrollBy({ left: -scrollStep, behavior: "smooth" });
+    });
+});
+// دریافت دکمه‌های فلش
+const prevButton = document.querySelector('.custom-prev');
+const nextButton = document.querySelector('.custom-next');
+
+// دریافت اسلایدر محصولات
+const productSlider = document.querySelector('.related-products-slider');
+
+// تعریف سرعت اسکرول
+const scrollAmount = 300; // مقدار اسکرول به پیکسل
+
+// حرکت به سمت چپ
+prevButton.addEventListener('click', () => {
+    productSlider.scrollBy({
+        left: -scrollAmount,  // اسکرول به سمت چپ
+        behavior: 'smooth'    // اسکرول نرم
+    });
+});
+
+// حرکت به سمت راست
+nextButton.addEventListener('click', () => {
+    productSlider.scrollBy({
+        left: scrollAmount,   // اسکرول به سمت راست
+        behavior: 'smooth'    // اسکرول نرم
+    });
+});
+
+
+</script>
