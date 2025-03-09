@@ -467,396 +467,40 @@
 
 </style>
 
+<!-- End Categories Section -->
 
+
+<!-- ======= show_most_viewed_products ======= -->
+ {% show_most_viewed_products %}
+<!-- End show_most_viewed_products -->
+
+
+<!-- ======= Testimonials Section ======= -->
+
+<section id="events" class="events py-16 bg-gray-100">
+
+  <div class="container mx-auto px-6" data-aos="fade-up">
+
+
+    <div class="text-center mb-10">
+
+      <h2 class="text-3xl font-bold text-gray-800">Best Offers & Features</h2>
+
+      <p class="text-gray-500 mt-2">Exclusive Cosmetic Packs Just for You</p>
+
+    </div>
+
+    {% show_latest_products %}
+   
+
+
+  </div>
+
+</section>
 
 <!-- End Events Section -->
 
 
-  
- <!-- ======= Testimonials Section ======= -->
-
-<!-- ======= Worth the Hype Section ======= -->
-
-
-<section class="worth-the-hype">
-  <div class="content">
-    <div class="custom-banner">
-      <img src="{% static 'assets/img/pic3.png' %}" alt="Worth the Hype">
-      <div class="overlay">
-          <h2>Worth the Hype</h2>
-          <button>Shop Now</button>
-      </div>
-  </div>
-  
-    <div class="products">
-      <h2>Worth the Hype</h2>
-      <p>Discover the hottest beauty trends that everyone is raving about!</p>
-      
-      <div class="scroll-container">
-        <button class="scroll-btn left" onclick="scrollProducts(-1)">&#10094;</button>
-        <div class="product-list">
-          <div class="product">
-            <img src="{% static 'assets/img/pic4.png' %}"  alt="Glam Lipstick">
-            <h3>Glam Lipstick</h3>
-            <p class="price">$12.99</p>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="{% static 'assets/img/pic4.png' %}"  alt="Shiny Highlighter">
-            <h3>Shiny Highlighter</h3>
-            <p class="price">$14.99</p>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="{% static 'assets/img/pic4.png' %}"  alt="Blush Powder">
-            <h3>Blush Powder</h3>
-            <p class="price">$9.99</p>
-            <button>Shop Now</button>
-          </div>
-          <div class="product">
-            <img src="{% static 'assets/img/pic4.png' %}"  alt="Foundation">
-            <h3>Foundation</h3>
-            <p class="price">$19.99</p>
-            <button>Shop Now</button>
-          </div>
-        
-        </div>
-        <button class="scroll-btn right" onclick="scrollProducts(1)">&#10095;</button>
-      </div>
-      <div class="custom-banner">
-
-    </div>
-    
-</section>
-
-
-<style>
-.next-section {
-  padding-top: 20px; /* فاصله از بالای این سکشن */
-}
-.content {
-  display: flex;
-  align-items: flex-start; /* اجزا به بالا می‌روند */
-
-  justify-content: center;
-  gap: 20px; /* کاهش فاصله */
-  max-width: 1200px;
-  margin-left: 180px;
-  margin-bottom: 0px;
-}
-
-.banner {
-  flex: 0 0 600px;
-  max-width: 600px; /* محدود کردن عرض بنر */
-  text-align: center;
-  margin-bottom: 20px;
-  flex-shrink: 0; /* جلوگیری از تغییر اندازه بنر */
-
-}
-
-
-.banner img {
-  width: 100%;
-  max-width: 600px;
-  border-radius: 20px;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
-  transition: all 0.4s ease-in-out;
-}
-
-.products-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-bottom: 0px; /* فاصله پایین محصولات */
-}
-.products {
-  text-align: left;
-  max-width: 600px;
-}
-
-/* استایل برای اسکرول محصولات */
-.scroll-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  max-width: 100%;
-  overflow: hidden; /* جلوگیری از اسکرول صفحه */
-}
-
-.product-list {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  white-space: nowrap;
-  padding: 10px 0;
-  scrollbar-width: none;
-}
-
-.product-list::-webkit-scrollbar {
-  display: none;
-}
-
-.product {
-  background: #f8f4f1;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  text-align: center;
-  width: 180px;
-  flex: 0 0 auto;
-}
-
-.product img {
-  width: 100%;
-  border-radius: 8px;
-}
-
-.product h3 {
-  font-size: 16px;
-  margin: 10px 0;
-  color: #5c4033;
-}
-
-.price {
-  color: #a65d49;
-  font-weight: bold;
-}
-
-/* دکمه‌های اسکرول */
-.scroll-btn {
-  position: absolute;
-  top: 50%;
-  background: #d6336c;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 18px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.8;
-}
-
-.scroll-btn.left {
-  left: -10px;
-}
-
-.scroll-btn.right {
-  right: -10px;
-}
-/* دکمه‌های "Shop Now" */
-.product button {
-  background: linear-gradient(45deg, #d6336c, #a65d49); /* صورتی به قهوه‌ای */
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 10px;
-  width: 100%;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-
-.product button:hover {
-  background: linear-gradient(45deg, #b82b5a, #8b4b3a); /* تیره‌تر شدن رنگ */
-  transform: scale(1.05);
-}
-
-/* دکمه نمایش بیشتر */
-.view-more {
-  background: transparent;
-  border: 2px solid #d6336c;
-  color: #d6336c;
-  margin-top: 20px;
-  padding: 10px 20px;
-  border-radius: 6px;
-}
-
-.view-more:hover {
-  background: #d6336c;
-  color: white;
-}
-
-/* جلوگیری از تغییر اندازه بنر هنگام اسکرول محصولات */
-.custom-banner {
-  position: relative;
-  width: 600px;
-  min-height: 300px;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.custom-banner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 20px;
-  display: block;
-  transition: all 0.4s ease-in-out;
-}
-
-.custom-banner .overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 192, 203, 0.8);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.4s ease-in-out;
-}
-
-.custom-banner h2 {
-  font-size: 22px;
-  color: white;
-  margin-bottom: 10px;
-}
-
-.custom-banner button {
-  background: white;
-  color: #d6336c;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.custom-banner button:hover {
-  background: #d6336c;
-  color: white;
-}
-
-.custom-banner:hover .overlay {
-  opacity: 1;
-}
-
-@media (max-width: 1024px) {
-  .content {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .banner {
-    max-width: 90%;
-  }
-
-  .products-container {
-    max-width: 90%;
-    text-align: center;
-  }
-  @media (max-width: 768px) {
-  .scroll-container {
-    position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .scroll-btn {
-    display: flex !important; /* مطمئن بشه دکمه‌ها نمایش داده میشن */
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    font-size: 18px;
-    background: #d6336c;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-  }
-
-  .scroll-btn.left {
-    left: 10px;
-  }
-
-  .scroll-btn.right {
-    right: 10px;
-  }
-}
-
-  .product {
-    width: 160px;
-  }
-
-  .view-more {
-    width: 80%;
-  }
-}
-
-
-</style>
-
-
-<script defer>
-  function scrollProducts(direction) {
-    const productList = document.querySelector('.product-list');
-    const scrollAmount = 200; // مقدار اسکرول
-
-    // اسکرول لیست محصولات با توجه به جهت
-    productList.scrollLeft += direction * scrollAmount;
-  }
-
-</script>
-
-    <!-- ======= Events Section ======= -->
-    <section id="events" class="events">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>best offers and fe</h2>
-          <p>pack cosmetic for you</p>
-        </div>
-      
-        <div class="events-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-            
-            <div class="swiper-slide">
-              <div class="row event-item">
-                <div class="col-lg-6">
-                  <img src="{% static 'assets/img/c6.png' %}" class="img-fluid" alt="">
-                </div>
-                <div class="col-lg-6 pt-4 pt-lg-0 content">
-                  <h3>mmm</h3>
-                  <div class="price">
-                    <p><span>$120</span></p>
-                  </div>
-                  <p>
-                    iiiiii
-                  </p>
-                </div>
-              </div>
-             
-            </div><!-- End testimonial item -->
-            
-
-
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-        
-      </div>
-    </section><!-- End Events Section -->
 
   
  <!-- ======= Testimonials Section ======= -->
@@ -891,55 +535,10 @@
 </section><!-- End Testimonials Section -->
 
 
- <!-- ======= Comments ======= -->
-    <!-- {% if request.user.is_authenticated %}
-     
-      <section id="book-a-table" class="book-a-table">
-        <div class="container" data-aos="fade-up">
-  
-          <div class="section-title">
-            <h2>Comments</h2>
-            <p>Send a comment</p>
-          </div>
-          
-          <form  method="post"  data-aos="fade-up" data-aos-delay="100" >
-            {% csrf_token %}
-            <div class="row">
-              <div class="col-lg-4 col-md-6 form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" style="background-color:  #e7a1a1;">
-                <div class="validate"></div>
-              </div>
-              <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" style="background-color:  #e7a1a1;">
-                <div class="validate"></div>
-              </div>
-              <div class="col-lg-4 col-md-6 form-group mt-3 mt-md-0">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="subject" data-rule="minlen:4" data-msg="Please enter at least 4 chars" style="background-color:  #e7a1a1;">
-                <div class="validate"></div>
-              </div>
-              
-            </div>
-            <div class="form-group mt-3">
-              <textarea class="form-control" name="message" rows="5" placeholder="Message" style="background-color:  #e7a1a1;"></textarea>
-              <div class="validate"></div>
-            </div>
-            <br>
-            <div class="text-center">
-              <button type="submit" class="btn btn-primary" style="background-color: #e7a1a1; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer;">
-                  Send
-              </button>
-          </div>
-          
-          </form>
-         
-  
-        </div>
-      </section>
-      {% endif %} -->
 
-<!-- جدیدترین محصولات آرایشی -->
+<!--show_latest_products -->
 {% show_latest_products %}
-
+<!--End show_latest_products -->
 
     <!-- ======= Gallery Section ======= -->
     <section id="gallery" class="gallery">
