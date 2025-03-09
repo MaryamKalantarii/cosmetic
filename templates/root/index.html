@@ -479,8 +479,11 @@
 <section id="events" class="events py-16 bg-gray-100">
   <div class="container mx-auto px-6" data-aos="fade-up">
     <div class="text-center mb-10">
-      <h2 class="text-3xl font-bold text-gray-800" style="color: #fab8f4;">Best Offers & Features</h2>
+
+      <h2 class="text-3xl font-bold text-gray-800">Best Offers & Features</h2>
+
       <p class="text-gray-500 mt-2">Exclusive Cosmetic Packs Just for You</p>
+
     </div>
     {% show_discounted_products %}
   </div>
@@ -489,37 +492,217 @@
 
 
 
-  
- <!-- ======= Testimonials Section ======= -->
- <section id="testimonials" class="testimonials section-bg">
-  <div class="container" data-aos="fade-up">
+    <style>/* برای فاصله بالا/پایین سکشن (در صورت نیاز به بوت‌استرپ، از py-5 هم استفاده شده) */
+   .hot-takes {
+  background-color: #7e7e7e8c;
+}
 
-    <div class="section-title">
-      <h2>Testimonials</h2>
-      <p>What they're saying about us</p>
-    </div>
-    
-    <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-      <div class="swiper-wrapper">
+/* استایل آیتم کلی */
+.hot-take-item {
+  position: relative;
+  overflow: hidden; /* در صورت نیاز به بریدن محتوای اضافی */
+  border-radius: 60px; /* گرد کردن گوشه‌ها */
+}
+
+/* استایل تصویر */
+.hot-take-image {
+  position: relative;
+  width: 100%;
+  height: 400px; /* ارتفاع بیشتر */
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.hot-take-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 20px;
+}
+
+/* Overlay (لایه روی تصویر) */
+.hot-take-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(126, 126, 126, 0.8);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  text-align: center;
+  padding: 20px;
+}
+
+/* محتوای درون Overlay */
+.overlay-content {
+  color: #fff;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.hot-take-date {
+  font-size: 0.9rem;
+  margin-bottom: 0 !important; /* حذف فاصله زیر تاریخ */
+  color: #fff;
+  font-weight: bold;
+}
+/* متن توضیحات */
+.overlay-content p {
+  margin: 0 !important; /* حذف فاصله زیر پاراگراف */
+  font-size: 0.95rem;
+  line-height: 1.2 !important; /* کاهش فاصله بین خطوط */
+}
+
+/* ستاره‌ها */
+.rating-stars {
+  font-size: 1rem;
+  color: #ffd700; /* رنگ طلایی */
+  margin-bottom: 15px;
+}
+
+/* دکمه */
+.hot-take-btn {
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+  display: inline-block;
+}
+
+.hot-take-btn:hover {
+  background-color: #333;
+}
+
+/* نمایش Overlay هنگام هاور روی تصویر یا خود آیتم */
+.hot-take-item:hover .hot-take-overlay {
+  opacity: 1;
+}
+
+    </style>
+<!-- ======= Your Hot Takes Section ======= -->
+<!-- ======= Your Hot Takes Section ======= -->
+<section id="hot-takes" class="hot-takes py-5">
+  <div class="container">
+    <div class="row justify-content-center">
       
-        <div class="swiper-slide">
-          <div class="testimonial-item">
-            <p>
-              <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-              ooo
-              <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-            </p>
-            <img src="{% static 'assets/img/c6.png' %}" class="testimonial-img" alt="">
-            <h3>ppp</h3>
-            <h4>p@p.com</h4>
+      <!-- آیتم اول -->
+      <div class="col-md-4 mb-4">
+        <div class="hot-take-item">
+          <div class="hot-take-image">
+            <img src="{% static 'assets/img/cm1.png' %}" alt="Test 1" />
+            <div class="hot-take-overlay">
+              <div class="overlay-content">
+                <div class="hot-take-date">07/08/2023</div>
+                <p>
+                  I absolutely loved the products I got from SHEGLAM! 
+                  The eyeshadow primer was so effective and left my eye looks brighter and longer lasting...
+                </p>
+                <div class="rating-stars">★★★★★</div>
+                <a href="#" class="hot-take-btn">Shop Now</a>
+              </div>
+            </div>
           </div>
-        </div><!-- End testimonial item -->
-      
+        </div>
       </div>
-      <div class="swiper-pagination"></div>
+      <!-- پایان آیتم اول -->
+      
+      <!-- آیتم دوم -->
+      <div class="col-md-4 mb-4">
+        <div class="hot-take-item">
+          <div class="hot-take-image">
+            <img src="{% static 'assets/img/cm2.png' %}" alt="Test 2" />
+            <div class="hot-take-overlay">
+              <div class="overlay-content">
+                <div class="hot-take-date">08/04/2024</div>
+                <div class="rating-stars">★★★★★</div>
+                <a href="#" class="hot-take-btn">Shop Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- پایان آیتم دوم -->
+      
+      <!-- آیتم سوم -->
+      <div class="col-md-4 mb-4">
+        <div class="hot-take-item">
+          <div class="hot-take-image">
+            <img src="{% static 'assets/img/cm.jpg' %}" alt="Test 3" />
+            <div class="hot-take-overlay">
+              <div class="overlay-content">
+                <div class="hot-take-date">10/05/2024</div>
+                <div class="rating-stars">★★★★☆</div>
+                <a href="#" class="hot-take-btn">Shop Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- پایان آیتم سوم -->
+
     </div>
   </div>
-</section><!-- End Testimonials Section -->
+
+  <div class="container">
+    <div class="row">
+      
+      <!-- تصویر بزرگ (col-md-8) -->
+      <div class="col-md-8 mb-4">
+        <div class="hot-take-item">
+          <div class="hot-take-image">
+            <!-- مسیر تصویر بزرگ -->
+            <img src="{% static 'assets/img/cm4.jpg' %}"  alt="Big Test" />
+            <div class="hot-take-overlay">
+              <div class="overlay-content">
+                <div class="hot-take-date">12/12/2024</div>
+                <p>
+                  This is the big image taking up two-thirds of the row...
+                </p>
+                <div class="rating-stars">★★★★★</div>
+                <a href="#" class="hot-take-btn">Shop Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- پایان تصویر بزرگ -->
+      
+      <!-- تصویر کوچک (col-md-4) -->
+      <div class="col-md-4 mb-4">
+        <div class="hot-take-item">
+          <div class="hot-take-image">
+            <!-- مسیر تصویر کوچک -->
+            <img src="{% static 'assets/img/cm5.png' %}"  alt="Small Test" />
+            <div class="hot-take-overlay">
+              <div class="overlay-content">
+                <div class="hot-take-date">20/01/2025</div>
+                <p>
+                  This is the smaller image taking up one-third of the row...
+                </p>
+                <div class="rating-stars">★★★★☆</div>
+                <a href="#" class="hot-take-btn">Shop Now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- پایان تصویر کوچک -->
+
+    </div>
+  </div>
+</section>
+<!-- ======= پایان سکشن دوم (2 عکس) ======= -->
+
+<!-- ======= پایان Your Hot Takes Section ======= -->
 
 
 
