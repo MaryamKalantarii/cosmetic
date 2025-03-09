@@ -38,3 +38,23 @@ def show_most_viewed_products(context):
         "request": request,
         "wishlist_items": wishlist_items
     }
+
+@register.inclusion_tag("includes/discounted-products.html", takes_context=True)
+def show_discounted_products(context):
+    request = context.get("request")
+    
+    # دریافت محصولات دارای تخفیف که منتشر شده‌اند
+    discounted_products = ProductModel.objects.filter(
+        status=ProductStatusType.publish.value, discount_percent__gt=0
+    ).order_by("-created_date")[:8]
+
+    # دریافت لیست محصولات موجود در لیست علاقه‌مندی‌های کاربر (در صورت لاگین بودن)
+    wishlist_items = WishlistProductModel.objects.filter(
+        user=request.user
+    ).values_list("product__id", flat=True) if request.user.is_authenticated else []
+
+    return {
+        "discounted_products": discounted_products,
+        "request": request,
+        "wishlist_items": wishlist_items
+    }
