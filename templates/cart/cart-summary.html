@@ -51,14 +51,14 @@
                     <a href="{% url 'order:checkout' %}" class="btn btn-minimal shadow-sm btn-md d-none d-md-block">
                         🎀 Checkout
                     </a>
-                    <a href="#" class="btn btn-minimal shadow-sm btn-sm d-md-none">
+                    <a href="{% url 'order:checkout' %}" class="btn btn-minimal shadow-sm btn-sm d-md-none">
                         🎀 Checkout
                     </a>
-                    <a href="/product/grid/"><button class="btn btn-outline-minimal shadow-sm btn-md d-none d-md-block">
+                    <a href="{% url 'product:product-grid' %}"><button class="btn btn-outline-minimal shadow-sm btn-md d-none d-md-block">
                         🎀 shopping
                     </button></a>
                     <button class="btn btn-outline-minimal shadow-sm btn-sm d-md-none">
-                        <a href="/product/grid/">🎀 shopping</a>
+                        <a href="{% url 'product:product-grid' %}">🎀 shopping</a>
                     </button>
                 </div>
             </div>
