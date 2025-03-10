@@ -107,6 +107,7 @@
         </form>
       </div>
   </section>
+  {% if object_list %}
   <div class="shop-filter-section">
     <div class="container">
         <div class="filter-box">
@@ -122,44 +123,6 @@
         </div>
     </div>
 </div>
-
-<style>
-    .shop-filter-section {
-        margin-bottom: 20px;
-        display: flex;
-        justify-content: center;
-    }
-
-
-
-    .filter-dropdown {
-        padding: 8px 12px;
-        font-size: 14px;
-        border: 4px solid #d6a5a5;
-        border-radius: 8px;
-        background: rgb(175, 175, 175);
-        color: #333;
-        cursor: pointer;
-        outline: none;
-        appearance: none;
-        transition: all 0.3s ease;
-    }
-
-    .filter-dropdown:hover {
-        border-color: #d48b8b;
-    }
-
-    @media (max-width: 768px) {
-        .filter-box {
-            width: 100%;
-            justify-content: center;
-        }
-
-        .filter-dropdown {
-            width: 100%;
-        }
-    }
-</style>
 
   <section id="why-us" class="py-5">
       <div class="container">
@@ -251,9 +214,64 @@
           </ul>
       </nav>
   </div>
+  {% else %}
+  <div class="no-result">
+    <img src="{% static 'assets/pink_tinted_image.png' %}" alt="">
+    <h2>No results found.</h2>
+</div>
+  {% endif %}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<style>
+    .shop-filter-section {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+
+
+    .filter-dropdown {
+        padding: 8px 12px;
+        font-size: 14px;
+        border: 4px solid #d6a5a5;
+        border-radius: 8px;
+        background: rgb(175, 175, 175);
+        color: #333;
+        cursor: pointer;
+        outline: none;
+        appearance: none;
+        transition: all 0.3s ease;
+    }
+
+    .filter-dropdown:hover {
+        border-color: #d48b8b;
+    }
+
+    @media (max-width: 768px) {
+        .filter-box {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .filter-dropdown {
+            width: 100%;
+        }
+    }
+    .no-result {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .no-result h2 {
+            margin-top: 10px;
+            font-size: 24px;
+            color: #333;
+        }
+</style>
 <script>
     function addToWishlist(element,product_id) {
      

@@ -4,6 +4,7 @@
 {% block 'content' %}
 <section id="product-detail" class="product-detail py-5">
   <div class="container" data-aos="fade-up">
+    {% if object.is_out_of_stock %}
       <div class="row g-4">
           <div class="col-md-6 text-center">
               <div id="product-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -46,29 +47,19 @@
                 </p>
                   
                  
-                  {% if object.is_discounted %}
+                  
                   <div class="price-box d-flex align-items-center gap-3">
                       <span class="price-label fw-bold">price: </span>
-                      <span class="price-label fw-bold">{{object.get_price}}$ </span>
-                      <span class="original-price text-pink-light text-decoration-line-through">{{object.price}}$</span>
-                      {% else %}
-                      <span class="discounted-price text-pink-dark fw-bold fs-4">{{object.get_price}}$</span>
-                      {% endif %}
+                      <span class="price-label fw-bold">non-existent</span>
                   </div>
                   <div class="d-flex align-items-center mt-3">
-                      <span class="me-2">Number:</span>
-                      <input id="product-quantity" min="1" max="{{ object.stock }}" value="1" type="number" class="form-control" style="width: 70px; height: 30px; text-align: center; background-color: #ffb6c1;">
+                      <span class="me-2">Number:non-existent</span>
                   </div>
 
                   <div class="variable-single-item mt-3">
                     <span class="fw-bold">Color:</span>
                     <div class="product-variable-color d-flex flex-wrap gap-2 mt-2">
-                        {% for color in object.colors.all %}
-                        <label for="product-color-{{ color.id }}" class="color-label">
-                            <input type="radio" name="product-color" id="product-color-{{ color.id }}" value="{{ color.id }}" class="d-none" {% if forloop.first %}checked{% endif %}>
-                            <span class="product-color" style="background-color: {{ color.hex_code }};"></span>
-                        </label>
-                        {% endfor %}
+                        
                     </div>
                 </div>     
 <!-- دکمه Wishlist -->
@@ -78,10 +69,7 @@
 </button>
 {% endif %}
 
-<!-- دکمه افزودن به سبد خرید -->
-<button class="btn btn-add-to-cart" onclick="addToCart('{{ object.id }}', event)">
-add to cart
-</button>
+
 
 
 
@@ -206,6 +194,210 @@ add to cart
       </div>
     </div>
   </div>
+{% else %}
+<div class="row g-4">
+  <div class="col-md-6 text-center">
+      <div id="product-carousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+              <div class="carousel-item active">
+                  <img src="{{ object.image1.url }}" class="img-fluid rounded" alt="">
+              </div>
+              {% if object.image2 %}
+              <div class="carousel-item">
+                  <img src="{{ object.image2.url }}" class="img-fluid rounded" alt="">
+              </div>
+              {% endif %}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#product-carousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#product-carousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
+      </div>
+  </div>
+  
+   <div class="col-md-6">
+      <div class="product-info">
+          <h2 class="product-title text-white">"{{object.title}}"</h2>
+          <p class="product-description text-white">{{ object.description }}</p>
+
+          <div class="variable-single-item">
+            <span></span>
+        
+          
+             
+              </div>
+            </div>
+          <p  class="category text-white">
+            {% for category in object.category.all %}
+                <strong>{{ category.title }}</strong>
+                {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+          
+         
+          {% if object.is_discounted %}
+          <div class="price-box d-flex align-items-center gap-3">
+              <span class="price-label fw-bold">price: </span>
+              <span class="price-label fw-bold">{{object.get_price}}$ </span>
+              <span class="original-price text-pink-light text-decoration-line-through">{{object.price}}$</span>
+              {% else %}
+              <span class="discounted-price text-pink-dark fw-bold fs-4">{{object.get_price}}$</span>
+              {% endif %}
+          </div>
+          <div class="d-flex align-items-center mt-3">
+              <span class="me-2">Number:</span>
+              <input id="product-quantity" min="1" max="{{ object.stock }}" value="1" type="number" class="form-control" style="width: 70px; height: 30px; text-align: center; background-color: #ffb6c1;">
+          </div>
+
+          <div class="variable-single-item mt-3">
+            <span class="fw-bold">Color:</span>
+            <div class="product-variable-color d-flex flex-wrap gap-2 mt-2">
+                {% for color in object.colors.all %}
+                <label for="product-color-{{ color.id }}" class="color-label">
+                    <input type="radio" name="product-color" id="product-color-{{ color.id }}" value="{{ color.id }}" class="d-none" {% if forloop.first %}checked{% endif %}>
+                    <span class="product-color" style="background-color: {{ color.hex_code }};"></span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>     
+<!-- دکمه Wishlist -->
+{% if request.user.is_authenticated %}
+<button id="wishlist-btn" type="button" class="btn btn-wishlist {% if object.id in wishlist_items %} active {% endif %}" onclick="addToWishlist(this,`{{object.id}}`)">
+<i class="bi bi-heart"></i> Wishlist
+</button>
+{% endif %}
+
+<!-- دکمه افزودن به سبد خرید -->
+<button class="btn btn-add-to-cart" onclick="addToCart('{{ object.id }}', event)">
+add to cart
+</button>
+
+
+
+
+
+
+<!-- Product Review Section -->
+<!-- Product Review Section -->
+<style>
+.review-box {
+background: #fff;
+padding: 15px;
+border-radius: 8px;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+margin-bottom: 15px;
+}
+.review-stars span {
+color: pink;
+font-size: 18px;
+}
+.star-empty {
+color: lightgray !important;
+}
+.default-form-box label {
+font-weight: bold;
+}
+.default-form-box textarea, .default-form-box select {
+width: 100%;
+padding: 10px;
+border: 1px solid #ddd;
+border-radius: 5px;
+background-color: #fff5f7;
+}
+.btn-black-default-hover {
+background: black;
+color: white;
+padding: 10px 20px;
+border-radius: 5px;
+cursor: pointer;
+}
+.btn-black-default-hover:hover {
+background: #333;
+}
+</style>
+
+
+<div class="product-details-content-tab-section section-top-gap-100">
+<div class="container">
+<div class="row">
+<div class="col-12">
+  <div class="product-details-content-tab-wrapper" data-aos="fade-up" data-aos-delay="0">
+ 
+ 
+
+        <div class="tab-pane" id="review">
+          <div class="single-tab-content-item">
+            <ul class="list-comment list-comment-divider mb-5">
+              {% for review in reviews %}
+              <li class="d-flex align-items-start review-item">
+                <div class="flex-grow-1 review-box">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 review-user">{{ review.user.email }}</h5>
+                    <span class="d-block small text-muted">{{ review.created_date|date:"Y-m-d H:i" }}</span>
+                  </div>
+                  <div class="d-flex align-items-center mt-2 review-stars">
+                    {% for i in "12345"|make_list %}
+                      {% if forloop.counter <= review.rating %}
+                        <span class="star-filled">&#9733;</span>
+                      {% else %}
+                        <span class="star-empty">&#9733;</span>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                  <div class="mt-2 review-description">
+                    <p>{{ review.description }}</p>
+                  </div>
+                </div>
+              </li>
+            
+              {% endfor %}
+            </ul>
+
+            <div class="review-form">
+              <div class="review-form-text-top">
+                <h5>Add Your Review</h5>
+          
+              </div>
+              <form method="POST" action="{% url 'review:submit-review' %}">
+                {% csrf_token %}
+                <input type="hidden" name="product" value="{{ object.id }}">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="default-form-box">
+                      <label for="comment-review-text">Your Review<span>*</span></label>
+                      <textarea name="description" id="comment-review-text" placeholder="Write your review..." required></textarea>
+                    </div>
+                  </div>
+                  <div class="col-12" >
+                    <div class="default-form-box">
+                      <label for="rating">Your Rating<span>*</span></label>
+                      <select name="rating" id="rating" required  style="background-color: #ffb6c1;">
+                        <option value="5">⭐⭐⭐⭐⭐</option>
+                        <option value="4">⭐⭐⭐⭐</option>
+                        <option value="3">⭐⭐⭐</option>
+                        <option value="2">⭐⭐</option>
+                        <option value="1">⭐</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <button class="btn btn-md btn-black-default-hover" type="submit"  style="background-color: #ffb6c1; margin-top: 20px;">Submit Review</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+{% endif %}
   {% show_similar_products object %}
   
       </div>

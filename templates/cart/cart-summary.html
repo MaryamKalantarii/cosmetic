@@ -144,14 +144,14 @@
        }
    });
 }
-     function removeProduct(product_id, color_id, style_id) {
+     function removeProduct(product_id, color_id) {
    $.ajax({
        url: "{% url 'cart:session-remove-product' %}",
        method: 'POST',
        data: {
            product_id: product_id,
            color_id: color_id || null,    
-           style_id: style_id || null,
+           
            csrfmiddlewaretoken: '{{ csrf_token }}'
        },
        success: function (response) {
