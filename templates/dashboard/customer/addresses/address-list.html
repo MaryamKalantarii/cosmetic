@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'title' %}Addresses{% endblock 'title' %}
+{% block 'content' %}
+
+<!-- Offcanvas Overlay -->
+<div class="offcanvas-overlay"></div>
+
+<!-- ...:::: Start Account Dashboard Section:::... -->
+<div class="account-dashboard" style="background-color: #ffffff; margin-top: 20px; margin-top: 200px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-3 col-lg-3">
+        <!-- Nav tabs -->
+        {% include 'dashboard/customer/sidebar.html' %}
+      </div>
+      <div class="col-sm-12 col-md-9 col-lg-9">
+        <!-- Tab panes -->
+        <div class="tab-content dashboard_content" data-aos="fade-up" data-aos-delay="200">
+          <style>
+            /* Card styles */
+            .card {
+              border: 1px solid #ffc0cb;
+              border-radius: 12px;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+              background: linear-gradient(145deg, #ffffff, #f0f0f0);
+              padding: 30px;
+              margin: auto;
+              margin-bottom: 50px;
+              width: 80%;
+              max-width: 800px;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+            }
+
+            /* Card Header styles */
+            .card-header {
+              background-color:#ffc0cb;
+              color: #ffffff;
+              font-family: 'Arial', sans-serif;
+              font-weight: bold;
+              padding: 12px 20px;
+              border-radius: 10px;
+              width: 100%;
+              text-align: center;
+              font-size: 40px;
+            }
+
+            /* Card Body styles */
+            .card-body {
+              background-color: #ffffff;
+              color: #5a4f3c;
+              font-size: 16px;
+              line-height: 1.6;
+              padding: 20px;
+              border-radius: 10px;
+              width: 100%;
+              margin-top: 15px;
+              text-align: center;
+            }
+
+            /* Button styles */
+            .card-body .btn {
+              background-color: #ff66b2;
+              color: #fff;
+              padding: 10px 20px;
+              border-radius: 25px;
+              text-decoration: none;
+              display: inline-block;
+              transition: all 0.3s ease;
+              margin-top: 10px;
+            }
+
+            .card-body .btn:hover {
+              background-color: #e64a8a;
+            }
+
+            /* Add Address Card styles */
+            .card-dashed-body {
+              background: #ffffff;
+              text-align: center;
+              border: 2px dashed #808080;
+              border-radius: 12px;
+              padding: 30px;
+              width: 100%;
+              margin-top: 20px;
+            }
+
+            .card-dashed-body .avatar {
+              border-radius: 10px;
+              background-color: #f0f0f0;
+              margin-bottom: 20px;
+            }
+
+            .card-dashed-body .bi-plus {
+              font-size: 24px;
+              color: #ff66b2;
+              margin-bottom: 10px;
+            }
+          </style>
+
+          <div class="card">
+            <!-- Header -->
+            <div class="card-header border-bottom">
+              <h5 class="card-header-title">My Addresses</h5>
+            </div>
+            <!-- End Header -->
+
+            <!-- Body -->
+            <div class="card-body">
+              <div class="row">
+                {% for object in object_list %}
+                <div class="col-sm-12 mb-5 mb-sm-7">
+                  <!-- Radio Check -->
+                  <div class="w-100 h-100">
+                    <label class="" for="billingRadio1">
+                      <span class="h5 d-block">Address #{{ object.id }}</span>
+                      <span class="d-block mb-2">{{object.state}}, {{object.city}}, {{object.address}}, {{object.zip_code}}</span>
+                      <a class="btn btn-white btn-xs" href="{% url 'dashboard:customer:address-edit' pk=object.pk %}">
+                        <i class="bi-pencil-fill me-1"></i> Edit Address
+                      </a>
+                    </label>
+                  </div>
+                  <!-- End Radio Check -->
+                </div>
+                {% endfor %}
+                <!-- End Col -->
+
+                <div class="col-sm-12 mb-5 mb-sm-7">
+                  <!-- Card -->
+                  <a class="card card-dashed card-centered" href="{% url 'dashboard:customer:address-create' %}">
+                    <div class="card-body card-dashed-body py-8">
+                      <span class="d-block"><i class="bi-plus"></i> Add a New Address</span>
+                    </div>
+                  </a>
+                  <!-- End Card -->
+                </div>
+                <!-- End Col -->
+              </div>
+              <!-- End Row -->
+            </div>
+            <!-- End Body -->
+          </div>
+          <!-- End Card -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ...:::: End Account Dashboard Section:::... -->
+
+{% endblock 'content' %}

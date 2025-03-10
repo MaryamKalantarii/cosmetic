@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'title' %}Wishlist{% endblock 'title' %}
+{% block 'content' %}
+
+<style>/* استایل کلی صفحه */
+  .account-dashboard {
+      background-color: #ffffff; /* پس‌زمینه سفید */
+      padding: 40px 0;
+      margin-top: 200px;
+  }
+  
+  /* استایل بخش Breadcrumb */
+  .breadcrumb-section {
+      background: #ffc0cb; /* پس‌زمینه صورتی */
+      padding: 20px 0;
+  }
+  
+  .breadcrumb-title {
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+  }
+  
+  .breadcrumb-nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 10px;
+  }
+  
+  .breadcrumb-nav ul li {
+      display: inline;
+      font-size: 16px;
+  }
+  
+  .breadcrumb-nav ul li a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+  }
+  
+  .breadcrumb-nav ul li.active {
+      color: #e60073; /* صورتی پررنگ */
+      font-weight: bold;
+  }
+  
+  /* استایل کارت علاقه‌مندی‌ها */
+  .wishlist-container .wishlist-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      margin-bottom: 20px;
+  }
+  
+  .wishlist-card .card-header {
+      background-color: #ffc0cb;
+      color: #fff;
+      padding: 15px;
+      border-radius: 10px 10px 0 0;
+  }
+  
+  .wishlist-card .card-header-title {
+      font-size: 18px;
+      font-weight: bold;
+  }
+  
+  .wishlist-card .card-body {
+      padding: 20px;
+  }
+  
+  .wishlist-card .list-group-item {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      padding: 10px;
+  }
+  
+  .wishlist-card img {
+      max-width: 100px;
+      height: auto;
+  }
+  
+  .wishlist-card .text-dark {
+      font-weight: bold;
+      color: #333;
+  }
+  
+  .wishlist-card .text-muted {
+      color: #999;
+  }
+  
+  .wishlist-card .btn-outline-danger {
+      border-color: #ff6666;
+      color: #ff6666;
+  }
+  
+  .wishlist-card .btn-outline-danger:hover {
+      background-color: #ff6666;
+      color: #fff;
+  }
+  
+  .wishlist-card .card-footer {
+      background-color: #f8f9fa;
+      border-top: 1px solid #ddd;
+      padding: 15px;
+  }
+  
+  .wishlist-card .card-footer a {
+      color: #ff66b2;
+      font-weight: bold;
+      text-decoration: none;
+  }
+  
+  .wishlist-card .card-footer a:hover {
+      text-decoration: underline;
+  }
+  </style>
+
+    <!-- Offcanvas Overlay -->
+    <div class="offcanvas-overlay"></div>
+
+    <!-- ...:::: End Breadcrumb Section :::... -->
+
+    <!-- ...:::: Start Account Dashboard Section :::... -->
+    <div class="account-dashboard">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-3 col-lg-3">
+            <!-- Nav tabs -->
+            {% include 'dashboard/customer/sidebar.html' %}
+          </div>
+          <div class="col-sm-12 col-md-9 col-lg-9">
+            <!-- Tab panes -->
+            <div class="tab-content dashboard_content" data-aos="fade-up" data-aos-delay="200">
+             
+<div class="wishlist-container">
+    <div class="wishlist-card card">
+        <div class="card-header d-sm-flex justify-content-sm-between align-items-sm-center border-bottom">
+            <h5 class="card-header-title">Wishlist</h5>
+            <span>{{ total_items }} items</span>
+        </div>
+
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                {% for object in object_list %}
+                <li class="list-group-item">
+                    <div class="d-flex align-items-center">
+                      <img src="{{ object.product.image1.url }}" alt="{{ object.product.title }}" style="max-width: 100px; height: auto;">
+                        <div class="flex-grow-1 ms-3">
+                            <h5>
+                                <a class="text-dark" href="{% url 'product:product-detail' slug=object.product.slug %}">
+                                    {{ object.product.title }}
+                                </a>
+                            </h5>
+                            <small class="text-muted">Category: 
+                                {% for category in object.product.category.all %}
+                                    <a class="link-sm link-secondary" href="#"> {{ category.title }} </a>
+                                    {% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </small>
+                        </div>
+                        <form action="{% url 'dashboard:customer:wishlist-delete' pk=object.pk %}" method="post">
+                            {% csrf_token %}
+                            <button class="btn btn-outline-danger btn-sm" type="submit">
+                                <i class="bi-trash me-1"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <a class="card-footer card-link text-center border-top" href="/product/product/grid/">Continue Shopping</a>
+    </div>
+</div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ...:::: End Account Dashboard Section :::... -->
+
+
+        {% endblock 'content' %}

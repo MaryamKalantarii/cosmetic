@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'title' %}Create Address{% endblock 'title' %}
+{% block 'content' %}
+
+    <!-- Offcanvas Overlay -->
+    <div class="offcanvas-overlay"></div>
+
+    <!-- ...:::: Start Account Dashboard Section:::... -->
+    <div class="account-dashboard" style="background-color: #ffffff; margin-top: 200px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-3 col-lg-3">
+            <!-- Nav tabs -->
+            {% include 'dashboard/customer/sidebar.html' %}
+          </div>
+          <div class="col-sm-12 col-md-9 col-lg-9">
+            <!-- Tab panes -->
+            <div
+              class="tab-content dashboard_content"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+
+<!-- Card -->
+<style>/* General style for card */
+  .card {
+      direction: rtl;
+    border: 1px solid #808080;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    margin: 30px auto;
+    padding: 25px;
+    width: 80%;
+    max-width: 900px;
+  }
+  
+  /* Style for header */
+  .card-header {
+    background-color: #808080;
+    color: #ffffff;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    padding: 15px 20px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 40px;
+  }
+  
+  /* Style for form body */
+  .card-body {
+    background-color: #ffffff;
+    color: #5a4f3c;
+    font-size: 16px;
+    line-height: 1.6;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+  /* Style for each form field */
+  .form-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #6a4e23;
+  }
+  
+  /* Style for input forms */
+  input, select, textarea {
+    border: 1px solid #808080;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+    background-color: #ffffff;
+    font-size: 16px;
+    margin-top: 5px;
+    box-sizing: border-box;
+  }
+  
+  /* Style for select options */
+  select {
+    height: 38px;
+  }
+  
+  /* Style for address text area */
+  textarea {
+    height: 120px;
+    resize: vertical;
+  }
+  
+  /* Style for submit buttons */
+  .btn {
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  /* Style for back button */
+  .btn-danger {
+    background-color: #ff66b2;
+    color: #fff;
+    border: none;
+  }
+  
+  .btn-danger:hover {
+    background-color: #e64a8a;
+  }
+  
+  /* Style for save button */
+  .btn-primary {
+    background-color: #808080;
+    color: #fff;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #666666;
+  }
+  
+  /* Style for rows */
+  .row {
+    margin-bottom: 20px;
+  }
+  
+  /* Style for error text */
+  .form-error {
+    color: #ff66b2;
+    font-size: 14px;
+  }
+  </style>
+<div class="card mb-3">
+  <div class="card-header border-bottom">
+      <h4 class="card-header-title">Create New Address</h4>
+  </div>
+
+  <form action="." method="post">
+      <!-- Body -->
+      <div class="card-body">
+          <!-- Form -->
+
+          {% csrf_token %}
+
+
+          <!-- Form -->
+          <div class="row">
+              <div class="col-md-4  mb-4">
+                  <label class="col-form-label form-label">State</label>
+                  {{form.state}}
+              </div>
+              <!-- End Form -->
+              <!-- Form -->
+              <div class="col-md-4  mb-4">
+                  <label class=" col-form-label form-label">City</label>
+                  {{form.city}}
+              </div>
+              <!-- End Form -->
+              <!-- Form -->
+              <div class="col-md-4  mb-4">
+                  <label class=" col-form-label form-label">Postal Code</label>
+                  {{form.zip_code}}
+              </div>
+              <!-- End Form -->
+          </div>
+          <!-- Form -->
+          <div class="row mb-4">
+              <label class="col-form-label form-label">Address</label>
+              {{form.address}}
+          </div>
+          <!-- End Form -->
+
+
+      </div>
+      <!-- End Body -->
+
+      <!-- Footer -->
+      <div class="card-footer pt-0">
+          <div class="d-flex justify-content-end gap-3">
+              <a class="btn btn-danger" href="{% url 'dashboard:customer:home' %}">Back</a>
+              <button class="btn btn-primary" type="submit">Save Changes</button>
+          </div>
+      </div>
+  </form>
+  <!-- End Footer -->
+</div>
+<!-- End Card -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ...:::: End Account Dashboard Section:::... -->
+
+
+        {% endblock 'content' %}

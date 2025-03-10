@@ -1,0 +1,94 @@
+{% load static %}
+
+<style>.dashboard_tab_button {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.dashboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dashboard-list li {
+  margin-bottom: 10px;
+}
+
+.dashboard-list .nav-link {
+  display: block;
+  text-align: center;
+  padding: 12px 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ff0095;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+.dashboard-list .nav-link:hover,
+.dashboard-list .nav-link.active {
+  background: #dfbbcc9d;
+  color: #000000;
+  border-color: #5a3e1b;
+}
+</style>{% load static %}
+
+<div class="dashboard_tab_button" data-aos="fade-up" data-aos-delay="0">
+  <ul role="tablist" class="nav flex-column dashboard-list">
+    <li>
+      <a href="{% url 'dashboard:customer:home' %}" class="nav-link btn btn-block btn-md btn-black-default-hover active">
+        Dashboard
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'dashboard:customer:order-list' %}" class="nav-link btn btn-block btn-md btn-black-default-hover">
+        Your Orders
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'dashboard:customer:address-list' %}" class="nav-link btn btn-block btn-md btn-black-default-hover">
+        Address
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'dashboard:customer:wishlist-list' %}" class="nav-link btn btn-block btn-md btn-black-default-hover">
+        Wishlist
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'dashboard:customer:profile-edit' %}" class="nav-link btn btn-block btn-md btn-black-default-hover">
+        Account Details
+      </a>
+    </li>
+    <li>
+      <a href="{% url 'dashboard:customer:security-edit' %}" class="nav-link btn btn-block btn-md btn-black-default-hover">
+        Security
+      </a>
+    </li>
+  </ul>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let links = document.querySelectorAll(".dashboard-list .nav-link");
+    links.forEach((link) => {
+      link.addEventListener("click", function () {
+        links.forEach((item) => item.classList.remove("active"));
+        this.classList.add("active");
+      });
+    });
+
+    // حفظ حالت فعال بعد از بارگذاری صفحه
+    let currentUrl = window.location.href;
+    links.forEach((link) => {
+      if (link.href === currentUrl) {
+        links.forEach((item) => item.classList.remove("active"));
+        link.classList.add("active");
+      }
+    });
+  });
+</script>

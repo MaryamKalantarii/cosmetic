@@ -1,0 +1,332 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'title' %}Orders{% endblock 'title' %}
+{% block 'content' %}
+
+<!-- Card -->
+<style>
+/* General settings */
+body {
+    background-color: #474747;
+    color: #4B5563;
+    font-family: var(--bs-font-sans-serif);
+    direction: ltr;
+    
+}
+
+/* Main card style */
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    margin-top: 100px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Card header */
+.card-header {
+    background-color: #949494; /* Gray background */
+    color: white;
+    border-radius: 10px 10px 0 0;
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Search form and filters */
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 1px solid #808080; /* Gray */
+    background-color: #f0f0f0; /* Light gray */
+    color: #4B5563;
+    padding: 10px;
+    transition: all 0.3s;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #ff66b2; /* Pink */
+    background-color: #f0f0f0; /* Light gray */
+    outline: none;
+}
+
+/* Order list styling */
+.list-unstyled li {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Order info */
+.text-dark.fw-semibold {
+    font-size: 1rem;
+    color: #ff66b2; /* Pink */
+    font-weight: bold;
+}
+
+small.card-subtitle {
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+/* Order buttons */
+.btn-primary {
+    background-color: #ff66b2; /* Pink */
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background 0.3s;
+    margin-top: 0px;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #e64a8a; /* Dark pink */
+}
+
+.btn-white {
+    border: 1px solid #ff66b2; /* Pink */
+    color: #ff66b2; /* Pink */
+    border-radius: 6px;
+    padding: 8px 12px;
+}
+
+.btn-white:hover {
+    background-color: #ff66b2; /* Pink */
+    color: white;
+}
+
+/* Product images in orders */
+.img-fluid {
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    transition: transform 0.3s;
+}
+
+.img-fluid:hover {
+    transform: scale(1.05);
+}
+
+/* Pagination styling */
+.pagination .page-link {
+    border-radius: 8px;
+    background: #f0f0f0; /* Light gray */
+    border: 1px solid #808080; /* Gray */
+    color: #4B5563;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #ff66b2; /* Pink */
+    color: white;
+    border: none;
+}
+
+.pagination .page-link:hover {
+    background-color: #e64a8a; /* Dark pink */
+    color: white;
+}
+</style>
+
+<!-- Offcanvas Overlay -->
+<div class="offcanvas-overlay"></div>
+
+<!-- ...:::: Start Account Dashboard Section:::... -->
+<div class="account-dashboard" style="background-color: #ffffff; margin-top: 200px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-3 col-lg-3">
+        <!-- Nav tabs -->
+        {% include 'dashboard/customer/sidebar.html' %}
+      </div>
+      <div class="col-sm-12 col-md-9 col-lg-9">
+        <!-- Tab panes -->
+        <div class="tab-content dashboard_content" data-aos="fade-up" data-aos-delay="200" class="nav-link btn btn-block btn-md btn-black-default-hover active">
+
+          <div class="card">
+            <!-- Header -->
+            <div class="card-header border-bottom">
+                <form action="." class="row">
+
+                    <!-- Input Card -->
+                    <div class="col-md-3 py-1">
+                        <input type="text" class="form-control form-control-sm" placeholder="Search Order" name="q"
+                            id="search-query-filter">
+                    </div>
+                    <div class="col-md-3 py-1">
+                        <select class="form-select form-select-sm" id="status-type-filter" name="status">
+                            <option value="" selected>Status</option>
+                            {% for status_type in status_types %}
+                            <option value="{{status_type.0}}">{{status_type.1}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-3 py-1">
+                        <select class="form-select form-select-sm" id="order-by-filter">
+                            <option value="" selected>Sort By</option>
+                            <option value="-created_date">Newest</option>
+                            <option value="created_date">Oldest</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2 py-1">
+                        <select class="form-select form-select-sm" id="page-size-filter">
+                            <option value="" selected>Per Page</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-1 py-1">
+                        <button type="submit" class="btn btn-sm btn-icon btn-primary btn-search"><i class="bi-search"> Search</i></button>
+                    </div>
+                </form>
+            </div>
+            <!-- End Header -->
+
+            <!-- Body -->
+            <div class="card-body">
+
+                <!-- Tab Content -->
+                <div class="tab-content" id="accountOrdersTabContent">
+                    <div class="tab-pane fade show active" id="accountOrdersOne" role="tabpanel"
+                        aria-labelledby="accountOrdersOne-tab">
+                        <!-- Select Group -->
+                        <div class="d-sm-flex align-items-sm-center mb-5">
+                            <div class="mb-2 mb-sm-0 me-3">
+                                <span><strong class="text-dark">{{ total_items}} Orders</strong></span>
+                            </div>
+                        </div>
+                        <!-- End Select Group -->
+
+                        <ul class="list-unstyled mb-5">
+                            <!-- Card -->
+                            {% for object in object_list %}
+                            <li class="card card-bordered shadow-none mb-3">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6 col-md mb-3 mb-md-0">
+                                            <small class="card-subtitle mb-0">Order Amount</small>
+                                            <small class="text-dark fw-semibold formatted-price">{{object.get_price}}</small>
+                                        </div>
+
+                                        <div class="col-6 col-md mb-3 mb-md-0">
+                                            <small class="card-subtitle mb-0">Status</small>
+                                            <small class="text-dark fw-semibold">{{object.get_status.label}}</small>
+                                        </div>
+
+                                        <div class="col-6 col-md">
+                                            <small class="card-subtitle mb-0">Order Number</small>
+                                            <small class="text-dark fw-semibold">{{object.id}}</small>
+                                        </div>
+
+                                        <div class="col-6 col-md">
+                                            <small class="card-subtitle mb-0">Order Time</small>
+                                            <small class="text-dark fw-semibold">
+                                                {{object.created_date|date:"Y-m-d h:i"}}
+                                            </small>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row gx-2">
+                                                {% for order_item in object.order_items.all|slice:":4" %}
+                                                <div class="col">
+                                                    <img class="img-fluid" style="width:100px; height:100px"
+                                                        src="{{order_item.product.image.url}}" alt="Image Description">
+                                                </div>
+                                                {% endfor %}
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="d-grid gap-2">
+                                                {% if object.is_successful %}
+                                                <a class="btn btn-white btn-sm"
+                                                    href="{% url 'dashboard:customer:order-invoice' pk=object.pk %}"
+                                                    target="_blank">
+                                                    <i class="bi-receipt small me-2"></i> View Invoice
+                                                </a>
+                                                {% endif %}
+                                                <a class="btn btn-primary btn-sm"
+                                                    href="{% url 'dashboard:customer:order-detail' pk=object.pk %}">View
+                                                    Order</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+
+                        <!-- Pagination -->
+                        <div class="row pt-5 mt-3">
+                            {% if page_obj.has_other_pages %}
+                            <!-- Pagination -->
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    {% if page_obj.has_previous %}
+                                    <li class="page-item">
+                                        <button class="page-link" onclick="changePage(`{{ page_obj.previous_page_number }}`)"
+                                            aria-label="Previous">
+                                            <span aria-hidden="true">
+                                                <i class="bi-chevron-double-right small"></i>
+                                            </span>
+                                        </button>
+                                    </li>
+                                    {% endif %}
+                                    {{page_obj.page_range}}
+                                    {% for i in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == i %}
+                                    <li class="page-item active"><a class="page-link">{{ i }}</a></li>
+                                    {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+                                    <li class="page-item">
+                                        <button class="page-link" onclick="changePage(`{{i}}`)">{{ i }}</button></li>
+                                    {% endif %}
+                                    {% endfor %}
+
+                                    {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <button class="page-link" onclick="changePage(`{{ page_obj.next_page_number }}`)"
+                                            aria-label="Next">
+                                            <span aria-hidden="true">
+                                                <i class="bi-chevron-double-left small"></i>
+                                            </span>
+                                        </button>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                            {% endif %}
+                            <!-- End Pagination -->
+                        </div>
+                    </div>
+                </div>
+                <!-- End Tab Content -->
+            </div>
+            <!-- End Body -->
+          </div>
+        </div>
+       
+          </div>
+        </div>
+        </div>
+       
+          </div>
+        </div>
+
+    {% endblock %}

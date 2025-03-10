@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'title' %}Security{% endblock 'title' %}
+{% block 'content' %}
+
+<!-- Offcanvas Overlay -->
+<div class="offcanvas-overlay"></div>
+
+<!-- ...:::: Start Account Dashboard Section:::... -->
+<div class="account-dashboard" style="background-color: #ffffff; margin-top: 200px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+                <!-- Nav tabs -->
+                {% include 'dashboard/customer/sidebar.html' %}
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+                <!-- Tab panes -->
+                <div class="tab-content dashboard_content" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Card -->
+                    <div class="card" style="border: 1px solid #808080; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); background: linear-gradient(145deg, #ffffff, #f0f0f0); margin: 30px auto; padding: 25px; width: 80%; max-width: 900px;">
+                        <div class="card-header" style="background-color: #808080; color: #ffffff; font-family: 'Arial', sans-serif; font-weight: bold; padding: 15px 20px; text-align: center; border-radius: 10px; font-size: 40px;">
+                            <h5>Password</h5>
+                        </div>
+                        <!-- Body -->
+                        <div class="card-body" style="background-color: #ffffff; color: #5a4f3c; font-size: 16px; line-height: 1.6; border-radius: 10px; padding: 20px;">
+                            <!-- Form -->
+                            <form action="." method="post">
+                                {% csrf_token %}
+                                <div class="mb-6">
+                                    <label for="currentPasswordLabel">Current Password</label>
+                                    {{ form.old_password }}
+                                </div>
+
+                                <div class="mb-6">
+                                    <label for="newPassword">New Password</label>
+                                    {{ form.new_password1 }}
+                                </div>
+
+                                <div class="mb-6">
+                                    <label for="confirmNewPasswordLabel">Confirm New Password</label>
+                                    {{ form.new_password2 }}
+
+                                    <h5 class="mt-4 font-semibold">Password Requirements:</h5>
+                                    <p class="text-sm">Make sure your password meets the following requirements:</p>
+
+                                    <ul>
+                                        <li>At least 8 characters – the longer, the better</li>
+                                        <li>At least one lowercase letter</li>
+                                        <li>At least one uppercase letter</li>
+                                        <li>At least one number, symbol, or whitespace character</li>
+                                    </ul>
+                                </div>
+
+                                <button type="submit" style="background-color: #ff66b2; color: white; border: none; padding: 8px 16px; border-radius: 5px;">
+                                    Update
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ...:::: End Account Dashboard Section:::... -->
+
+{% endblock 'content' %}

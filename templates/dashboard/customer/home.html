@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+    {% load static %}
+    {% block 'title' %}Dashboard{% endblock 'title' %}
+    {% block 'content' %}
+    
+<style>/* استایل کلی داشبورد */
+  .account-dashboard {
+      background: #f3f3f3; /* پس‌زمینه طوسی ملایم */
+      padding: 40px 0;
+      
+  }
+  
+  /* استایل بخش Breadcrumb */
+  .breadcrumb-section {
+      background: #ffc0cb; /* پس‌زمینه صورتی */
+      padding: 20px 0;
+      margin-top: 150px;
+  }
+  
+  .breadcrumb-title {
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+  }
+  
+  .breadcrumb-nav ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      gap: 10px;
+  }
+  
+  .breadcrumb-nav ul li {
+      display: inline;
+      font-size: 16px;
+  }
+  
+  .breadcrumb-nav ul li a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+  }
+  
+  .breadcrumb-nav ul li.active {
+      color: #6c757d; /* رنگ طوسی */
+      font-weight: bold;
+  }
+  
+  /* استایل محتوای داشبورد */
+  .dashboard_content {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* استایل عناوین */
+  .dashboard_content h4 {
+      font-size: 22px;
+      font-weight: bold;
+      color: #d63384; /* صورتی پررنگ */
+      margin-bottom: 15px;
+  }
+  
+  /* استایل متن‌ها */
+  .dashboard_content p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+  }
+  
+  /* لینک‌ها */
+  .dashboard_content a {
+      color: #ff69b4; /* صورتی ملایم */
+      text-decoration: none;
+      font-weight: 600;
+  }
+  
+  .dashboard_content a:hover {
+      text-decoration: underline;
+  }
+  
+  /* استایل ستون سایدبار */
+  .dashboard-sidebar {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  </style>
+    
+        <!-- Offcanvas Overlay -->
+        <div class="offcanvas-overlay"></div>
+    
+        <!-- ...:::: Start Breadcrumb Section :::... -->
+        <div class="breadcrumb-section breadcrumb-bg-color--golden">
+          <div class="breadcrumb-wrapper">
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                  <h3 class="breadcrumb-title">My Account</h3>
+                  <div class="breadcrumb-nav breadcrumb-nav-color--black breadcrumb-nav-hover-color--golden">
+                    <nav aria-label="breadcrumb">
+                      <ul>
+                        <li><a href="{% url 'root:home' %}">Home</a></li>
+                        <li><a href="{% url 'product:product-grid' %}">Shop</a></li>
+                        <li class="active" aria-current="page">My Account</li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ...:::: End Breadcrumb Section :::... -->
+    
+        <!-- ...:::: Start Account Dashboard Section :::... -->
+        <div class="account-dashboard">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12 col-md-3 col-lg-3">
+                <!-- Nav tabs -->
+                {% include 'dashboard/customer/sidebar.html' %}
+              </div>
+              <div class="col-sm-12 col-md-9 col-lg-9">
+                <!-- Tab panes -->
+                <div class="tab-content dashboard_content" data-aos="fade-up" data-aos-delay="200">
+                  <div class="tab-pane fade show active" id="dashboard">
+                    <h4>Dashboard</h4>
+                    <p>
+                      From your account dashboard, you can easily check your 
+                      <a href="#">recent orders</a>, manage your 
+                      <a href="#">shipping and billing addresses</a>, 
+                      and <a href="#">edit your password and account details</a>.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ...:::: End Account Dashboard Section :::... -->
+    
+    {% endblock 'content' %}
+    

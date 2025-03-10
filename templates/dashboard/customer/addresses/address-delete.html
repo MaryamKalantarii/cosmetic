@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'title' %}Delete Address{% endblock 'title' %}
+{% block 'content' %}
+
+    <!-- Offcanvas Overlay -->
+    <div class="offcanvas-overlay"></div>
+
+    <!-- ...:::: Start Account Dashboard Section:::... -->
+    <div class="account-dashboard" style="background-color: #ffffff; margin-top: 200px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-3 col-lg-3">
+            <!-- Nav tabs -->
+            {% include 'dashboard/customer/sidebar.html' %}
+          </div>
+          <div class="col-sm-12 col-md-9 col-lg-9">
+            <!-- Tab panes -->
+            <div
+              class="tab-content dashboard_content"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+            <style>/* General style for card */
+              .card {
+                border: 1px solid #808080;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                background: linear-gradient(145deg, #ffffff, #f0f0f0);
+                margin: 30px auto;
+                padding: 25px;
+                width: 80%;
+                max-width: 900px;
+                direction: rtl;
+              }
+              
+              /* Style for header */
+              .card-header {
+                background-color: #808080;
+                color: #ffffff;
+                font-family: 'Arial', sans-serif;
+                font-weight: bold;
+                padding: 15px 20px;
+                text-align: center;
+                border-radius: 10px;
+                font-size: 40px;
+              }
+              
+              /* Style for card body */
+              .card-body {
+                background-color: #ffffff;
+                color: #5a4f3c;
+                font-size: 16px;
+                line-height: 1.6;
+                padding: 20px;
+                border-radius: 10px;
+              }
+              
+              /* Style for description text */
+              .card-body p, .card-body span {
+                font-size: 18px;
+                color: #6a4e23;
+                margin-bottom: 15px;
+              }
+              
+              /* Style for buttons */
+              .btn {
+                padding: 12px 20px;
+                border-radius: 25px;
+                font-weight: bold;
+                transition: all 0.3s ease;
+              }
+              
+              /* Style for delete confirmation button */
+              .btn-danger {
+                background-color: #ff66b2;
+                color: #fff;
+                border: none;
+              }
+              
+              .btn-danger:hover {
+                background-color: #e64a8a;
+              }
+              
+              /* Style for back button */
+              .btn-secondary {
+                background-color: #808080;
+                color: #fff;
+                border: none;
+              }
+              
+              .btn-secondary:hover {
+                background-color: #666666;
+              }
+              
+              /* Style for rows */
+              .row {
+                margin-bottom: 20px;
+              }
+              
+              /* Style for card and button borders */
+              .card-footer {
+                background-color: #ffffff;
+                border-top: 1px solid #808080;
+                padding-top: 20px;
+              }
+              
+              /* Style for button spacing */
+              .ms-3 {
+                margin-left: 10px;
+              }
+              
+              /* Style for delete confirmation button on hover */
+              .btn-danger:hover {
+                background-color: #e64a8a;
+                cursor: pointer;
+              }
+              </style>
+          <div class="card">
+              <!-- Header -->
+              <div class="card-header border-bottom">
+                  <h5 class="card-header-title">Delete Address</h5>
+              </div>
+              <!-- End Header -->
+          
+              <!-- Body -->
+              <form action="." method="post">
+                  {% csrf_token %}
+                  <div class="card-body">
+                      <div class="row d-flex ">
+                          <p> Are you sure you want to delete the following address?</p>
+                          <div class="row">
+                               <span>Address ID  : {{object.pk}}</span>
+                               <span> Address  : {{object.state}},{{object.city}},{{object.address}} ,{{object.zip_code}}</span>
+                          </div>
+          
+                      </div>
+                      <div class="card-footer">
+                          <div class=" d-flex pt-5 justify-content-end">
+                              <button type="submit" class="btn btn-danger ms-3">Confirm Deletion</button>
+                              <a class="btn btn-secondary ms-3" href="{% url 'dashboard:customer:address-edit' pk=object.pk %}">Back</a>
+                          </div>
+                      </div>
+              </form>
+          </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ...:::: End Account Dashboard Section:::... -->
+
+
+        {% endblock 'content' %}
