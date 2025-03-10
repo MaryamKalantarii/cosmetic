@@ -48,7 +48,7 @@
                 <p class="text-danger fw-bold fs-6">Discount: ${{total_payment_price}}</p>
                 <p class="text-danger fs-6">Total: ${{total_payment_price}}</p>
                 <div class="d-flex flex-column flex-md-row justify-content-center gap-2 mt-2">
-                    <a href="#" class="btn btn-minimal shadow-sm btn-md d-none d-md-block">
+                    <a href="{% url 'order:checkout' %}" class="btn btn-minimal shadow-sm btn-md d-none d-md-block">
                         🎀 Checkout
                     </a>
                     <a href="#" class="btn btn-minimal shadow-sm btn-sm d-md-none">

@@ -1,0 +1,252 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'content' %}
+
+<style>
+/* General settings */
+body {
+    background-color: #000000; /* Soft gray background */
+    color: #343a40; /* Dark gray text */
+    font-family: 'Arial', sans-serif;
+    margin-top: 150px;
+    direction: ltr;
+}
+
+/* Breadcrumb section */
+.breadcrumb-section {
+    background-color: #f5adad; /* Soft pink */
+    padding: 30px 0;
+    margin-top: 150px;
+    border-radius: 10px;
+}
+
+.breadcrumb-title {
+    color: white; /* White text for contrast */
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.breadcrumb-nav a {
+    color: #343a40; /* Dark gray */
+    transition: color 0.3s ease;
+}
+
+.breadcrumb-nav a:hover {
+    color: #f5adad; /* Soft pink */
+}
+
+/* Checkout form section */
+.checkout-section {
+    background-color: #ffffff; /* White */
+    padding: 40px 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Titles */
+.checkout_form h3 {
+    color: #f5adad; /* Soft pink */
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+/* Default form box (address selection) */
+.default-form-box {
+    background-color: #f0f0f0; /* Light gray */
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.default-form-box:hover {
+    background-color: #f9d3d3; /* Soft pink hover */
+    transform: scale(1.02);
+}
+
+.default-form-box input[type="radio"] {
+    accent-color: #f5adad; /* Soft pink */
+}
+
+/* Labels */
+.default-form-box label {
+    color: #343a40; /* Dark gray */
+    font-size: 1rem;
+}
+
+/* Order table */
+.order_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.order_table th,
+.order_table td {
+    padding: 14px;
+    border: 1px solid #ddd; /* Light gray */
+    text-align: left;
+    font-size: 1rem;
+}
+
+.order_table th {
+    background-color: #f5adad; /* Soft pink */
+    color: white;
+    font-weight: bold;
+}
+
+.order_table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Very light gray */
+}
+
+.order_table tfoot th {
+    background-color: #f5adad; /* Soft pink */
+    color: white;
+}
+
+.order_table tfoot td {
+    background-color: #f7f7f7; /* Very light gray */
+}
+
+/* Payment button */
+.order_button button {
+    background-color: #f5adad; /* Soft pink */
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.order_button button:hover {
+    background-color: #f28d8d; /* Darker soft pink */
+    transform: scale(1.05);
+}
+
+/* Links */
+a {
+    color: #a58383; /* Soft pink */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #f28d8d; /* Darker soft pink */
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .checkout-section {
+        padding: 20px;
+    }
+
+    .checkout_form h3 {
+        font-size: 1.1rem;
+    }
+
+    .order_table th,
+    .order_table td {
+        padding: 10px;
+    }
+}
+
+</style>
+
+<!-- Offcanvas Overlay -->
+<div class="offcanvas-overlay"></div>
+
+<!-- ...:::: Start Checkout Section:::... -->
+<div class="checkout-section">
+  <div class="container">
+    <div class="row">
+      
+    </div>
+    <!-- Start User Details Checkout Form -->
+    <div class="checkout_form" data-aos="fade-up" data-aos-delay="400">
+      <div class="row">
+        <div class="col-lg-6 col-md-6">
+          <form action="." method="post" id="checkout-form">
+            {% csrf_token %}
+            <h3>Select Address</h3>
+            <div class="row">
+              <div class="col-lg-6">
+                {% for address in addresses %}
+                <div class="default-form-box d-flex align-items-center gap-2">
+                  <input type="radio" class="form-check-input mt-0" name="address_id" value="{{ address.id }}" required />
+                  <label class="form-check-label mb-0" for="address">
+                      {{ address.state }}, {{ address.city }}, {{ address.address }} , {{ address.zip_code }}
+                  </label>
+              </div>
+                {% endfor %}
+                <div class="mt-3">
+                  <a href="{% url 'dashboard:customer:address-list' %}">Manage Addresses</a>
+                </div>
+              </div>
+              
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-6 col-md-6">
+          <form action="#">
+            <h3>Your Order</h3>
+            <div class="order_table table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in cart_items %}
+                  <tr>
+                    <td>{{item.product.title}}<strong> × {{item.quantity}}</strong></td>
+                    <td class="formatted-price">{{ item.multiply_by_number }}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Shipping Method:</th>
+                    <td><strong>The shipping cost will be covered by the buyer and will be announced after checking with the courier service.</strong></td>
+                  </tr>
+                  <tr>
+                    <th>Contact Number:</th>
+                    <td><strong>If you have any questions, call 09013365803.</strong></td>
+                  </tr>
+                  <tr class="order_total">
+                    <th>Total Order</th>
+                    <td><strong class="formatted-price">{{total_price}}</strong></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+            <div class="payment_method">
+              <div class="panel-default">
+                
+                <div id="methodCod" class="collapse" data-parent="#methodCod">
+                  
+                </div>
+              </div>
+              <div class="panel-default">
+                
+              </div>
+              <div class="order_button pt-3">
+                <button class="btn btn-md btn-black-default-hover" type="submit" form="checkout-form">
+                  Pay
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Start User Details Checkout Form -->
+  </div>
+</div>
+<!-- ...:::: End Checkout Section:::... -->
+
+{% endblock 'content' %}
