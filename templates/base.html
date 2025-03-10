@@ -128,15 +128,22 @@
               <i class="bi bi-person-circle" style="font-size: 26px;"></i>
           </a>
       </li>
+     
+    
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-      <a href="{% url 'cart:cart-summary' %}" class="book-a-table-btn scrollto d-none d-lg-flex">
+  
+      </style>
+      <a href="{% url 'cart:cart-summary' %}" class="book-a-table-btn scrollto d-flex align-items-center justify-content-center">
         cart
         <i class="bi bi-bag"></i>
         <span id="total-cart-item-count">{{cart.get_total_quantity}}</span>
-      </a>
+    </a>
+    
+   
     </div>
+  
   </header><!-- End Header -->
   
 
