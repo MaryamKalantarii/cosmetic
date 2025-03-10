@@ -23,20 +23,19 @@ class CartSession:
             return
         self.save()
         
-    def add_product(self, product_id, color_id=None,quantity=1):
+    def add_product(self, product_id, color_id=None, quantity=1):
         # جستجو برای محصول در سبد خرید
         for item in self._cart["items"]:
             if product_id == item["product_id"] and item.get("color_id") == color_id:
-                item["quantity"] += 1  # اگر محصول قبلاً موجود بود، تعداد را افزایش می‌دهیم
+                item["quantity"] += int(quantity)  # ✅ مقدار درست اضافه شود
                 break
         else:
-            # اگر محصول جدید است، آن را اضافه می‌کنیم
+            # اگر محصول جدید است، مقدار quantity را ذخیره کنیم
             new_item = {
                 "product_id": product_id,
                 "color_id": color_id,
                 "quantity": int(quantity),
             }
-
             self._cart["items"].append(new_item)
 
         self.save()
@@ -131,7 +130,7 @@ class CartSession:
             )
             cart_item.quantity = item["quantity"]
             cart_item.save()
-            print(f"Synced CartItem to DB: {cart_item}") 
+            
         session_product_ids = [item["product_id"] for item in self._cart["items"]]
         CartItemModel.objects.filter(cart=cart).exclude(product__id__in=session_product_ids).delete()
             

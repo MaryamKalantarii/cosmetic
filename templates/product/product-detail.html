@@ -509,28 +509,27 @@ background: #333;
 
 <script>
  
-function addToCart(product_id) {
-    // گرفتن رنگ و سایز انتخابی
-    var colorId = $("input[name='product-color']:checked").val(); // گرفتن ID رنگ انتخاب شده
-    var quantity = $(".product-variable-quantity input").val(); // گرفتن مقدار تعداد
+ function addToCart(product_id) {
+    var colorId = $("input[name='product-color']:checked").val(); 
+    var quantity = $("#product-quantity").val(); 
 
-    // ارسال درخواست AJAX به سرور
+    console.log("Selected Quantity:", quantity); 
+
     $.ajax({
         url: "{% url 'cart:session-add-product' %}",
         method: 'POST',
         data: {
             product_id: product_id,
-            color_id: colorId,       // ارسال ID رنگ انتخابی
+            color_id: colorId,
             quantity: quantity,    
             csrfmiddlewaretoken: '{{ csrf_token }}'
         },
         success: function (response) {
-            // به‌روزرسانی تعداد کل محصولات در سبد خرید
             $("#total-cart-item-count").html(response.total_quantity);
-            console.log(response);  // نمایش داده‌ها در کنسول
+            console.log(response);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            console.log(errorThrown);  // نمایش خطا در کنسول
+            console.log(errorThrown);
         }
     });
 }
