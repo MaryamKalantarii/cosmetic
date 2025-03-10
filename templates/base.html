@@ -45,24 +45,32 @@
 
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="d-flex align-items-center fixed-top">
-    <div class="container d-flex justify-content-center justify-content-md-between">
+    <div class="container d-flex justify-content-center justify-content-md-between w-100">
+        <!-- بخش اطلاعات تماس -->
+        <div class="contact-info d-flex align-items-center">
+            <i class="bi bi-phone d-flex align-items-center"><span>09918139066</span></i>
+            <i class="bi bi-clock d-flex align-items-center ms-4"><span> 8AM / 9PM</span></i>
+        </div>
 
-      <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-phone d-flex align-items-center"><span>09918139066</span></i>
-        <i class="bi bi-clock d-flex align-items-center ms-4"><span> 8AM / 9PM</span></i>
-      </div>
-
-      <div class="contact-info d-flex languages d-md-flex align-items-center">
-        <ul>
-          {% if request.user.is_authenticated %}
-          <li class="bi d-flex align-items-center ms-4"><a href="">{{request.user.email}}</a></li>
-          {% else %}
-          <li class="bi bi-box-arrow-in-right d-flex align-items-center ms-4"><a href="{% url 'accounts:login' %}">Login / Register</a></li>
-          {% endif %}
-        </ul>
-      </div>
+        <!-- بخش ورود و خروج کاربر -->
+        <div class="contact-info d-flex languages d-md-flex align-items-center">
+            <ul class="d-flex m-0 p-0">
+                {% if request.user.is_authenticated %}
+                <li class="bi d-flex align-items-center ms-4">
+                    <a href="{% url 'accounts:logout' %}" class="logout-link">{{ request.user.email }}</a>
+                    <a href="{% url 'accounts:logout' %}" class="logout-icon ms-2" title="Logout">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'accounts:login' %}" class="login-link">Login / Register</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
-  </div>
+</div>
 
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-cente">
