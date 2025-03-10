@@ -57,7 +57,7 @@
             <ul class="d-flex m-0 p-0">
                 {% if request.user.is_authenticated %}
                 <li class="bi d-flex align-items-center ms-4">
-                    <a href="{% url 'accounts:logout' %}" class="logout-link">{{ request.user.email }}</a>
+                    <a href="{% url 'dashboard:home' %}" class="logout-link">{{ request.user.email }}</a>
                     <a href="{% url 'accounts:logout' %}" class="logout-icon ms-2" title="Logout">
                         <i class="bi bi-box-arrow-right"></i> Logout
                     </a>
