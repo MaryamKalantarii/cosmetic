@@ -13,6 +13,7 @@
                         <tr class="text-danger small">
                             <th>Image</th>
                             <th>Product</th>
+                            <th>Color</th> <!-- افزودن ستون رنگ -->
                             <th>Price</th>
                             <th>Qty</th>
                             <th>Total</th>
@@ -22,22 +23,25 @@
                         {% for item in cart_items %}
                         <tr>
                             <td>
-                                <img src="{{item.product_obj.image1.url}}" alt="Sample" 
-                                     class="rounded d-none d-md-inline" width="80">
-                                <img src="{% static 'assets/img/sample-product.jpg' %}" alt="Sample" 
-                                     class="rounded d-md-none" width="40">
+                                <img src="{{ item.product_obj.image1.url }}" alt="Sample" class="rounded d-md-inline d-none" width="80">
+                                <img src="{{ item.product_obj.image1.url }}" alt="Sample" class="rounded d-inline d-md-none" width="40">
                             </td>
-                            <td class="small">{{item.product_obj.title}}</td>
-                            <td class="small">${{item.product_obj.get_price}}</td>
+                            
+                            <td class="small">{{ item.product_obj.title }}</td>
+                            <td class="small">
+                                <span class="rounded-pill d-inline-block" style="background: {{ item.color_code }}; width: 20px; height: 20px;"></span>
+                            </td> <!-- نمایش رنگ -->
+                            <td class="small">${{ item.product_obj.get_price }}</td>
                             <td>
-                                <input type="number" type="number" min="1" max="{{ item.product_obj.stock }}" value="{{ item.quantity }}" class="form-control w-50 mx-auto text-center"
-                                onchange="changeProductQuantity('{{ item.product_id }}', '{{ item.color_id }}',this.value)" >
+                                <input type="number" min="1" max="{{ item.product_obj.stock }}" value="{{ item.quantity }}" class="form-control w-50 mx-auto text-center"
+                                onchange="changeProductQuantity('{{ item.product_id }}', '{{ item.color_id }}', this.value)" >
                                 <a href="#" class="text-danger d-block mt-1 small" onclick="removeProduct('{{ item.product_id }}', '{{ item.color_id }}')">Remove</a>
                             </td>
-                            <td class="small">${{item.total_price}}</td>
+                            <td class="small">${{ item.total_price }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
+                    
                 </table>
             </div>
 
