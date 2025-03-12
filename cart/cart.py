@@ -63,7 +63,7 @@ class CartSession:
                 "color_obj": color_obj,
                 "total_price": item["quantity"] * product_obj.get_price(),
             })
-            print(f"Processed Item: {item}")
+            
         return self._cart["items"]
 
     def get_total_payment_amount(self):
