@@ -75,6 +75,7 @@ class OrderCheckOutView(LoginRequiredMixin, HasCustomerAccessPermission, FormVie
                 order=order,
                 product=item.product,
                 quantity=item.quantity,
+                color=item.color,
                 price=item.product.get_price(),
             )
 
