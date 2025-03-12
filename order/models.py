@@ -1,5 +1,9 @@
 from django.db import models
 from decimal import Decimal
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from product.models import ProductColorStock
+
 class OrderStatusType(models.IntegerChoices):
     pending = 1 , "در انتظار پرداخت"
     success = 2, "موفقیت آمیز"
@@ -26,10 +30,7 @@ class OrderModel(models.Model):
     state = models.CharField(max_length=50)
     city = models.CharField(max_length=50)
     zip_code = models.CharField(max_length=50)
-    
     payment = models.ForeignKey('payment.PaymentModel',on_delete=models.SET_NULL,null=True,blank=True)
-    
-    
     total_price = models.DecimalField(default=0,max_digits=10,decimal_places=0)
 
     status = models.IntegerField(choices=OrderStatusType.choices,default=OrderStatusType.pending.value)
@@ -68,6 +69,7 @@ class OrderItemModel(models.Model):
     product = models.ForeignKey('product.ProductModel',on_delete=models.PROTECT)
     quantity = models.PositiveIntegerField(default=0)
     price = models.DecimalField(default=0,max_digits=10,decimal_places=0)
+    color = models.ForeignKey('product.ColorModel', on_delete=models.PROTECT, null=True, blank=True)
     
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
@@ -75,3 +77,33 @@ class OrderItemModel(models.Model):
     def __str__(self):
         return f"{self.product.title} - {self.order.id}"
     
+
+
+
+@receiver(post_save, sender=OrderModel)
+def reduce_stock(sender, instance, **kwargs):
+    """ کاهش موجودی محصول و رنگ بعد از پرداخت موفق """
+    if instance.is_successful:  # فقط در صورتی که پرداخت موفق باشد
+        for order_item in instance.order_items.all():
+            product = order_item.product
+            quantity = order_item.quantity
+
+            # کم کردن موجودی کلی محصول
+            if product.stock >= quantity:
+                product.stock -= quantity
+                product.save(update_fields=['stock'])
+            else:
+                raise ValueError(f"موجودی کافی برای {product.title} وجود ندارد!")
+
+            # کم کردن موجودی رنگ محصول، اگر رنگی انتخاب شده باشد
+            if order_item.color:
+                product_color_stock = ProductColorStock.objects.filter(
+                    product=product, color=order_item.color
+                ).first()
+                
+                if product_color_stock:
+                    if product_color_stock.stock >= quantity:
+                        product_color_stock.stock -= quantity
+                        product_color_stock.save(update_fields=['stock'])
+                    else:
+                        raise ValueError(f"موجودی کافی برای رنگ {order_item.color.name} از {product.title} وجود ندارد!")

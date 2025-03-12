@@ -60,18 +60,25 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         product = self.get_object()
+
         # افزایش تعداد بازدید
         product.views += 1
         product.save(update_fields=['views'])
+
         # فیلتر کردن نظرات تایید شده مربوط به این محصول
         context['reviews'] = ReviewModel.objects.filter(
             product=product,
             status=ReviewStatusType.accepted.value
-        ).order_by('-created_date')  # اگر می‌خواهید نظرات به ترتیب تاریخ نزولی نمایش داده شوند
+        ).order_by('-created_date')
+
+        # ارسال لیست علاقه‌مندی‌های کاربر
         context["wishlist_items"] = WishlistProductModel.objects.filter(user=self.request.user).values_list(
             "product__id", flat=True) if self.request.user.is_authenticated else []
-        return context
 
+        # ارسال فقط رنگ‌های موجود به قالب
+        context['available_colors'] = product.available_colors()  
+
+        return context
      
 
 

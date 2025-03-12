@@ -16,6 +16,7 @@ class ProductCategoryModel(models.Model):
         return self.title
     
 
+    
 class ColorModel(models.Model):
     name = models.CharField(max_length=50)
     hex_code = models.CharField(max_length=7, null=True, blank=True)  # برای کد رنگ مثل #FFFFFF
@@ -31,7 +32,6 @@ class ProductModel(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(allow_unicode=True,unique=True)
     description = models.TextField()
-    colors = models.ManyToManyField(ColorModel, blank=True)
     avg_rate = models.FloatField(default=0.0) # امتیاز
     image1 = models.ImageField(upload_to='product')
     image2 = models.ImageField(upload_to='product', null=True ,blank=True)
@@ -66,6 +66,10 @@ class ProductModel(models.Model):
     @property
     def is_out_of_stock(self):
         return self.stock == 0
+    
+    def available_colors(self):
+        """ فقط رنگ‌های موجود محصول را برمی‌گرداند """
+        return self.color_variants.filter(stock__gt=0)
 
 class WishlistProductModel(models.Model):
     user = models.ForeignKey("accounts.CustomeUser",on_delete=models.PROTECT)
@@ -73,3 +77,18 @@ class WishlistProductModel(models.Model):
     
     def __str__(self):
         return self.product.title
+    
+class ProductColorStock(models.Model):
+    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name="color_variants")
+    color = models.ForeignKey(ColorModel, on_delete=models.CASCADE)
+    stock = models.PositiveIntegerField(default=0)  # تعداد موجود از این رنگ
+
+    class Meta:
+        unique_together = ("product", "color")  # جلوگیری از رنگ‌های تکراری برای یک محصول
+
+    def __str__(self):
+        return f"{self.product.title} - {self.color.name} (موجودی: {self.stock})"
+
+    @property
+    def is_out_of_stock(self):
+        return self.stock == 0

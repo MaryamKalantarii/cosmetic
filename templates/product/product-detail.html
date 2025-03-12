@@ -254,13 +254,14 @@
           <div class="variable-single-item mt-3">
             <span class="fw-bold">Color:</span>
             <div class="product-variable-color d-flex flex-wrap gap-2 mt-2">
-                {% for color in object.colors.all %}
-                <label for="product-color-{{ color.id }}" class="color-label">
-                    <input type="radio" name="product-color" id="product-color-{{ color.id }}" value="{{ color.id }}" class="d-none" {% if forloop.first %}checked{% endif %}>
-                    <span class="product-color" style="background-color: {{ color.hex_code }};"></span>
-                </label>
-                {% endfor %}
-            </div>
+              {% for color_stock in available_colors %}
+                  <label for="product-color-{{ color_stock.color.id }}" class="color-label">
+                      <input type="radio" name="product-color" id="product-color-{{ color_stock.color.id }}" 
+                             value="{{ color_stock.color.id }}" class="d-none" {% if forloop.first %}checked{% endif %}>
+                      <span class="product-color" style="background-color: {{ color_stock.color.hex_code }};"></span>
+                  </label>
+              {% endfor %}
+          </div>
         </div>     
 <!-- دکمه Wishlist -->
 {% if request.user.is_authenticated %}
