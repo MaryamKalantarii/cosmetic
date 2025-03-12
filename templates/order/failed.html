@@ -1,64 +1,99 @@
 {% extends 'base.html' %}
+
 {% load static %}
+
 {% block 'content' %}
+
  <!-- ...:::: Start Breadcrumb Section:::... -->
- <div class="breadcrumb-section breadcrumb-bg-color--golden">
+
+ <div class="breadcrumb-section breadcrumb-bg-color--pink" style="margin-top: 10%;">
+
     <div class="breadcrumb-wrapper">
+
       <div class="container">
+
         <div class="row">
-          <div class="col-12">
-            <h3 class="breadcrumb-title">51 پرداخت ناموفق</h3>
-            <div
-              class="
-                breadcrumb-nav
-                breadcrumb-nav-color--black
-                breadcrumb-nav-hover-color--golden
-              "
-            >
-              <nav aria-label="breadcrumb">
-                <ul>
-                  <li><a href="{% url 'root:home' %}">خانه</a></li>
-                  <li class="active" aria-current="page">صفحه 51</li>
-                </ul>
-              </nav>
+
+          <div class="col-12 text-center">
+
+            <h3 class="breadcrumb-title">💔 Payment Failed 💔</h3>
+
+            <div class="breadcrumb-nav breadcrumb-nav-color--gray breadcrumb-nav-hover-color--pink">
+
+          
+
             </div>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
+
   <!-- ...:::: End Breadcrumb Section:::... -->
 
-  <!-- ...:::: Start Error Sectiتاریخ :::... -->
-  <div class="error-section">
+
+  <!-- ...:::: Start Error Section :::... -->
+
+  <div class="error-section text-center" style="margin-top: 30px;">
+
     <div class="container">
+
       <div class="row">
-        <div class="error-form">
-          <h1 class="big-title" data-aos="fade-up" data-aos-delay="0"></h1>
+
+        <div class="col-12">
+
+          <h1 class="big-title" data-aos="fade-up" data-aos-delay="0">💔 Oops! 💔</h1>
+
           <h4 class="sub-title" data-aos="fade-up" data-aos-delay="200">
-          پرداخت ناموفق
+
+          🚫 Payment Failed 🚫
+
           </h4>
+
           <p data-aos="fade-up" data-aos-delay="400">
-           پرداخت شما با موفقیت انجام نشد.
-            <br />
-           
+
+           Unfortunately, your payment was not successful. 😢<br/>
+
+           Please try again or contact support. 📞💬
+
           </p>
+
           <div class="row">
+
             <div class="col-10 offset-1 col-md-4 offset-md-4">
-              
+
               <a
+
                 href="{% url 'root:home' %}"
-                class="btn btn-md btn-black-default-hover mt-7"
+
+                class="btn btn-md btn-pink-default-hover mt-7"
+
                 data-aos="fade-up"
+
                 data-aos-delay="800"
-                >بازگشت به صفحه اصلی</a
+
+                >🔙 Back to Home</a
+
               >
+
             </div>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
+
   </div>
-  <!-- ...:::: End Error Sectiتاریخ :::... -->
+
+  <!-- ...:::: End Error Section :::... -->
+
 
 {% endblock 'content' %}
