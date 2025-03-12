@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'content' %}
+ <!-- ...:::: Start Breadcrumb Section:::... -->
+ <div class="breadcrumb-section breadcrumb-bg-color--golden">
+    <div class="breadcrumb-wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h3 class="breadcrumb-title">صفحه 201</h3>
+            <div
+              class="
+                breadcrumb-nav
+                breadcrumb-nav-color--black
+                breadcrumb-nav-hover-color--golden
+              "
+            >
+              <nav aria-label="breadcrumb">
+                <ul>
+                  <li><a href="{% url 'root:home' %}">خانه</a></li>
+                  <li class="active" aria-current="page">100 عملیات موفق</li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ...:::: End Breadcrumb Section:::... -->
+
+  <!-- ...:::: Start Error Sectiتاریخ :::... -->
+  <div class="error-section">
+    <div class="container">
+      <div class="row">
+        <div class="error-form">
+          <h1 class="big-title" data-aos="fade-up" data-aos-delay="0"></h1>
+          <h4 class="sub-title" data-aos="fade-up" data-aos-delay="200">
+          پرداخت با موفقیت انجام شد .  
+          </h4>
+          <p data-aos="fade-up" data-aos-delay="400">
+           پرداخت شما با موفقیت انجام شد.
+            <br />
+           امیدوارم خرید خوبی را تجربه کرده باشید.
+          </p>
+          <div class="row">
+            <div class="col-10 offset-1 col-md-4 offset-md-4">
+              
+              <a
+                href="{% url 'root:home' %}"
+                class="btn btn-md btn-black-default-hover mt-7"
+                data-aos="fade-up"
+                data-aos-delay="800"
+                >بازگشت به صفحه اصلی</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ...:::: End Error Sectiتاریخ :::... -->
+
+{% endblock 'content' %}
