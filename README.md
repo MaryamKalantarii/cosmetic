@@ -2,7 +2,9 @@
 
 **CosmeticQueen** is a chic and modern e-commerce platform for luxury beauty products, inspired by **Kylie Jenner's** cosmetic line. The website is designed with a sleek, feminine touch, perfect for beauty lovers.
 
-![CosmeticQueen Banner][https://example.com/your-banner-image.jpg](https://imgur.com/a/pkOhq9m)
+<p align="center">
+  <img src="https://i.imgur.com/8WwSAOy.png" alt="CosmeticQueen Banner" width="700"/>
+</p>
 
 ---
 
@@ -35,4 +37,3 @@ The backend is built using **Django** and **Django REST Framework**, providing a
 1. Clone the repo:
    ```bash
    git clone https://github.com/yourusername/cosmeticqueen.git
-
