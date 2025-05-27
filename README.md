@@ -36,4 +36,4 @@ The backend is built using **Django** and **Django REST Framework**, providing a
 ## 🚀 **How to Try It**
 1. Clone the repo:
    ```bash
-   git clone [https://github.com/yourusername/cosmeticqueen.git](https://github.com/mhidusti/cosmetic)
+   git clone (https://github.com/mhidusti/cosmetic)
